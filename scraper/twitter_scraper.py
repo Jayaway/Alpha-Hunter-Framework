@@ -3,9 +3,9 @@ import sys
 import time
 import json
 import pandas as pd
-from progress import Progress
-from scroller import Scroller
-from tweet import Tweet
+from .progress import Progress
+from .scroller import Scroller
+from .tweet import Tweet
 from urllib.parse import quote
 
 from datetime import datetime
@@ -24,11 +24,15 @@ from selenium.common.exceptions import (
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.safari.options import Options as SafariOptions
+from selenium.webdriver.safari.service import Service as SafariService
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 
 from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 TWITTER_LOGIN_URL = "https://x.com/i/flow/login"
@@ -51,6 +55,7 @@ class Twitter_Scraper:
         scrape_top=False,
         proxy=None,
         cookie_file="x_cookie.json",
+        browser="chrome",
     ):
         print("Initializing Twitter Scraper...")
         self.mail = mail
@@ -59,6 +64,7 @@ class Twitter_Scraper:
         self.headlessState = headlessState
         self.interrupted = False
         self.cookie_file = cookie_file
+        self.browser = browser.lower()
         self.tweet_ids = set()
         self.data = []
         self.tweet_cards = []
@@ -175,40 +181,54 @@ class Twitter_Scraper:
     def _get_driver(self, proxy=None):
         print("Setup WebDriver...")
 
-        header = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+        if self.browser == "chrome":
+            browser_option = ChromeOptions()
+            browser_option.add_argument("--disable-blink-features=AutomationControlled")
+            browser_option.add_argument("--disable-infobars")
+            browser_option.add_experimental_option("excludeSwitches", ["enable-automation"])
+            browser_option.add_experimental_option("useAutomationExtension", False)
+            if self.headlessState == "yes":
+                browser_option.add_argument("--headless")
+            try:
+                print("Initializing ChromeDriver...")
+                driver = webdriver.Chrome(options=browser_option)
+            except WebDriverException:
+                print("Downloading ChromeDriver...")
+                chrome_path = ChromeDriverManager().install()
+                chrome_service = ChromeService(executable_path=chrome_path)
+                driver = webdriver.Chrome(service=chrome_service, options=browser_option)
 
-        browser_option = FirefoxOptions()
-        browser_option.set_preference("general.useragent.override", header)
+        elif self.browser == "safari":
+            browser_option = SafariOptions()
+            if self.headlessState == "yes":
+                browser_option.add_argument("--headless")
+            print("Initializing SafariDriver...")
+            driver = webdriver.Safari(options=browser_option)
 
-        # 关键：让 Firefox 识别系统/企业根证书
-        browser_option.set_preference("security.enterprise_roots.enabled", True)
+        else:  # firefox
+            header = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+            browser_option = FirefoxOptions()
+            browser_option.set_preference("general.useragent.override", header)
+            browser_option.set_preference("security.enterprise_roots.enabled", True)
+            browser_option.set_preference("network.http.http3.enable", False)
+            browser_option.set_preference("dom.webnotifications.enabled", False)
+            browser_option.set_preference("permissions.default.desktop-notification", 2)
+            browser_option.accept_insecure_certs = True
+            if self.headlessState == "yes":
+                browser_option.add_argument("--headless")
 
-        # 关键：先关掉 HTTP/3，避免部分环境下 x.com 握手异常
-        browser_option.set_preference("network.http.http3.enable", False)
-
-        # 不要弹通知
-        browser_option.set_preference("dom.webnotifications.enabled", False)
-        browser_option.set_preference("permissions.default.desktop-notification", 2)
-
-        # 关键：允许不安全证书
-        browser_option.accept_insecure_certs = True
-
-        if self.headlessState == "yes":
-            browser_option.add_argument("--headless")
-
-        try:
-            print("Initializing FirefoxDriver...")
-            driver = webdriver.Firefox(options=browser_option)
-        except WebDriverException:
-            print("Downloading FirefoxDriver...")
-            firefoxdriver_path = GeckoDriverManager().install()
-            firefox_service = FirefoxService(executable_path=firefoxdriver_path)
-
-            print("Initializing FirefoxDriver...")
-            driver = webdriver.Firefox(
-                service=firefox_service,
-                options=browser_option,
-            )
+            try:
+                print("Initializing FirefoxDriver...")
+                driver = webdriver.Firefox(options=browser_option)
+            except WebDriverException:
+                print("Downloading FirefoxDriver...")
+                firefoxdriver_path = GeckoDriverManager().install()
+                firefox_service = FirefoxService(executable_path=firefoxdriver_path)
+                print("Initializing FirefoxDriver...")
+                driver = webdriver.Firefox(
+                    service=firefox_service,
+                    options=browser_option,
+                )
 
         driver.set_page_load_timeout(60)
         print("WebDriver Setup Complete")
@@ -519,7 +539,7 @@ class Twitter_Scraper:
     def save_to_csv(self):
         print("Saving Tweets to CSV...")
         now = datetime.now()
-        folder_path = "./tweets/"
+        folder_path = "./抓取的信息/"
 
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)

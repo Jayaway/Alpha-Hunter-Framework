@@ -4,6 +4,14 @@ __pycache__/
 *$py.class
 *.csv
 
+# Cookie（含登录凭证，绝对不能提交）
+x_cookie.json
+
+# 抓取输出
+抓取的信息/
+filter_output/
+tweets/*.csv
+
 # C extensions
 *.so
 

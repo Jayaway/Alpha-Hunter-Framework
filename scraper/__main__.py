@@ -2,7 +2,7 @@ import os
 import sys
 import argparse
 import getpass
-from twitter_scraper import Twitter_Scraper
+from .twitter_scraper import Twitter_Scraper
 
 try:
     from dotenv import load_dotenv
@@ -43,7 +43,13 @@ def main():
     parser.add_argument("-a", "--add", type=str, default="")
     parser.add_argument("--latest", action="store_true")
     parser.add_argument("--top", action="store_true")
-    
+    parser.add_argument(
+        "-b", "--browser",
+        type=str,
+        default="chrome",
+        choices=["firefox", "chrome", "safari"],
+        help="Browser to use (default: chrome)",
+    )
 
     parser.add_argument(
         "--cookie-file",
@@ -55,15 +61,9 @@ def main():
     args = parser.parse_args()
 
     user_mail = args.mail
-    user_name = args.user
-    user_password = args.password
+    user_name = args.user or "cookie_login"
+    user_password = args.password or "cookie_login"
     headless_mode = str(args.headlessState or "no").strip().lower()
-
-    if user_name is None:
-        user_name = input("Twitter Username: ").strip()
-
-    if user_password is None:
-        user_password = getpass.getpass("Enter Password: ").strip()
 
     if headless_mode not in {"yes", "no"}:
         headless_mode = "no"
@@ -88,10 +88,6 @@ def main():
         print("Please specify either --latest or --top, not both.")
         sys.exit(1)
 
-    if not user_name or not user_password:
-        print("Missing Twitter username or password.")
-        sys.exit(1)
-
     additional_data = [x.strip() for x in args.add.split(",") if x.strip()]
 
     scraper = Twitter_Scraper(
@@ -101,6 +97,7 @@ def main():
         headlessState=headless_mode,
         max_tweets=args.tweets,
         cookie_file=args.cookie_file,
+        browser=args.browser,
     )
 
     try:

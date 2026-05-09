@@ -1,0 +1,1269 @@
+{
+  "nodes": [
+    {
+      "id": "Iran",
+      "label": "伊朗",
+      "detail": "Iran",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 103,
+      "engagement": 58276
+    },
+    {
+      "id": "Reuters",
+      "label": "路透社",
+      "detail": "@Reuters",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 103,
+      "engagement": 3837
+    },
+    {
+      "id": "KSAmofaEN",
+      "label": "沙特外交部",
+      "detail": "@KSAmofaEN",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 76,
+      "engagement": 8904
+    },
+    {
+      "id": "US",
+      "label": "美国",
+      "detail": "US",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 61,
+      "engagement": 17141
+    },
+    {
+      "id": "IDF",
+      "label": "以色列军方",
+      "detail": "IDF",
+      "type": "organization",
+      "type_label": "机构",
+      "mention_count": 52,
+      "engagement": 152065
+    },
+    {
+      "id": "oil",
+      "label": "原油",
+      "detail": "oil",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 52,
+      "engagement": 77223
+    },
+    {
+      "id": "JavierBlas",
+      "label": "石油分析家",
+      "detail": "Javier Blas / @JavierBlas",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 41,
+      "engagement": 81684
+    },
+    {
+      "id": "war",
+      "label": "战争",
+      "detail": "war",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 41,
+      "engagement": 13502
+    },
+    {
+      "id": "BrianFeroldi",
+      "label": "情报账号",
+      "detail": "@BrianFeroldi",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 32,
+      "engagement": 2871
+    },
+    {
+      "id": "nickschifrin",
+      "label": "情报账号",
+      "detail": "@nickschifrin",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 31,
+      "engagement": 2041
+    },
+    {
+      "id": "LizAnnSonders",
+      "label": "情报账号",
+      "detail": "@LizAnnSonders",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 28,
+      "engagement": 4701
+    },
+    {
+      "id": "Hormuz",
+      "label": "霍尔木兹",
+      "detail": "Hormuz",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 26,
+      "engagement": 31421
+    },
+    {
+      "id": "FaisalbinFarhan",
+      "label": "沙特外长",
+      "detail": "@FaisalbinFarhan",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 20,
+      "engagement": 2730
+    },
+    {
+      "id": "Chevron",
+      "label": "情报账号",
+      "detail": "@Chevron",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 20,
+      "engagement": 2223
+    },
+    {
+      "id": "Israel",
+      "label": "以色列",
+      "detail": "Israel",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 19,
+      "engagement": 24486
+    },
+    {
+      "id": "AndrewPancholi",
+      "label": "情报账号",
+      "detail": "@AndrewPancholi",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 19,
+      "engagement": 171
+    },
+    {
+      "id": "Riyadh",
+      "label": "利雅得",
+      "detail": "Riyadh",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 17,
+      "engagement": 1132
+    },
+    {
+      "id": "Saudi Arabia",
+      "label": "沙特",
+      "detail": "Saudi Arabia",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 15,
+      "engagement": 11704
+    },
+    {
+      "id": "SangerNYT",
+      "label": "情报账号",
+      "detail": "@SangerNYT",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 15,
+      "engagement": 1389
+    },
+    {
+      "id": "realDonaldTrump",
+      "label": "特朗普",
+      "detail": "@realDonaldTrump",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 13,
+      "engagement": 5884000
+    },
+    {
+      "id": "blockade",
+      "label": "封锁",
+      "detail": "blockade",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 13,
+      "engagement": 18884
+    },
+    {
+      "id": "AlexCrawfordSky",
+      "label": "情报账号",
+      "detail": "@AlexCrawfordSky",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 13,
+      "engagement": 15857
+    },
+    {
+      "id": "ceasefire",
+      "label": "停火",
+      "detail": "ceasefire",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 13,
+      "engagement": 9704
+    },
+    {
+      "id": "Gulf",
+      "label": "海湾",
+      "detail": "Gulf",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 13,
+      "engagement": 5665
+    },
+    {
+      "id": "Russia",
+      "label": "俄罗斯",
+      "detail": "Russia",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 13,
+      "engagement": 4329
+    },
+    {
+      "id": "China",
+      "label": "中国",
+      "detail": "China",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 13,
+      "engagement": 2244
+    },
+    {
+      "id": "OPEC",
+      "label": "欧佩克",
+      "detail": "OPEC",
+      "type": "organization",
+      "type_label": "机构",
+      "mention_count": 11,
+      "engagement": 5714
+    },
+    {
+      "id": "attack",
+      "label": "袭击",
+      "detail": "attack",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 9,
+      "engagement": 9992
+    },
+    {
+      "id": "aeberman12",
+      "label": "情报账号",
+      "detail": "@aeberman12",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 9,
+      "engagement": 106
+    },
+    {
+      "id": "United States",
+      "label": "美国",
+      "detail": "United States",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 8,
+      "engagement": 992699
+    },
+    {
+      "id": "Tehran",
+      "label": "德黑兰",
+      "detail": "Tehran",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 8,
+      "engagement": 15761
+    },
+    {
+      "id": "POTUS",
+      "label": "情报账号",
+      "detail": "@POTUS",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 8,
+      "engagement": 98
+    },
+    {
+      "id": "crude",
+      "label": "原油",
+      "detail": "crude",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 7,
+      "engagement": 49675
+    },
+    {
+      "id": "White House",
+      "label": "白宫",
+      "detail": "White House",
+      "type": "organization",
+      "type_label": "机构",
+      "mention_count": 7,
+      "engagement": 2967
+    },
+    {
+      "id": "KingSalman",
+      "label": "沙特国王",
+      "detail": "@KingSalman",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 7,
+      "engagement": 389
+    },
+    {
+      "id": "Middle East",
+      "label": "中东",
+      "detail": "Middle East",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 6,
+      "engagement": 2294
+    },
+    {
+      "id": "Statement",
+      "label": "Statement",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 6,
+      "engagement": 2243
+    },
+    {
+      "id": "SecRubio",
+      "label": "情报账号",
+      "detail": "@SecRubio",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 6,
+      "engagement": 293
+    },
+    {
+      "id": "WTI",
+      "label": "WTI原油",
+      "detail": "WTI",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 6,
+      "engagement": 94
+    },
+    {
+      "id": "RALee85",
+      "label": "情报账号",
+      "detail": "@RALee85",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 5,
+      "engagement": 3922
+    },
+    {
+      "id": "Washington",
+      "label": "华盛顿",
+      "detail": "Washington",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 5,
+      "engagement": 306
+    },
+    {
+      "id": "NYTimes",
+      "label": "情报账号",
+      "detail": "@NYTimes",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 5,
+      "engagement": 213
+    },
+    {
+      "id": "SecWar",
+      "label": "情报账号",
+      "detail": "@SecWar",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 5,
+      "engagement": 76
+    },
+    {
+      "id": "gold",
+      "label": "黄金",
+      "detail": "gold",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 5,
+      "engagement": 56
+    },
+    {
+      "id": "stock",
+      "label": "股票",
+      "detail": "stock",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 4,
+      "engagement": 1004457
+    },
+    {
+      "id": "missile",
+      "label": "导弹",
+      "detail": "missile",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 4,
+      "engagement": 13883
+    },
+    {
+      "id": "Beijing",
+      "label": "北京",
+      "detail": "Beijing",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 4,
+      "engagement": 247
+    },
+    {
+      "id": "conflict",
+      "label": "冲突",
+      "detail": "conflict",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 4,
+      "engagement": 173
+    },
+    {
+      "id": "W_Elkhereiji",
+      "label": "情报账号",
+      "detail": "@W_Elkhereiji",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 4,
+      "engagement": 140
+    },
+    {
+      "id": "dollar",
+      "label": "美元",
+      "detail": "dollar",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 4,
+      "engagement": 73
+    },
+    {
+      "id": "CENTCOM",
+      "label": "情报账号",
+      "detail": "@CENTCOM",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 3,
+      "engagement": 9280
+    },
+    {
+      "id": "strike",
+      "label": "打击",
+      "detail": "strike",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 3,
+      "engagement": 3505
+    },
+    {
+      "id": "UN",
+      "label": "联合国",
+      "detail": "UN",
+      "type": "organization",
+      "type_label": "机构",
+      "mention_count": 3,
+      "engagement": 1495
+    },
+    {
+      "id": "Brent",
+      "label": "布伦特原油",
+      "detail": "Brent",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 3,
+      "engagement": 1147
+    },
+    {
+      "id": "Moscow",
+      "label": "莫斯科",
+      "detail": "Moscow",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 3,
+      "engagement": 1023
+    },
+    {
+      "id": "Axios",
+      "label": "情报账号",
+      "detail": "@Axios",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 3,
+      "engagement": 932
+    },
+    {
+      "id": "Mike_Eckel",
+      "label": "情报账号",
+      "detail": "@Mike_Eckel",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 3,
+      "engagement": 548
+    },
+    {
+      "id": "laurnorman",
+      "label": "情报账号",
+      "detail": "@laurnorman",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 3,
+      "engagement": 526
+    },
+    {
+      "id": "invasion",
+      "label": "入侵",
+      "detail": "invasion",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 3,
+      "engagement": 443
+    },
+    {
+      "id": "Ankara",
+      "label": "Ankara",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 3,
+      "engagement": 432
+    },
+    {
+      "id": "ElizLanders",
+      "label": "情报账号",
+      "detail": "@ElizLanders",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 3,
+      "engagement": 334
+    },
+    {
+      "id": "Jeddah",
+      "label": "Jeddah",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 3,
+      "engagement": 310
+    },
+    {
+      "id": "AdelAlJubeir",
+      "label": "情报账号",
+      "detail": "@AdelAlJubeir",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 3,
+      "engagement": 246
+    },
+    {
+      "id": "Pentagon",
+      "label": "五角大楼",
+      "detail": "Pentagon",
+      "type": "organization",
+      "type_label": "机构",
+      "mention_count": 3,
+      "engagement": 193
+    },
+    {
+      "id": "Pontifex",
+      "label": "情报账号",
+      "detail": "@Pontifex",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 3,
+      "engagement": 47
+    },
+    {
+      "id": "energy",
+      "label": "energy",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 3,
+      "engagement": 47
+    },
+    {
+      "id": "OOTT",
+      "label": "OOTT",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 3,
+      "engagement": 47
+    },
+    {
+      "id": "oilandgas",
+      "label": "oilandgas",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 3,
+      "engagement": 47
+    },
+    {
+      "id": "CrudeOil",
+      "label": "CrudeOil",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 3,
+      "engagement": 47
+    },
+    {
+      "id": "fintwit",
+      "label": "fintwit",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 3,
+      "engagement": 47
+    },
+    {
+      "id": "Commodities",
+      "label": "Commodities",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 3,
+      "engagement": 47
+    },
+    {
+      "id": "commoditiesmarket",
+      "label": "commoditiesmarket",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 3,
+      "engagement": 47
+    },
+    {
+      "id": "IranWar‌",
+      "label": "IranWar‌",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 3,
+      "engagement": 0
+    },
+    {
+      "id": "SkyNews",
+      "label": "情报账号",
+      "detail": "@SkyNews",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 2,
+      "engagement": 8319
+    },
+    {
+      "id": "CFTC",
+      "label": "情报账号",
+      "detail": "@CFTC",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 2,
+      "engagement": 7892
+    },
+    {
+      "id": "NickKristof",
+      "label": "情报账号",
+      "detail": "@NickKristof",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 2,
+      "engagement": 7681
+    },
+    {
+      "id": "SangitaMyska",
+      "label": "情报账号",
+      "detail": "@SangitaMyska",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 2,
+      "engagement": 5861
+    },
+    {
+      "id": "CopernicusEU",
+      "label": "情报账号",
+      "detail": "@CopernicusEU",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 2,
+      "engagement": 3000
+    },
+    {
+      "id": "Persian Gulf",
+      "label": "波斯湾",
+      "detail": "Persian Gulf",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 2,
+      "engagement": 1974
+    },
+    {
+      "id": "LTC_Shoshani",
+      "label": "情报账号",
+      "detail": "@LTC_Shoshani",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 2,
+      "engagement": 1725
+    }
+  ],
+  "edges": [
+    {
+      "source": "Reuters",
+      "target": "Iran",
+      "type": "mentions",
+      "weight": 21
+    },
+    {
+      "source": "KSAmofaEN",
+      "target": "FaisalbinFarhan",
+      "type": "mentions",
+      "weight": 20
+    },
+    {
+      "source": "Reuters",
+      "target": "US",
+      "type": "mentions",
+      "weight": 19
+    },
+    {
+      "source": "JavierBlas",
+      "target": "oil",
+      "type": "discusses",
+      "weight": 18
+    },
+    {
+      "source": "Reuters",
+      "target": "war",
+      "type": "reports",
+      "weight": 17
+    },
+    {
+      "source": "JavierBlas",
+      "target": "Iran",
+      "type": "mentions",
+      "weight": 14
+    },
+    {
+      "source": "nickschifrin",
+      "target": "Iran",
+      "type": "mentions",
+      "weight": 14
+    },
+    {
+      "source": "KSAmofaEN",
+      "target": "Saudi Arabia",
+      "type": "mentions",
+      "weight": 12
+    },
+    {
+      "source": "Reuters",
+      "target": "China",
+      "type": "mentions",
+      "weight": 9
+    },
+    {
+      "source": "Reuters",
+      "target": "oil",
+      "type": "discusses",
+      "weight": 9
+    },
+    {
+      "source": "JavierBlas",
+      "target": "US",
+      "type": "mentions",
+      "weight": 8
+    },
+    {
+      "source": "nickschifrin",
+      "target": "POTUS",
+      "type": "mentions",
+      "weight": 8
+    },
+    {
+      "source": "JavierBlas",
+      "target": "Hormuz",
+      "type": "mentions",
+      "weight": 7
+    },
+    {
+      "source": "KSAmofaEN",
+      "target": "KingSalman",
+      "type": "mentions",
+      "weight": 7
+    },
+    {
+      "source": "Reuters",
+      "target": "Hormuz",
+      "type": "mentions",
+      "weight": 7
+    },
+    {
+      "source": "KSAmofaEN",
+      "target": "Gulf",
+      "type": "mentions",
+      "weight": 7
+    },
+    {
+      "source": "IDF",
+      "target": "Israel",
+      "type": "mentions",
+      "weight": 7
+    },
+    {
+      "source": "SangerNYT",
+      "target": "Iran",
+      "type": "mentions",
+      "weight": 6
+    },
+    {
+      "source": "nickschifrin",
+      "target": "SecRubio",
+      "type": "mentions",
+      "weight": 6
+    },
+    {
+      "source": "nickschifrin",
+      "target": "US",
+      "type": "mentions",
+      "weight": 6
+    },
+    {
+      "source": "JavierBlas",
+      "target": "war",
+      "type": "reports",
+      "weight": 5
+    },
+    {
+      "source": "SangerNYT",
+      "target": "NYTimes",
+      "type": "mentions",
+      "weight": 5
+    },
+    {
+      "source": "nickschifrin",
+      "target": "SecWar",
+      "type": "mentions",
+      "weight": 5
+    },
+    {
+      "source": "AlexCrawfordSky",
+      "target": "Israel",
+      "type": "mentions",
+      "weight": 5
+    },
+    {
+      "source": "JavierBlas",
+      "target": "Tehran",
+      "type": "mentions",
+      "weight": 4
+    },
+    {
+      "source": "KSAmofaEN",
+      "target": "W_Elkhereiji",
+      "type": "mentions",
+      "weight": 4
+    },
+    {
+      "source": "SangerNYT",
+      "target": "US",
+      "type": "mentions",
+      "weight": 4
+    },
+    {
+      "source": "KSAmofaEN",
+      "target": "AdelAlJubeir",
+      "type": "mentions",
+      "weight": 3
+    },
+    {
+      "source": "nickschifrin",
+      "target": "Pontifex",
+      "type": "mentions",
+      "weight": 3
+    },
+    {
+      "source": "aeberman12",
+      "target": "US",
+      "type": "mentions",
+      "weight": 3
+    },
+    {
+      "source": "aeberman12",
+      "target": "OPEC",
+      "type": "mentions",
+      "weight": 3
+    },
+    {
+      "source": "aeberman12",
+      "target": "WTI",
+      "type": "discusses",
+      "weight": 3
+    },
+    {
+      "source": "IDF",
+      "target": "ceasefire",
+      "type": "reports",
+      "weight": 3
+    },
+    {
+      "source": "realDonaldTrump",
+      "target": "United States",
+      "type": "mentions",
+      "weight": 2
+    },
+    {
+      "source": "NickKristof",
+      "target": "war",
+      "type": "reports",
+      "weight": 2
+    },
+    {
+      "source": "ElizLanders",
+      "target": "Iran",
+      "type": "mentions",
+      "weight": 2
+    },
+    {
+      "source": "LTC_Shoshani",
+      "target": "IDF",
+      "type": "mentions",
+      "weight": 2
+    },
+    {
+      "source": "IDF",
+      "target": "strike",
+      "type": "reports",
+      "weight": 2
+    },
+    {
+      "source": "IDF",
+      "target": "attack",
+      "type": "reports",
+      "weight": 2
+    },
+    {
+      "source": "RALee85",
+      "target": "Russia",
+      "type": "mentions",
+      "weight": 2
+    },
+    {
+      "source": "Mike_Eckel",
+      "target": "Russia",
+      "type": "mentions",
+      "weight": 2
+    },
+    {
+      "source": "Chevron",
+      "target": "oil",
+      "type": "discusses",
+      "weight": 2
+    },
+    {
+      "source": "AlexCrawfordSky",
+      "target": "ceasefire",
+      "type": "reports",
+      "weight": 2
+    },
+    {
+      "source": "AlexCrawfordSky",
+      "target": "US",
+      "type": "mentions",
+      "weight": 2
+    },
+    {
+      "source": "AndrewPancholi",
+      "target": "Iran",
+      "type": "mentions",
+      "weight": 2
+    },
+    {
+      "source": "AndrewPancholi",
+      "target": "oil",
+      "type": "discusses",
+      "weight": 2
+    },
+    {
+      "source": "AndrewPancholi",
+      "target": "gold",
+      "type": "discusses",
+      "weight": 2
+    },
+    {
+      "source": "aeberman12",
+      "target": "energy",
+      "type": "posts_about",
+      "weight": 3
+    },
+    {
+      "source": "aeberman12",
+      "target": "OOTT",
+      "type": "posts_about",
+      "weight": 3
+    },
+    {
+      "source": "aeberman12",
+      "target": "oilandgas",
+      "type": "posts_about",
+      "weight": 3
+    },
+    {
+      "source": "oil",
+      "target": "war",
+      "type": "co_occurs",
+      "weight": 7
+    },
+    {
+      "source": "Hormuz",
+      "target": "blockade",
+      "type": "co_occurs",
+      "weight": 6
+    },
+    {
+      "source": "Statement",
+      "target": "Saudi Arabia",
+      "type": "co_occurs",
+      "weight": 6
+    },
+    {
+      "source": "oil",
+      "target": "crude",
+      "type": "co_occurs",
+      "weight": 5
+    },
+    {
+      "source": "Hormuz",
+      "target": "war",
+      "type": "co_occurs",
+      "weight": 4
+    },
+    {
+      "source": "Russia",
+      "target": "war",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "AdelAlJubeir",
+      "target": "Riyadh",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "FaisalbinFarhan",
+      "target": "Jeddah",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "FaisalbinFarhan",
+      "target": "Ankara",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "energy",
+      "target": "OOTT",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "energy",
+      "target": "oilandgas",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "energy",
+      "target": "WTI",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "energy",
+      "target": "CrudeOil",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "energy",
+      "target": "fintwit",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "OOTT",
+      "target": "oilandgas",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "OOTT",
+      "target": "WTI",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "OOTT",
+      "target": "CrudeOil",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "OOTT",
+      "target": "fintwit",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "oilandgas",
+      "target": "WTI",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "oilandgas",
+      "target": "CrudeOil",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "oilandgas",
+      "target": "fintwit",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "WTI",
+      "target": "CrudeOil",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "WTI",
+      "target": "fintwit",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "CrudeOil",
+      "target": "fintwit",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "CrudeOil",
+      "target": "OPEC",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "fintwit",
+      "target": "OPEC",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "OPEC",
+      "target": "Commodities",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "OPEC",
+      "target": "commoditiesmarket",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "Commodities",
+      "target": "commoditiesmarket",
+      "type": "co_occurs",
+      "weight": 3
+    },
+    {
+      "source": "Tehran",
+      "target": "Hormuz",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "UN",
+      "target": "Russia",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "Moscow",
+      "target": "Russia",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "W_Elkhereiji",
+      "target": "Riyadh",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "W_Elkhereiji",
+      "target": "Saudi Arabia",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "Gulf",
+      "target": "Persian Gulf",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "Gulf",
+      "target": "Hormuz",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "Middle East",
+      "target": "conflict",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "Beijing",
+      "target": "China",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "Russia",
+      "target": "ceasefire",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "Israel",
+      "target": "ceasefire",
+      "type": "co_occurs",
+      "weight": 2
+    }
+  ],
+  "query": "油价会涨吗？",
+  "generated": "2026-05-08T13:02:35.667135"
+}66638"
+}

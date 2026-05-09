@@ -1,0 +1,500 @@
+{
+  "query": "油价会涨吗？",
+  "decision": {
+    "asset": "oil",
+    "user_intent": "供给驱动",
+    "current_regime": "supply_risk",
+    "urgency": "normal",
+    "top_accounts": [
+      "@JavierBlas",
+      "@Reuters",
+      "@KSAmofaEN",
+      "@TankersTrackers",
+      "@realDonaldTrump"
+    ],
+    "top_event_phrases": [],
+    "crawl_tasks": [
+      "from:@JavierBlas OR from:@Reuters",
+      "from:@KSAmofaEN OR from:@TankersTrackers"
+    ],
+    "why_this_route": "当前原油市场处于【供给驱动】阶段",
+    "cached": false
+  },
+  "csv_path": "./抓取的信息/2026-05-08_02-45-38_intel_140.csv",
+  "crawl_stats": {
+    "total": 140,
+    "cleaned": 37,
+    "errors": []
+  },
+  "graph": {
+    "output_file": "./graph_data/关系图谱.json",
+    "node_count": 80,
+    "edge_count": 46,
+    "tweet_count": 253
+  },
+  "judgment": {
+    "market_direction": "bullish_oil",
+    "market_direction_label": "利多原油",
+    "aggregate_confidence": 0.21,
+    "signal_count": {
+      "bearish_oil": 1,
+      "bullish_oil": 9
+    },
+    "avg_impact": 1.8,
+    "top_signals": [
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.9,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: Hormuz",
+        "key_signals": [
+          "Hormuz"
+        ],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Chinese-owned oil tanker hit near Hormuz as US pauses ship-protection plan, report says reut.rs/4daS"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.9,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: Hormuz",
+        "key_signals": [
+          "Hormuz"
+        ],
+        "tweet_handle": "@JavierBlas",
+        "tweet_content": "Shell CEO Wael Sawan: \"The journey back [from the closure of the Strait of Hormuz\" will be a long on"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.8,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: Hormuz",
+        "key_signals": [
+          "Hormuz"
+        ],
+        "tweet_handle": "@Alhadath_Brk",
+        "tweet_content": "Iranian TV: No changes to the mechanism of ships' passage in the Strait of Hormuz #الحدث_عاجل"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.8,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: sanction",
+        "key_signals": [
+          "sanction"
+        ],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "US targets Iraq oil official and militias with sanctions for aiding Iran reut.rs/48Oq1vt"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.8,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: Hormuz",
+        "key_signals": [
+          "Hormuz"
+        ],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Explainer: What's included in talks to end the Iran war and reopen Hormuz? reut.rs/4uuqqLR"
+      }
+    ],
+    "details": [
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Tesla's China-made EV sales jump 36% in April, extending rebound reut.rs/3QUwkaO"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "McDonald's sees weak start to Q2 as high gas prices dent consumer sentiment reut.rs/4wfVm4l"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Japan to keep intervening to defend 160-per-dollar level, ex-BOJ official says reut.rs/4ncXllK"
+      },
+      {
+        "direction": "bearish_oil",
+        "direction_label": "利空原油",
+        "confidence": 0.65,
+        "impact_level": 2,
+        "impact_reason": "触发 1 个信号: peace deal",
+        "key_signals": [
+          "peace deal"
+        ],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Maersk says energy crunch to persist even if Iran peace deal struck reut.rs/4ezxnGR"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.9,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: Hormuz",
+        "key_signals": [
+          "Hormuz"
+        ],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Chinese-owned oil tanker hit near Hormuz as US pauses ship-protection plan, report says reut.rs/4daS"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "CDC says monitoring US travelers on cruise ship after hantavirus outbreak reut.rs/4dudX57"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "New York judge releases purported Epstein suicide note reut.rs/4u0HUjl"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Indian seafarers endured nightly blasts, lack of food in Iran war ordeal reut.rs/3QMGytQ"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "India's Royal Enfield to invest over $232 million in new manufacturing plant reut.rs/3QZdwqQ"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.75,
+        "impact_level": 2,
+        "impact_reason": "触发 1 个信号: blockade",
+        "key_signals": [
+          "blockade"
+        ],
+        "tweet_handle": "@RKelanic",
+        "tweet_content": "Huge story from WaPo (gift link) on Iran’s resilience to US blockade:\n- 3-4 months before “severe” p"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.8,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: Hormuz",
+        "key_signals": [
+          "Hormuz"
+        ],
+        "tweet_handle": "@Alhadath_Brk",
+        "tweet_content": "Iranian TV: No changes to the mechanism of ships' passage in the Strait of Hormuz #الحدث_عاجل"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@JavierBlas",
+        "tweet_content": "Shell CEO Wael Sawan: \"While 20% of the world's LNG is impacted [by US-Iran war], that equals to onl"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.9,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: Hormuz",
+        "key_signals": [
+          "Hormuz"
+        ],
+        "tweet_handle": "@JavierBlas",
+        "tweet_content": "Shell CEO Wael Sawan: \"The journey back [from the closure of the Strait of Hormuz\" will be a long on"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "India's Skyroot becomes first $1 bln space-tech startup with GIC, Sherpalo, Blackrock backing reut.r"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Hantavirus-hit cruise ship tracker"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Countries track passengers of virus-hit cruise ship reut.rs/49CligH"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "UK voters cast ballots in elections expected to deal blow to Starmer reut.rs/4cYLIM0"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "From Breakingviews - Breakingviews - Arms makers see German spending is for real reut.rs/4dawty2"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.65,
+        "impact_level": 2,
+        "impact_reason": "触发 1 个信号: attack",
+        "key_signals": [
+          "attack"
+        ],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "African countries warn citizens of xenophobic attacks in South Africa reut.rs/4tqHhhD"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.8,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: sanction",
+        "key_signals": [
+          "sanction"
+        ],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "US targets Iraq oil official and militias with sanctions for aiding Iran reut.rs/48Oq1vt"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Iran crisis does not yet warrant emergency measures for tourism sector, EU says reut.rs/4wc7jrT"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.8,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: Hormuz",
+        "key_signals": [
+          "Hormuz"
+        ],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Explainer: What's included in talks to end the Iran war and reopen Hormuz? reut.rs/4uuqqLR"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "South Korea, Dutch leaders discuss chips, AI cooperation reut.rs/4uDt1U0"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Coach parent sees muted quarterly revenue growth, shares slip reut.rs/4drfsRH"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@KSAmofaEN",
+        "tweet_content": "On behalf of HH the Foreign Minister, Vice Minister of Foreign Affairs H.E. participates in a meetin"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "BP to sell stakes in flagship UK carbon capture projects in Northern England reut.rs/3PeTtUG"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.8,
+        "impact_level": 5,
+        "impact_reason": "触发 1 个信号: Hormuz",
+        "key_signals": [
+          "Hormuz"
+        ],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Strait of Hormuz vessel tracker"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "A growing number of Democratic primary challengers are making opposition to the American Israel Publ"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Doordash shares jump after strong quarterly forecast on food, grocery delivery demand reut.rs/48Okcy"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Swiss-based Terra Quantum lands US Air Force deal ahead of Nasdaq listing reut.rs/42mmJvN"
+      },
+      {
+        "direction": "bullish_oil",
+        "direction_label": "利多原油",
+        "confidence": 0.65,
+        "impact_level": 2,
+        "impact_reason": "触发 1 个信号: cut",
+        "key_signals": [
+          "cut"
+        ],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Singapore's oil product stocks hit over nine-month lows as US-Iran war cuts supply reut.rs/4dcqusU"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Canadian dollar forecasts more bullish as geopolitical risk ebbs: Reuters poll reut.rs/4uzHqk6"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Cheniere flags earnings pressure from Middle East disruptions after Q1 loss reut.rs/3QMJA1d"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "S&P 500, Nasdaq at record highs as oil pullback brings relief reut.rs/4u2I75u"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@Reuters",
+        "tweet_content": "Uganda's parliament passed legislation to curb alleged foreign influence after scaling back proposed"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@realDonaldTrump",
+        "tweet_content": "MELANIA, the Movie, is a MUST WATCH. Get your tickets today — Selling out, FAST!\n\nPhoto: Regine Maha"
+      },
+      {
+        "direction": null,
+        "direction_label": null,
+        "confidence": 0.0,
+        "impact_level": 1,
+        "impact_reason": "未检测到明确方向信号",
+        "key_signals": [],
+        "tweet_handle": "@realDonaldTrump",
+        "tweet_content": "THE TRUMP KENNEDY CENTER HONORS will be broadcast tonight, on CBS, and Stream on Paramount+. Tune in"
+      }
+    ]
+  },
+  "timestamp": "2026-05-08T02:45:38.982302"
+}

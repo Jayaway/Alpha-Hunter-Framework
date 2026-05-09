@@ -3,9 +3,9 @@ import sys
 import time
 import json
 import pandas as pd
-from progress import Progress
-from scroller import Scroller
-from tweet import Tweet
+from .progress import Progress
+from .scroller import Scroller
+from .tweet import Tweet
 from urllib.parse import quote
 
 from datetime import datetime
@@ -24,11 +24,15 @@ from selenium.common.exceptions import (
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.safari.options import Options as SafariOptions
+from selenium.webdriver.safari.service import Service as SafariService
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 
 from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 TWITTER_LOGIN_URL = "https://x.com/i/flow/login"
@@ -51,6 +55,7 @@ class Twitter_Scraper:
         scrape_top=False,
         proxy=None,
         cookie_file="x_cookie.json",
+        browser="chrome",
     ):
         print("Initializing Twitter Scraper...")
         self.mail = mail
@@ -59,6 +64,7 @@ class Twitter_Scraper:
         self.headlessState = headlessState
         self.interrupted = False
         self.cookie_file = cookie_file
+        self.browser = browser.lower()
         self.tweet_ids = set()
         self.data = []
         self.tweet_cards = []
@@ -175,40 +181,81 @@ class Twitter_Scraper:
     def _get_driver(self, proxy=None):
         print("Setup WebDriver...")
 
-        header = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+        if self.browser == "chrome":
+            browser_option = ChromeOptions()
+            
+            # 反检测配置
+            browser_option.add_argument("--disable-blink-features=AutomationControlled")
+            browser_option.add_argument("--disable-infobars")
+            browser_option.add_argument("--disable-extensions")
+            browser_option.add_argument("--disable-dev-shm-usage")
+            browser_option.add_argument("--no-sandbox")
+            browser_option.add_argument("--start-maximized")
+            browser_option.add_argument("--disable-gpu")
+            browser_option.add_argument("--disable-setuid-sandbox")
+            browser_option.add_argument("--disable-web-security")
+            browser_option.add_argument("--allow-running-insecure-content")
+            browser_option.add_argument("--disable-features=VizDisplayCompositor")
+            browser_option.add_argument("--ignore-certificate-errors")
+            
+            # 禁用自动化提示
+            browser_option.add_experimental_option("excludeSwitches", ["enable-automation", "enable-logging"])
+            browser_option.add_experimental_option("useAutomationExtension", False)
+            
+            # 设置用户代理
+            browser_option.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+            
+            # 启用无头模式的特殊配置
+            if self.headlessState == "yes":
+                browser_option.add_argument("--headless=new")
+                browser_option.add_argument("--window-size=1920,1080")
+                browser_option.add_argument("--hide-scrollbars")
+            
+            try:
+                print("Initializing ChromeDriver...")
+                driver = webdriver.Chrome(options=browser_option)
+            except WebDriverException:
+                print("Downloading ChromeDriver...")
+                chrome_path = ChromeDriverManager().install()
+                chrome_service = ChromeService(executable_path=chrome_path)
+                driver = webdriver.Chrome(service=chrome_service, options=browser_option)
+            
+            # 进一步隐藏自动化特征
+            driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+            driver.execute_script("window.chrome = {runtime: {}}")
+            driver.execute_script("window.navigator.chrome = {runtime: {}}")
 
-        browser_option = FirefoxOptions()
-        browser_option.set_preference("general.useragent.override", header)
+        elif self.browser == "safari":
+            browser_option = SafariOptions()
+            if self.headlessState == "yes":
+                browser_option.add_argument("--headless")
+            print("Initializing SafariDriver...")
+            driver = webdriver.Safari(options=browser_option)
 
-        # 关键：让 Firefox 识别系统/企业根证书
-        browser_option.set_preference("security.enterprise_roots.enabled", True)
+        else:  # firefox
+            header = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0"
+            browser_option = FirefoxOptions()
+            browser_option.set_preference("general.useragent.override", header)
+            browser_option.set_preference("security.enterprise_roots.enabled", True)
+            browser_option.set_preference("network.http.http3.enable", False)
+            browser_option.set_preference("dom.webnotifications.enabled", False)
+            browser_option.set_preference("permissions.default.desktop-notification", 2)
+            browser_option.accept_insecure_certs = True
+            if self.headlessState == "yes":
+                browser_option.add_argument("--headless")
 
-        # 关键：先关掉 HTTP/3，避免部分环境下 x.com 握手异常
-        browser_option.set_preference("network.http.http3.enable", False)
-
-        # 不要弹通知
-        browser_option.set_preference("dom.webnotifications.enabled", False)
-        browser_option.set_preference("permissions.default.desktop-notification", 2)
-
-        # 关键：允许不安全证书
-        browser_option.accept_insecure_certs = True
-
-        if self.headlessState == "yes":
-            browser_option.add_argument("--headless")
-
-        try:
-            print("Initializing FirefoxDriver...")
-            driver = webdriver.Firefox(options=browser_option)
-        except WebDriverException:
-            print("Downloading FirefoxDriver...")
-            firefoxdriver_path = GeckoDriverManager().install()
-            firefox_service = FirefoxService(executable_path=firefoxdriver_path)
-
-            print("Initializing FirefoxDriver...")
-            driver = webdriver.Firefox(
-                service=firefox_service,
-                options=browser_option,
-            )
+            try:
+                print("Initializing FirefoxDriver...")
+                driver = webdriver.Firefox(options=browser_option)
+            except WebDriverException:
+                print("Downloading FirefoxDriver...")
+                firefoxdriver_path = GeckoDriverManager().install()
+                firefox_service = FirefoxService(executable_path=firefoxdriver_path)
+                print("Initializing FirefoxDriver...")
+                driver = webdriver.Firefox(
+                    service=firefox_service,
+                    options=browser_option,
+                )
 
         driver.set_page_load_timeout(60)
         print("WebDriver Setup Complete")
@@ -228,57 +275,111 @@ class Twitter_Scraper:
         return False
 
 
-    def _load_cookies_from_json(self):
+    def _load_cookies_from_json(self, max_retries=3):
         if not os.path.exists(self.cookie_file):
             raise FileNotFoundError(f"Cookie file not found: {self.cookie_file}")
 
         with open(self.cookie_file, "r", encoding="utf-8") as f:
             cookies = json.load(f)
 
-        self.driver.get("https://x.com/")
-        sleep(3)
-
+        # 过滤掉无效的 cookie（只保留 x.com 相关的）
+        valid_cookies = []
         for cookie in cookies:
-            cookie_dict = {
-                "name": cookie["name"],
-                "value": cookie["value"],
-            }
+            domain = cookie.get("domain", "")
+            if ".x.com" in domain or ".twitter.com" in domain or not domain:
+                valid_cookies.append(cookie)
+        
+        print(f"  加载 {len(valid_cookies)} 个有效 cookies")
 
-            if cookie.get("domain"):
-                cookie_dict["domain"] = cookie["domain"]
-            if cookie.get("path"):
-                cookie_dict["path"] = cookie["path"]
-            if "secure" in cookie:
-                cookie_dict["secure"] = cookie["secure"]
-            if "httpOnly" in cookie:
-                cookie_dict["httpOnly"] = cookie["httpOnly"]
-
-            # 你的导出文件用的是 expirationDate
-            if cookie.get("expirationDate") is not None:
-                try:
-                    cookie_dict["expiry"] = int(cookie["expirationDate"])
-                except Exception:
-                    pass
-
-            # 浏览器扩展导出的这些字段，selenium 往往不认
-            # 不要传给 add_cookie
-            for bad_key in [
-                "sameSite",
-                "hostOnly",
-                "session",
-                "storeId",
-                "firstPartyDomain",
-                "partitionKey",
-            ]:
-                cookie_dict.pop(bad_key, None)
-
+        last_error = None
+        for attempt in range(max_retries):
             try:
-                self.driver.add_cookie(cookie_dict)
-            except Exception as e:
-                print(f"Skip cookie {cookie.get('name')}: {e}")
+                print(f"  尝试加载 cookies ({attempt+1}/{max_retries})...")
+                
+                # 先访问一个简单的页面
+                self.driver.get("https://x.com/robots.txt")
+                sleep(2)
 
-        self.driver.get("https://x.com/home")
-        sleep(5)
+                # 清除现有 cookies
+                self.driver.delete_all_cookies()
+
+                for cookie in valid_cookies:
+                    cookie_dict = {
+                        "name": cookie["name"],
+                        "value": cookie["value"],
+                    }
+
+                    if cookie.get("domain"):
+                        # 确保 domain 以点开头
+                        domain = cookie["domain"]
+                        if not domain.startswith("."):
+                            domain = "." + domain
+                        cookie_dict["domain"] = domain
+                    if cookie.get("path"):
+                        cookie_dict["path"] = cookie["path"]
+                    if "secure" in cookie:
+                        cookie_dict["secure"] = cookie["secure"]
+                    if "httpOnly" in cookie:
+                        cookie_dict["httpOnly"] = cookie["httpOnly"]
+
+                    # 处理过期时间
+                    if cookie.get("expirationDate") is not None:
+                        try:
+                            cookie_dict["expiry"] = int(cookie["expirationDate"])
+                        except Exception:
+                            pass
+
+                    # 移除 selenium 不支持的字段
+                    for bad_key in [
+                        "sameSite",
+                        "hostOnly",
+                        "session",
+                        "storeId",
+                        "firstPartyDomain",
+                        "partitionKey",
+                        "priority",
+                        "sourceScheme",
+                    ]:
+                        cookie_dict.pop(bad_key, None)
+
+                    try:
+                        self.driver.add_cookie(cookie_dict)
+                    except Exception as e:
+                        pass  # 跳过失败的 cookie，继续处理其他的
+
+                # 重新加载主页
+                self.driver.get("https://x.com/home")
+                sleep(3)
+                
+                # 等待页面加载
+                self._wait_for_page_load()
+                
+                return
+                
+            except Exception as e:
+                last_error = e
+                print(f"  加载 cookies 失败 (尝试 {attempt+1}): {e}")
+                if attempt < max_retries - 1:
+                    sleep(3)
+        
+        raise last_error
+
+    def _wait_for_page_load(self, timeout=30):
+        """等待页面完全加载"""
+        try:
+            # 等待页面标题出现
+            self._wait(timeout).until(
+                lambda d: "X" in d.title or "Twitter" in d.title
+            )
+            print("  页面标题加载完成")
+            
+            # 等待页面元素
+            self._wait(timeout).until(
+                EC.presence_of_element_located((By.TAG_NAME, "body"))
+            )
+            sleep(2)
+        except TimeoutException:
+            print("  页面加载超时，但继续尝试...")
 
     def _is_logged_in(self):
         try:
@@ -305,20 +406,55 @@ class Twitter_Scraper:
         print("\nLoading X cookies...")
 
         try:
-            self.driver.maximize_window()
+            # 设置更大的超时时间
+            self.driver.set_page_load_timeout(120)
+            
+            # 窗口最大化
+            try:
+                self.driver.maximize_window()
+            except Exception:
+                pass  # 某些环境不支持最大化
+            
+            # 加载 cookies
             self._load_cookies_from_json()
 
+            # 检查是否登录成功
             if not self._is_logged_in():
-                raise RuntimeError(
-                    "Cookie login failed. Please export fresh cookies from your normal browser."
-                )
+                # 尝试刷新页面后再次检查
+                print("  登录状态检查失败，尝试刷新页面...")
+                self.driver.refresh()
+                sleep(5)
+                
+                if not self._is_logged_in():
+                    raise RuntimeError(
+                        "Cookie login failed. Please export fresh cookies from your normal browser.\n"
+                        "提示：请确保 Cookie 未过期，并且是从已登录的浏览器导出的。"
+                    )
 
-            print("\nCookie login successful\n")
+            print("  ✓ Cookie login successful\n")
 
+        except TimeoutException as e:
+            print(f"\nLogin Failed: 页面加载超时 ({e})")
+            print("  建议：检查网络连接，或尝试使用其他浏览器（safari/firefox）")
+            self._safe_quit()
+            raise
+        except WebDriverException as e:
+            print(f"\nLogin Failed: WebDriver 错误 ({e})")
+            print("  建议：更新 Chrome/Firefox 浏览器和对应的 WebDriver")
+            self._safe_quit()
+            raise
         except Exception as e:
             print(f"\nLogin Failed: {e}")
+            self._safe_quit()
+            raise
+
+    def _safe_quit(self):
+        """安全退出浏览器"""
+        try:
+            print("  正在关闭浏览器...")
             self.driver.quit()
-            sys.exit(1)
+        except Exception:
+            pass
 
     
 
@@ -519,7 +655,7 @@ class Twitter_Scraper:
     def save_to_csv(self):
         print("Saving Tweets to CSV...")
         now = datetime.now()
-        folder_path = "./tweets/"
+        folder_path = "./抓取的信息/"
 
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
@@ -556,6 +692,17 @@ class Twitter_Scraper:
         df.to_csv(file_path, index=False, encoding="utf-8")
 
         print("CSV Saved: {}".format(file_path))
+
+        try:
+            from graph_engine import generate_graph_data
+
+            generate_graph_data(
+                output_file="./graph_data/关系图谱.json",
+                query=self.scraper_details.get("query") or self.scraper_details.get("username") or "",
+                input_dir=folder_path,
+            )
+        except Exception as e:
+            print("Graph generation failed: {}".format(e))
 
         pass
 

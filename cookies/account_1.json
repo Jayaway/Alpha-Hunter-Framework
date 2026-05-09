@@ -1,0 +1,25 @@
+{
+    "account_id": "account_1",
+    "username": "X_User",
+    "level": "S",
+    "cookies": [
+        {
+            "domain": ".x.com",
+            "expirationDate": 0,
+            "hostOnly": false,
+            "httpOnly": true,
+            "name": "auth_token",
+            "path": "/",
+            "sameSite": "no_restriction",
+            "secure": true,
+            "session": false,
+            "storeId": null,
+            "value": "YOUR_AUTH_TOKEN_HERE"
+        }
+    ],
+    "proxy": null,
+    "fingerprint": {
+        "browser": "chrome",
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+}

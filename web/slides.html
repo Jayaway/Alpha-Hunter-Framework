@@ -21,9 +21,9 @@
         --soft: #e4e4e7;
         --muted: #a1a1aa;
         --dim: #52525b;
-        --green: #22c55e;
-        --green-soft: rgba(34, 197, 94, 0.1);
-        --cyan-soft: rgba(6, 182, 212, 0.09);
+        --blue: #1da1f2;
+        --blue-soft: rgba(29, 161, 242, 0.12);
+        --cyan-soft: rgba(6, 182, 212, 0.08);
         --red-soft: rgba(239, 68, 68, 0.08);
       }
 
@@ -66,7 +66,7 @@
         top: -20rem;
         left: 50%;
         transform: translateX(-50%);
-        background: radial-gradient(circle, rgba(34, 197, 94, 0.1), transparent 62%);
+        background: radial-gradient(circle, rgba(29, 161, 242, 0.12), transparent 62%);
         filter: blur(5rem);
       }
 
@@ -142,11 +142,11 @@
         width: 0.45rem;
         height: 0.45rem;
         border-radius: 999px;
-        background: var(--green);
+        background: var(--blue);
       }
 
       .green {
-        color: #4ade80;
+        color: #60a5fa;
       }
 
       .white {
@@ -178,7 +178,7 @@
 
       .logo .accent {
         position: relative;
-        color: var(--green);
+        color: var(--blue);
       }
 
       .logo .accent::after {
@@ -189,7 +189,7 @@
         left: 0.08rem;
         height: 0.42rem;
         border-radius: 999px;
-        background: linear-gradient(90deg, var(--green), #4ade80);
+        background: linear-gradient(90deg, var(--blue), #60a5fa);
         opacity: 0.3;
       }
 
@@ -199,7 +199,7 @@
         height: 0.78em;
         margin-left: 0.35rem;
         border-radius: 999px;
-        background: var(--green);
+        background: var(--blue);
         vertical-align: -0.08em;
         animation: blink 1s infinite;
       }
@@ -215,7 +215,7 @@
         max-width: 64rem;
         margin: 1rem 0;
         padding-left: 1.8rem;
-        border-left: 4px solid var(--green);
+        border-left: 4px solid var(--blue);
         color: var(--soft);
         font-size: clamp(1.5rem, 2.7vw, 2.2rem);
         font-weight: 650;
@@ -279,9 +279,9 @@
       .pipe {
         min-height: 8rem;
         padding: 1rem;
-        border: 1px solid rgba(34, 197, 94, 0.22);
+        border: 1px solid rgba(29, 161, 242, 0.24);
         border-radius: 0.75rem;
-        background: var(--green-soft);
+        background: var(--blue-soft);
       }
 
       .pipe b {
@@ -291,8 +291,8 @@
         height: 2rem;
         margin-bottom: 0.75rem;
         border-radius: 0.5rem;
-        background: var(--green);
-        color: #061207;
+        background: var(--blue);
+        color: #03111f;
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       }
 
@@ -327,8 +327,8 @@
       }
 
       .metric {
-        border-color: rgba(34, 197, 94, 0.2);
-        color: #4ade80;
+        border-color: rgba(29, 161, 242, 0.24);
+        color: #60a5fa;
       }
 
       .code {
@@ -380,12 +380,45 @@
 
       .home-link:hover {
         color: var(--text);
-        border-color: rgba(34, 197, 94, 0.35);
+        border-color: rgba(29, 161, 242, 0.38);
+      }
+
+      .twitter-bird-easter {
+        position: absolute;
+        left: calc(50% - 25rem);
+        top: calc(50% - 6.2rem);
+        z-index: 1;
+        width: min(10.5rem, 22vw);
+        opacity: 0.08;
+        filter: saturate(1.12) drop-shadow(0 0 2rem rgba(29, 161, 242, 0.18));
+        pointer-events: none;
+        transform: translate(-26vw, 26vh) scale(0.68) rotate(-10deg);
+      }
+
+      .finale-slide.active .twitter-bird-easter {
+        animation: birdFlyIn 1.45s cubic-bezier(0.2, 0.72, 0.22, 1) 0.12s forwards;
       }
 
       @keyframes blink {
         50% {
           opacity: 0;
+        }
+      }
+
+      @keyframes birdFlyIn {
+        0% {
+          opacity: 0.08;
+          transform: translate(-26vw, 26vh) scale(0.68) rotate(-10deg);
+        }
+        18% {
+          opacity: 0.18;
+        }
+        68% {
+          opacity: 0.34;
+        }
+        100% {
+          opacity: 0.38;
+          transform: translate(0, 0) scale(1) rotate(0deg);
         }
       }
 
@@ -425,6 +458,12 @@
           right: 1rem;
           bottom: 1rem;
         }
+
+        .twitter-bird-easter {
+          left: 1.2rem;
+          top: 34%;
+          width: 7.5rem;
+        }
       }
     </style>
   </head>
@@ -433,7 +472,7 @@
 
     <section class="slide center active">
       <div class="logo">Deep<span class="accent">Alpha</span><span class="cursor"></span></div>
-      <p class="tagline">从 X 信息流发现事件、叙事拐点和市场冲击源。</p>
+      <p class="tagline">v0.1 稳定版：X 情报流、六层清洗、关系图谱与中文证据报告。</p>
     </section>
 
     <section class="slide">
@@ -556,7 +595,8 @@
       </div>
     </section>
 
-    <section class="slide center">
+    <section class="slide center finale-slide">
+      <img class="twitter-bird-easter" src="./assets/twitter-transparent.png" alt="" aria-hidden="true" />
       <h3>Try it</h3>
       <div class="logo">Deep<span class="accent">Alpha</span></div>
       <p style="margin-top: 1.4rem">先让系统说清楚：它看到了什么，没看到什么，为什么这么判断。</p>

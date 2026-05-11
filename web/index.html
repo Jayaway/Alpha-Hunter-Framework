@@ -11,15 +11,32 @@
       <section class="home-screen" id="homeScreen">
         <nav class="home-nav" aria-label="DeepAlpha 功能入口">
           <a class="nav-pill" href="../docs/PROJECT_STRUCTURE.md">
-            <span class="nav-icon">D</span>
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path>
+                <path d="M14 2v5h5"></path>
+                <path d="M9 13h6"></path>
+                <path d="M9 17h4"></path>
+              </svg>
+            </span>
             <span>Docs</span>
           </a>
           <a class="nav-pill" href="./slides.html">
-            <span class="nav-icon">S</span>
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <path d="M8 12h8"></path>
+                <path d="M8 15h5"></path>
+              </svg>
+            </span>
             <span>Slides</span>
           </a>
-          <a class="nav-pill" href="https://github.com/">
-            <span class="nav-icon">G</span>
+          <a class="nav-pill" href="https://github.com/Jayaway/Alpha-Hunter-Framework">
+            <span class="nav-icon" aria-hidden="true">
+              <svg class="github-icon" viewBox="0 0 24 24">
+                <path d="M12 .3a12 12 0 0 0-3.8 23.39c.6.11.82-.26.82-.58v-2.04c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.3.76-1.6-2.66-.31-5.46-1.34-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.28-1.23 3.28-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.21.69.82.57A12 12 0 0 0 12 .3Z"></path>
+              </svg>
+            </span>
             <span>GitHub</span>
           </a>
         </nav>
@@ -35,7 +52,10 @@
 
             <form class="home-search" id="homeForm">
               <label class="sr-only" for="homeQuery">输入市场问题</label>
-              <input id="homeQuery" name="query" placeholder="你想知道什么？" autocomplete="off" />
+              <div class="home-input-wrap">
+                <span class="home-input-caret" aria-hidden="true"></span>
+                <input id="homeQuery" name="query" placeholder="你想知道什么？" autocomplete="off" />
+              </div>
               <button type="submit">
                 <span>分析</span>
                 <span class="button-arrow">→</span>
@@ -45,7 +65,7 @@
             <section class="powered" aria-label="DeepAlpha 能力模块">
               <div class="powered-label">POWERED BY</div>
               <div class="power-chip-grid">
-                <span class="power-chip"><i style="--chip-color: #6f45ff">X</i>X 情报流</span>
+                <span class="power-chip"><i style="--chip-color: #1da1f2">X</i>X 情报流</span>
                 <span class="power-chip"><i style="--chip-color: #2f78ff">IR</i>问题路由</span>
                 <span class="power-chip"><i style="--chip-color: #95c84c">EC</i>事件聚类</span>
                 <span class="power-chip"><i style="--chip-color: #f47445">EV</i>证据链</span>

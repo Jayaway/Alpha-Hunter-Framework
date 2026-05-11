@@ -84,6 +84,7 @@ def build_parser():
     parser.add_argument("--delay", type=int, default=3, help="任务间延迟秒数")
     parser.add_argument("--output", type=str, default=None, help="输出 JSON 报告路径")
     parser.add_argument("--debug", action="store_true", help="显示详细错误并写入调试日志")
+    parser.add_argument("--event-pipeline", action="store_true", help="启用 v0.2 事件聚合 + 证据链报告")
     return parser
 
 
@@ -119,7 +120,8 @@ def run_query(query: str, args):
 
     if not args.crawl:
         analysis_result, graph_result = _analyze_existing_intel(query, decision, args)
-        _save_history_report(args, query, decision, analysis_result, graph_result)
+        event_pipeline = _build_event_pipeline(args, query, decision, analysis_result.get("relevant_tweets", []))
+        _save_history_report(args, query, decision, analysis_result, graph_result, event_pipeline)
         return
 
     if args.dry_run:
@@ -157,9 +159,10 @@ def run_query(query: str, args):
 
     cleaned_tweets = _clean_tweets(all_tweets, args, ai)
     judgment = _judge_signals(cleaned_tweets, decision, args)
+    event_pipeline = _build_event_pipeline(args, query, decision, cleaned_tweets)
 
     _print_final_report(query, decision, all_tweets, cleaned_tweets, judgment)
-    _save_report(args, query, decision, crawl_results, cleaned_tweets, judgment, graph_result, csv_path)
+    _save_report(args, query, decision, crawl_results, cleaned_tweets, judgment, graph_result, csv_path, event_pipeline)
 
     if args.view_graph and graph_result:
         _start_graph_viewer(args.graph_file, args.graph_port)
@@ -393,6 +396,21 @@ def _judge_signals(cleaned_tweets: list, decision: dict, args):
     return judgment
 
 
+def _build_event_pipeline(args, query: str, decision: dict, tweets: list):
+    if not args.event_pipeline:
+        return None
+
+    print(f"\n{'─' * 60}")
+    print("  Step 5: v0.2 事件聚合与证据链")
+    print(f"{'─' * 60}")
+
+    from deepalpha_runtime.event_pipeline import print_event_pipeline_report, run_event_pipeline
+
+    pipeline = run_event_pipeline(tweets, query=query, decision=decision)
+    print_event_pipeline_report(pipeline)
+    return pipeline
+
+
 def _print_final_report(query, decision, all_tweets, cleaned_tweets, judgment):
     print(f"\n{'=' * 60}")
     print("  最终报告")
@@ -413,7 +431,7 @@ def _print_final_report(query, decision, all_tweets, cleaned_tweets, judgment):
     print(f"\n{'=' * 60}\n")
 
 
-def _save_report(args, query, decision, crawl_results, cleaned_tweets, judgment, graph_result, csv_path):
+def _save_report(args, query, decision, crawl_results, cleaned_tweets, judgment, graph_result, csv_path, event_pipeline=None):
     if not args.output:
         return
 
@@ -428,13 +446,14 @@ def _save_report(args, query, decision, crawl_results, cleaned_tweets, judgment,
         },
         "graph": graph_result,
         "judgment": judgment,
+        "event_pipeline": event_pipeline,
         "timestamp": datetime.now().isoformat(),
     }
 
     _write_json_report(args.output, report)
 
 
-def _save_history_report(args, query, decision, analysis_result, graph_result):
+def _save_history_report(args, query, decision, analysis_result, graph_result, event_pipeline=None):
     if not args.output:
         return
 
@@ -454,6 +473,7 @@ def _save_history_report(args, query, decision, analysis_result, graph_result):
             "summary_lines": analysis_result.get("summary_lines", []),
             "top_tweets": analysis_result.get("top_tweets", []),
         },
+        "event_pipeline": event_pipeline,
         "timestamp": datetime.now().isoformat(),
     }
 

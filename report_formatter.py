@@ -28,6 +28,7 @@ def format_report(report: dict[str, Any]) -> str:
     judgment = report.get("judgment") or {}
     graph = report.get("graph") or {}
     crawl_stats = report.get("crawl_stats") or {}
+    event_pipeline = report.get("event_pipeline") or {}
 
     direction = extract_direction(judgment)
     confidence = extract_confidence(judgment)
@@ -76,6 +77,9 @@ def format_report(report: dict[str, Any]) -> str:
             lines.append(f"- {item}")
     else:
         lines.append("- 暂无结构化关键证据。")
+
+    if event_pipeline:
+        lines.extend(format_event_pipeline(event_pipeline))
 
     lines.extend(
         [
@@ -145,6 +149,50 @@ def extract_key_evidence(judgment: dict[str, Any]) -> list[str]:
         reason = one_line(signal.get("impact_reason") or "")
         evidence.append(f"`{handle}` [{direction}, 影响{impact}级] {content} {reason}".strip())
     return evidence
+
+
+def format_event_pipeline(pipeline: dict[str, Any]) -> list[str]:
+    aggregate = pipeline.get("aggregate_signal") or {}
+    events = pipeline.get("events") or []
+    lines = [
+        "",
+        "## v0.2 事件级判断",
+        "",
+        f"- 输入推文：{pipeline.get('input_tweet_count', 0)} 条",
+        f"- 聚合事件：{pipeline.get('event_count', 0)} 个",
+        f"- 事件级方向：**{aggregate.get('market_direction_label') or '暂无明确方向'}**",
+        f"- 事件级置信度：**{aggregate.get('confidence', 0)}**",
+        f"- 是否需要二次确认：{'是' if aggregate.get('requires_confirmation') else '否'}",
+        f"- 说明：{aggregate.get('reason', '暂无')}",
+        "",
+        "## 核心事件与证据链",
+        "",
+    ]
+
+    if not events:
+        lines.append("- 暂无可聚合事件。")
+        return lines
+
+    for event in events[:5]:
+        signal = event.get("signal") or {}
+        chain = event.get("evidence_chain") or {}
+        lines.append(f"### {event.get('event_title') or '未知事件'}")
+        lines.append("")
+        lines.append(f"- 事件ID：`{event.get('event_id', 'unknown')}`")
+        lines.append(f"- 来源账号：{format_list(event.get('sources'))}")
+        lines.append(f"- 独立来源数：{event.get('independent_source_count', 0)}")
+        lines.append(f"- 扩散/重复来源数：{event.get('echo_source_count', 0)}")
+        lines.append(f"- 证据质量：{signal.get('evidence_quality', 'unknown')} / {signal.get('multi_source_status', 'unknown')}")
+        lines.append(f"- 来源平均可信度：{chain.get('average_credibility', '暂无')}")
+        lines.append(f"- 信号类型：{signal.get('signal_type', 'unknown')}")
+        lines.append(f"- 方向判断：{signal.get('market_direction_label') or '暂无明确方向'}")
+        lines.append(f"- 是否需要二次确认：{'是' if signal.get('requires_confirmation') else '否'}")
+        if signal.get("market_movers"):
+            lines.append(f"- 市场冲击源：{format_list(signal.get('market_movers'))}")
+        lines.append(f"- 摘要：{event.get('summary', '暂无')}")
+        lines.append("")
+
+    return lines
 
 
 def extract_sources(report: dict[str, Any], judgment: dict[str, Any]) -> list[str]:

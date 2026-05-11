@@ -53,6 +53,7 @@ def analyze_history(query: str, decision: dict, input_dir: str = DEFAULT_INPUT_D
         "relevant_count": len(relevant),
         "judgment": judgment,
         "top_tweets": top_tweets,
+        "relevant_tweets": relevant,
         "summary_lines": summary_lines,
     }
 

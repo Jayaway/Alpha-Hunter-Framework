@@ -1209,8 +1209,8 @@
       "weight": 2
     },
     {
-      "source": "Moscow",
-      "target": "Russia",
+      "source": "Russia",
+      "target": "Moscow",
       "type": "co_occurs",
       "weight": 2
     },
@@ -1245,8 +1245,8 @@
       "weight": 2
     },
     {
-      "source": "Beijing",
-      "target": "China",
+      "source": "China",
+      "target": "Beijing",
       "type": "co_occurs",
       "weight": 2
     },
@@ -1264,6 +1264,5 @@
     }
   ],
   "query": "油价会涨吗？",
-  "generated": "2026-05-08T13:02:35.667135"
-}66638"
+  "generated": "2026-05-11T09:26:32.285395"
 }

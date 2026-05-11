@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DeepAlpha 关系图谱</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 50% 4%, rgba(29, 161, 242, 0.13), transparent 28rem),
+          radial-gradient(circle at 88% 96%, rgba(6, 182, 212, 0.07), transparent 20rem),
+          var(--bg);
+      }
+
+      .graph-shell {
+        min-height: 100vh;
+        padding: 5.5rem 1.5rem 2.5rem;
+      }
+
+      .graph-nav {
+        position: fixed;
+      }
+
+      .graph-hero,
+      .graph-board {
+        width: min(76rem, 100%);
+        margin: 0 auto;
+      }
+
+      .graph-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 1rem;
+        align-items: end;
+        padding-bottom: 1rem;
+      }
+
+      .graph-hero h1 {
+        margin: 0;
+        color: var(--text);
+        font-size: clamp(2rem, 3.4vw, 2.8rem);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+      }
+
+      .graph-meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        max-width: 28rem;
+      }
+
+      .graph-meta span {
+        display: flex;
+        gap: 0.5rem;
+        min-height: 2.1rem;
+        align-items: center;
+        padding: 0 0.75rem;
+        border: 1px solid rgba(29, 161, 242, 0.16);
+        border-radius: 999px;
+        background: #0a0a0a;
+        color: #737986;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .graph-meta b {
+        color: #9fd8ff;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      .graph-board {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 14.5rem;
+        gap: 0.75rem;
+        min-height: 40rem;
+      }
+
+      .graph-stage {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(29, 161, 242, 0.14);
+        border-radius: 0.7rem;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          #08090b;
+        background-size: 2.2rem 2.2rem;
+      }
+
+      .graph-svg {
+        display: block;
+        width: 100%;
+        height: 40rem;
+      }
+
+      .graph-edge {
+        stroke: rgba(140, 176, 204, 0.26);
+        stroke-linecap: round;
+      }
+
+      .graph-node circle {
+        stroke: rgba(255, 255, 255, 0.66);
+        stroke-width: 1.2;
+        transition:
+          r 0.18s ease,
+          stroke 0.18s ease,
+          opacity 0.18s ease;
+      }
+
+      .graph-node text {
+        fill: #cbd5df;
+        font-size: 0.72rem;
+        font-weight: 700;
+        paint-order: stroke;
+        pointer-events: none;
+        stroke: #08090b;
+        stroke-width: 4px;
+        stroke-linejoin: round;
+      }
+
+      .graph-node:hover circle {
+        stroke: #ffffff;
+      }
+
+      .type-account {
+        fill: #1da1f2;
+      }
+
+      .legend-item .type-account {
+        background: #1da1f2;
+      }
+
+      .type-location {
+        fill: #60a5fa;
+      }
+
+      .legend-item .type-location {
+        background: #60a5fa;
+      }
+
+      .type-topic {
+        fill: #7c3aed;
+      }
+
+      .legend-item .type-topic {
+        background: #7c3aed;
+      }
+
+      .type-asset {
+        fill: #06b6d4;
+      }
+
+      .legend-item .type-asset {
+        background: #06b6d4;
+      }
+
+      .type-organization {
+        fill: #38bdf8;
+      }
+
+      .legend-item .type-organization {
+        background: #38bdf8;
+      }
+
+      .type-event,
+      .type-other {
+        fill: #94a3b8;
+      }
+
+      .legend-item .type-event,
+      .legend-item .type-other {
+        background: #94a3b8;
+      }
+
+      .graph-side {
+        display: grid;
+        align-content: start;
+        gap: 0.75rem;
+      }
+
+      .graph-panel {
+        padding: 0.85rem;
+        border: 1px solid var(--line-soft);
+        border-radius: 0.7rem;
+        background: rgba(255, 255, 255, 0.018);
+      }
+
+      .graph-panel h2 {
+        margin: 0 0 0.7rem;
+        color: var(--text);
+        font-size: 0.88rem;
+      }
+
+      .legend-list,
+      .top-list {
+        display: grid;
+        gap: 0.48rem;
+      }
+
+      .legend-item,
+      .top-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.7rem;
+        color: var(--muted);
+        font-size: 0.76rem;
+      }
+
+      .legend-item i {
+        display: inline-block;
+        width: 0.62rem;
+        height: 0.62rem;
+        margin-right: 0.38rem;
+        border-radius: 999px;
+        vertical-align: -0.06rem;
+      }
+
+      .top-item b {
+        color: #9fd8ff;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.76rem;
+      }
+
+      .graph-empty {
+        position: absolute;
+        inset: 0;
+        display: none;
+        place-items: center;
+        color: var(--muted);
+      }
+
+      .graph-stage.is-empty .graph-empty {
+        display: grid;
+      }
+
+      @media (max-width: 980px) {
+        .graph-shell {
+          padding-top: 1rem;
+        }
+
+        .graph-nav {
+          position: relative;
+        }
+
+        .graph-hero {
+          grid-template-columns: 1fr;
+          padding-top: 2.8rem;
+        }
+
+        .graph-meta {
+          justify-content: flex-start;
+          max-width: none;
+        }
+
+        .graph-board {
+          grid-template-columns: 1fr;
+        }
+
+        .graph-svg {
+          height: 32rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="graph-shell">
+      <nav class="home-nav graph-nav" aria-label="DeepAlpha 图谱导航">
+        <a class="nav-pill" href="./index.html">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 11.5 12 4l9 7.5"></path>
+              <path d="M5 10.5V20h14v-9.5"></path>
+              <path d="M9 20v-6h6v6"></path>
+            </svg>
+          </span>
+          <span>Home</span>
+        </a>
+        <a class="nav-pill" href="./docs.html">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path>
+              <path d="M14 2v5h5"></path>
+              <path d="M9 13h6"></path>
+              <path d="M9 17h4"></path>
+            </svg>
+          </span>
+          <span>Docs</span>
+        </a>
+        <a class="nav-pill" href="./slides.html">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <path d="M8 12h8"></path>
+              <path d="M8 15h5"></path>
+            </svg>
+          </span>
+          <span>Slides</span>
+        </a>
+      </nav>
+
+      <header class="graph-hero">
+        <div>
+          <div class="report-kicker">DeepAlpha Graph</div>
+          <h1>关系图谱</h1>
+        </div>
+        <div class="graph-meta">
+          <span>查询 <b id="graphQuery">-</b></span>
+          <span>节点 <b id="graphNodeCount">0</b></span>
+          <span>关系 <b id="graphEdgeCount">0</b></span>
+          <span>生成 <b id="graphGenerated">-</b></span>
+        </div>
+      </header>
+
+      <main class="graph-board">
+        <section class="graph-stage" id="graphStage" aria-label="关系图谱">
+          <svg class="graph-svg" id="graphSvg" role="img" aria-label="DeepAlpha 关系图谱"></svg>
+          <div class="graph-empty">暂无图谱数据</div>
+        </section>
+
+        <aside class="graph-side">
+          <section class="graph-panel">
+            <h2>图例</h2>
+            <div class="legend-list" id="legendList"></div>
+          </section>
+          <section class="graph-panel">
+            <h2>高频节点</h2>
+            <div class="top-list" id="topList"></div>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <script src="./graph-data.js"></script>
+    <script>
+      const graph = window.DEEPALPHA_GRAPH || { nodes: [], edges: [] };
+      const nodes = graph.nodes || [];
+      const edges = graph.edges || [];
+      const typeOrder = ["account", "location", "topic", "asset", "organization", "event", "other"];
+      const typeLabels = {
+        account: "账号",
+        location: "地点",
+        topic: "主题",
+        asset: "资产",
+        organization: "组织",
+        event: "事件",
+        other: "其他",
+      };
+
+      function byId(id) {
+        return document.getElementById(id);
+      }
+
+      function formatDate(value) {
+        if (!value) return "-";
+        const date = new Date(value);
+        if (Number.isNaN(date.valueOf())) return value.slice(0, 10);
+        return date.toISOString().slice(0, 10);
+      }
+
+      function radiusFor(node) {
+        const count = Number(node.mention_count || 1);
+        return Math.max(5, Math.min(17, 5 + Math.sqrt(count) * 0.92));
+      }
+
+      function typeOf(node) {
+        return typeOrder.includes(node.type) ? node.type : "other";
+      }
+
+      function layoutNodes(width, height) {
+        const center = { x: width * 0.5, y: height * 0.5 };
+        const grouped = new Map(typeOrder.map((type) => [type, []]));
+        nodes.forEach((node) => grouped.get(typeOf(node)).push(node));
+
+        const placed = new Map();
+        const rings = {
+          account: { radius: 0.23, start: -0.8 },
+          location: { radius: 0.34, start: 0.15 },
+          topic: { radius: 0.43, start: 1.1 },
+          asset: { radius: 0.18, start: 2.4 },
+          organization: { radius: 0.39, start: 2.8 },
+          event: { radius: 0.48, start: 3.5 },
+          other: { radius: 0.5, start: 4.3 },
+        };
+        const minSide = Math.min(width, height);
+
+        typeOrder.forEach((type) => {
+          const group = grouped.get(type).sort((a, b) => (b.mention_count || 0) - (a.mention_count || 0));
+          const ring = rings[type];
+          const count = Math.max(group.length, 1);
+          group.forEach((node, index) => {
+            const angle = ring.start + (Math.PI * 2 * index) / count;
+            const wobble = ((index % 3) - 1) * 0.04 * minSide;
+            const radius = minSide * ring.radius + wobble;
+            placed.set(node.id, {
+              ...node,
+              x: center.x + Math.cos(angle) * radius,
+              y: center.y + Math.sin(angle) * radius,
+              r: radiusFor(node),
+              nodeType: type,
+            });
+          });
+        });
+
+        return placed;
+      }
+
+      function renderGraph() {
+        byId("graphQuery").textContent = graph.query || "-";
+        byId("graphNodeCount").textContent = String(nodes.length);
+        byId("graphEdgeCount").textContent = String(edges.length);
+        byId("graphGenerated").textContent = formatDate(graph.generated);
+
+        const stage = byId("graphStage");
+        const svg = byId("graphSvg");
+        svg.innerHTML = "";
+        if (!nodes.length) {
+          stage.classList.add("is-empty");
+          return;
+        }
+        stage.classList.remove("is-empty");
+
+        const rect = svg.getBoundingClientRect();
+        const width = Math.max(720, Math.round(rect.width || 900));
+        const height = Math.max(520, Math.round(rect.height || 672));
+        svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+
+        const placed = layoutNodes(width, height);
+        const edgeLayer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        const nodeLayer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        svg.append(edgeLayer, nodeLayer);
+
+        edges
+          .filter((edge) => placed.has(edge.source) && placed.has(edge.target))
+          .sort((a, b) => (a.weight || 1) - (b.weight || 1))
+          .forEach((edge) => {
+            const source = placed.get(edge.source);
+            const target = placed.get(edge.target);
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("class", "graph-edge");
+            line.setAttribute("x1", source.x);
+            line.setAttribute("y1", source.y);
+            line.setAttribute("x2", target.x);
+            line.setAttribute("y2", target.y);
+            line.setAttribute("stroke-width", Math.max(0.6, Math.min(4, 0.5 + Math.sqrt(edge.weight || 1) * 0.45)));
+            line.setAttribute("opacity", Math.max(0.14, Math.min(0.46, 0.1 + (edge.weight || 1) / 44)));
+            edgeLayer.append(line);
+          });
+
+        [...placed.values()]
+          .sort((a, b) => a.r - b.r)
+          .forEach((node) => {
+            const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            group.setAttribute("class", "graph-node");
+            group.setAttribute("transform", `translate(${node.x},${node.y})`);
+
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("r", node.r);
+            circle.setAttribute("class", `type-${node.nodeType}`);
+
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", node.r + 5);
+            label.setAttribute("y", 4);
+            label.textContent = node.label || node.id;
+
+            const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+            title.textContent = `${node.label || node.id} · ${node.type_label || typeLabels[node.nodeType]} · ${node.mention_count || 0} mentions`;
+
+            group.append(title, circle, label);
+            nodeLayer.append(group);
+          });
+
+        renderLegend();
+        renderTopNodes();
+      }
+
+      function renderLegend() {
+        const counts = nodes.reduce((acc, node) => {
+          const type = typeOf(node);
+          acc[type] = (acc[type] || 0) + 1;
+          return acc;
+        }, {});
+        byId("legendList").innerHTML = typeOrder
+          .filter((type) => counts[type])
+          .map((type) => `<div class="legend-item"><span><i class="type-${type}"></i>${typeLabels[type]}</span><b>${counts[type]}</b></div>`)
+          .join("");
+      }
+
+      function renderTopNodes() {
+        byId("topList").innerHTML = [...nodes]
+          .sort((a, b) => (b.mention_count || 0) - (a.mention_count || 0))
+          .slice(0, 8)
+          .map((node) => `<div class="top-item"><span>${node.label || node.id}</span><b>${node.mention_count || 0}</b></div>`)
+          .join("");
+      }
+
+      window.addEventListener("resize", renderGraph);
+      renderGraph();
+    </script>
+  </body>
+</html>

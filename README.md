@@ -1,8 +1,8 @@
 # DeepAlpha
 
-DeepAlpha 是当前文件夹内继续开发的新版 X/Twitter 情报分析项目。原始版本已经单独备份在 GitHub / Gitee，本目录不再作为原始仓库的整理现场，而是作为新版项目主线继续演进。
+DeepAlpha 是当前文件夹内继续开发的新版 X/Twitter 情报分析项目。原始版本已经单独备份在 GitHub / Gitee，本目录作为新版项目主线继续演进。
 
-当前阶段先做“主线收敛”：明确推荐入口、兼容入口、实验文件边界，不删除旧文件，也不改底层爬虫和业务逻辑。
+当前阶段做“主线收敛”：源码、网页、文档和测试保留在仓库内；抓取 CSV、报告、图谱 JSON、日志、虚拟环境和缓存都视为本地运行产物，不再作为源码维护。
 
 ## 当前推荐入口
 
@@ -232,6 +232,8 @@ pip install -r requirements.txt
 | `intel_analyzer.py` | 历史情报分析。 |
 | `graph_engine.py` | 独立图谱 JSON 生成。 |
 | `graph_viewer.py` | 本地图谱查看器。 |
+| `web/` | DeepAlpha 静态网页、Slides、Docs 和关系图谱界面。 |
+| `scripts/export_web_graph.py` | 将运行生成的 `graph_data/关系图谱.json` 导出为 `web/graph-data.js`。 |
 | `scheduled_crawler.py` | 低频刷新历史库脚本，未来监听模块参考。 |
 | `main_v2.py` | 实验入口，暂不作为主链路。 |
 | `hybrid_crawler.py` | 实验抓取引擎，暂不作为主链路。 |
@@ -245,10 +247,14 @@ pip install -r requirements.txt
 | --- | --- |
 | `抓取的信息/` | 抓取 CSV 历史库。 |
 | `graph_data/` | 图谱 JSON 和调度状态。 |
+| `reports/` | JSON / Markdown 报告输出。 |
+| `logs/` | 运行日志。 |
 | `obsidian_vault/` | Obsidian 图谱输出产物。 |
 | `test_obsidian_vault/` | 测试图谱输出产物。 |
 | `__pycache__/` | Python 缓存。 |
 | `venv/` | 本地虚拟环境。 |
+
+这些目录会由运行命令自动生成，并已加入 `.gitignore`。
 
 ## 测试/示例脚本
 

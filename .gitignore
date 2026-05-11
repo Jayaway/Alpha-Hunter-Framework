@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-*.csv
 .DS_Store
 .idea/
 
@@ -12,13 +11,16 @@ cookies/*.json
 cookies/browser/*.json
 cookies/browser/x_cookie.json
 
-# 抓取输出
+# 运行输出 / 可再生成数据
+*.csv
 抓取的信息/
 filter_output/
-tweets/*.csv
-reports/test_*.json
-reports/test_*.md
-graph_data/scheduler_state.json
+tweets/
+reports/
+logs/
+graph_data/
+obsidian_vault/
+test_obsidian_vault/
 
 # C extensions
 *.so

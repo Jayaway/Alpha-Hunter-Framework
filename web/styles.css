@@ -8,9 +8,6 @@
   --text: #f4f5f4;
   --muted: #7b8088;
   --soft: #c8ccd1;
-  --green: #1da1f2;
-  --green-deep: #0d8ddb;
-  --green-soft: rgba(29, 161, 242, 0.16);
   --blue: #1da1f2;
   --blue-deep: #0d8ddb;
   --blue-soft: rgba(29, 161, 242, 0.16);
@@ -370,7 +367,7 @@ input {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 0.38rem;
-  background: var(--chip-color, var(--green));
+  background: var(--chip-color, var(--blue));
   color: white;
   font-style: normal;
   font-size: 0.62rem;
@@ -458,7 +455,7 @@ input {
 }
 
 .run-button {
-  background: var(--green-soft);
+  background: var(--blue-soft);
   color: #9fd8ff;
   border-color: rgba(29, 161, 242, 0.45);
   font-size: 0.82rem;
@@ -484,7 +481,7 @@ input {
   width: 0.46rem;
   height: 0.46rem;
   border-radius: 999px;
-  background: var(--green);
+  background: var(--blue);
   box-shadow: 0 0 0 0 rgba(29, 161, 242, 0.45);
   animation: pulse 1.8s infinite;
 }
@@ -510,7 +507,7 @@ input {
   bottom: 2rem;
   left: 2.95rem;
   width: 2px;
-  background: linear-gradient(var(--green), rgba(29, 161, 242, 0.1));
+  background: linear-gradient(var(--blue), rgba(29, 161, 242, 0.1));
   border-radius: 999px;
 }
 
@@ -531,7 +528,7 @@ input {
   height: 1.5rem;
   margin-top: 0.25rem;
   border-radius: 999px;
-  background: var(--green);
+  background: var(--blue);
   color: white;
   font-size: 0.7rem;
   font-weight: 900;
@@ -639,7 +636,7 @@ input {
 }
 
 .summary-meter .ok {
-  background: var(--green);
+  background: var(--blue);
 }
 
 .summary-meter .bad {
@@ -659,7 +656,7 @@ input {
   width: 48%;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--green), #7cc7ff);
+  background: linear-gradient(90deg, var(--blue), #7cc7ff);
   animation: loading 1.5s ease-in-out infinite alternate;
 }
 
@@ -684,7 +681,7 @@ input {
 }
 
 .report-kicker {
-  color: var(--green);
+  color: var(--blue);
   font-weight: 900;
   letter-spacing: 0;
   margin-bottom: 0.45rem;
@@ -711,7 +708,7 @@ input {
 .section-title span {
   width: 0.2rem;
   height: 1.8rem;
-  background: var(--green);
+  background: var(--blue);
 }
 
 .section-title h2,

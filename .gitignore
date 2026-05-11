@@ -3,14 +3,22 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.csv
+.DS_Store
+.idea/
 
 # Cookie（含登录凭证，绝对不能提交）
 x_cookie.json
+cookies/*.json
+cookies/browser/*.json
+cookies/browser/x_cookie.json
 
 # 抓取输出
 抓取的信息/
 filter_output/
 tweets/*.csv
+reports/test_*.json
+reports/test_*.md
+graph_data/scheduler_state.json
 
 # C extensions
 *.so

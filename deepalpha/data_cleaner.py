@@ -16,7 +16,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 from typing import Optional
 
-from x_intel_rules import (
+from deepalpha.x_intel_rules import (
     S_LEVEL, A_LEVEL, B_LEVEL, C_LEVEL,
     LEADERS_GROUP, JOURNALIST_SCOOP_GROUP,
 )

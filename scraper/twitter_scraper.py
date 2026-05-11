@@ -54,7 +54,7 @@ class Twitter_Scraper:
         scrape_latest=True,
         scrape_top=False,
         proxy=None,
-        cookie_file="x_cookie.json",
+        cookie_file="cookies/browser/x_cookie.json",
         browser="chrome",
     ):
         print("Initializing Twitter Scraper...")
@@ -694,7 +694,7 @@ class Twitter_Scraper:
         print("CSV Saved: {}".format(file_path))
 
         try:
-            from graph_engine import generate_graph_data
+            from deepalpha.graph_engine import generate_graph_data
 
             generate_graph_data(
                 output_file="./graph_data/关系图谱.json",

@@ -31,8 +31,8 @@ def run_event_pipeline(
     decision: dict[str, Any],
     max_events: int = 8,
 ) -> dict[str, Any]:
-    from event_cluster import cluster_events
-    from evidence_chain import build_evidence_chain
+    from deepalpha.event_cluster import cluster_events
+    from deepalpha.evidence_chain import build_evidence_chain
 
     asset = decision.get("asset") or "unknown"
     events = cluster_events(tweets)
@@ -75,7 +75,7 @@ def run_event_pipeline(
 
 
 def judge_event_signal(event: dict[str, Any], chain: dict[str, Any], asset: str | None = None) -> dict[str, Any]:
-    from signal_judge import judge_all_signals
+    from deepalpha.signal_judge import judge_all_signals
 
     related_tweets = event.get("related_tweets", []) or []
     tweet_signal = judge_all_signals(related_tweets, asset=asset)

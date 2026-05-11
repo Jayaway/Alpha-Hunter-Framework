@@ -22,7 +22,7 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass, field
 
-from x_intel_rules import S_LEVEL, A_LEVEL, B_LEVEL, LEADERS_GROUP, JOURNALIST_SCOOP_GROUP
+from deepalpha.x_intel_rules import S_LEVEL, A_LEVEL, B_LEVEL, LEADERS_GROUP, JOURNALIST_SCOOP_GROUP
 
 
 # ============================================================

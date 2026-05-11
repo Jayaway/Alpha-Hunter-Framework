@@ -11,7 +11,7 @@ X 实时情报系统 - 抓取前极速决策器
   - 先判市场阶段，再定抓取路径
 """
 
-from x_intel_rules import S_LEVEL, A_LEVEL
+from deepalpha.x_intel_rules import S_LEVEL, A_LEVEL
 
 
 # ============================================================

@@ -8,7 +8,7 @@ X 实时情报系统 - AI 模型接口
   - 其他兼容 API
 
 使用方式：
-  from ai_model import AIModel
+  from deepalpha.ai_model import AIModel
   
   ai = AIModel()  # 自动检测可用后端
   response = ai.chat("分析这段文本...")
@@ -307,7 +307,7 @@ def ai_decide(query: str, ai: AIModel = None) -> dict:
 
     if "error" in result:
         logging.error("AI decision failed, falling back to local router: %s", result["error"])
-        from intel_router_v2 import decide
+        from deepalpha.intel_router_v2 import decide
         return decide(query).to_dict()
 
     required_fields = ["asset", "current_regime", "top_accounts", "top_event_phrases", "crawl_tasks"]

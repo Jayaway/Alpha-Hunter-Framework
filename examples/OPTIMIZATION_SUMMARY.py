@@ -171,7 +171,7 @@ health_score = (
 
 ### 1. 快速查询
 ```python
-from main_v2 import query
+from deepalpha.main_v2 import query
 
 result = query("油价会涨吗？")
 print(result.summary())
@@ -179,7 +179,7 @@ print(result.summary())
 
 ### 2. 使用新版抓取引擎
 ```python
-from hybrid_crawler import HybridCrawlerEngine
+from deepalpha.hybrid_crawler import HybridCrawlerEngine
 
 engine = HybridCrawlerEngine()
 tweets = engine.crawl("profile", "Reuters", limit=30)
@@ -187,7 +187,7 @@ tweets = engine.crawl("profile", "Reuters", limit=30)
 
 ### 3. 使用新版决策器
 ```python
-from intel_router_v2 import decide
+from deepalpha.intel_router_v2 import decide
 
 decision = decide("美联储会不会降息？")
 print(f"推荐账号: {decision.top_accounts}")
@@ -195,7 +195,7 @@ print(f"推荐账号: {decision.top_accounts}")
 
 ### 4. 使用精简清洗
 ```python
-from cleaner_v2 import clean_tweets
+from deepalpha.cleaner_v2 import clean_tweets
 
 cleaned = clean_tweets(raw_tweets, verbose=True)
 ```
@@ -223,7 +223,7 @@ cleaned = clean_tweets(raw_tweets, verbose=True)
 ### 中优先级
 4. **LLM 集成**：复杂意图理解
    ```python
-   from main_v2 import XIntelSystem
+   from deepalpha.main_v2 import XIntelSystem
    system = XIntelSystem(use_llm=True)
    ```
 

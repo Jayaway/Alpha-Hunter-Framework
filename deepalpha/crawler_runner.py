@@ -37,7 +37,7 @@ def build_tasks(decision: dict) -> dict:
     user_tasks = []
     search_tasks = []
 
-    from account_status import should_degrade_account, should_skip_account
+    from deepalpha.account_status import should_degrade_account, should_skip_account
 
     for acc in accounts[:max_accounts]:
         username = acc.lstrip("@")
@@ -97,7 +97,7 @@ def _account_empty_error(page_text: str) -> str:
     return "No more tweets to scrape"
 
 
-def run_all_tasks(decision: dict, cookie_file: str = "x_cookie.json",
+def run_all_tasks(decision: dict, cookie_file: str = "cookies/browser/x_cookie.json",
                   browser: str = "chrome", headless: str = "no",
                   delay_between_tasks: int = 3, debug: bool = False) -> dict:
     """
@@ -135,7 +135,7 @@ def run_all_tasks(decision: dict, cookie_file: str = "x_cookie.json",
     
     try:
         from scraper.twitter_scraper import Twitter_Scraper
-        from account_status import mark_account_failure, mark_account_success
+        from deepalpha.account_status import mark_account_failure, mark_account_success
 
         scraper = Twitter_Scraper(
             mail="cookie_login",

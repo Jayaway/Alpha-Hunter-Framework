@@ -243,13 +243,13 @@ def add_oil_term(term: str, entities: set[str], keywords: set[str]) -> None:
 
 
 def oil_keyword_rules() -> list[tuple]:
-    from x_intel_rules import get_keyword_rules_by_domain
+    from deepalpha.x_intel_rules import get_keyword_rules_by_domain
 
     return get_keyword_rules_by_domain("oil")
 
 
 def oil_source_index() -> dict[str, str]:
-    from x_intel_rules import get_accounts_by_group, get_accounts_by_level
+    from deepalpha.x_intel_rules import get_accounts_by_group, get_accounts_by_level
 
     index = {}
     for level in ("S", "A", "B", "C"):

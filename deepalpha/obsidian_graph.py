@@ -12,7 +12,7 @@ X 实时情报系统 - Obsidian 关系图谱生成器
   4. 支持增量更新，避免重复生成
 
 用法：
-  from obsidian_graph import generate_obsidian_graph
+  from deepalpha.obsidian_graph import generate_obsidian_graph
   generate_obsidian_graph(tweets, output_dir="./obsidian_vault/")
 """
 

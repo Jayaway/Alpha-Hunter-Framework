@@ -30,7 +30,7 @@ Git 状态提示：
 
 - 当前 Git 跟踪文件很少，主要是原始 scraper、README、requirements、notebook、cookie 示例等。
 - 大量实时情报系统文件处于未跟踪状态，如 `run.py`、`run_v2.py`、`crawler_runner.py`、`intel_router*.py`、`cleaner*.py`、`signal_judge.py`、`graph_engine.py` 等。
-- `.gitignore` 已忽略 `venv/`、`__pycache__/`、`*.csv`、`抓取的信息/`、`x_cookie.json`，但 `.idea/` 当前未启用忽略。
+- `.gitignore` 已忽略 `venv/`、`__pycache__/`、`*.csv`、`抓取的信息/`、`cookies/browser/x_cookie.json`，但 `.idea/` 当前未启用忽略。
 
 ## 2. 当前真正的主入口文件
 
@@ -255,9 +255,9 @@ Git 状态提示：
 
 | 文件 | 判断依据 |
 | --- | --- |
-| `x_cookie.json` | 登录凭证，已在 `.gitignore` 中；不要提交或公开。 |
+| `cookies/browser/x_cookie.json` | 登录凭证，已在 `.gitignore` 中；不要提交或公开。 |
 | `cookies/account_1.json` | 多账号 Cookie 配置，疑似也含凭证，应按敏感文件处理。 |
-| `x_cookie 示例.json` | Cookie 格式示例，可保留。 |
+| `cookies/browser/x_cookie 示例.json` | Cookie 格式示例，可保留。 |
 
 ## 7. 明显问题记录
 

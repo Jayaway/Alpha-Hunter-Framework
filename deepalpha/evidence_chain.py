@@ -84,7 +84,7 @@ def classify_multi_source(source_count: int, source_types: Iterable[str]) -> str
 
 
 def account_credibility_score(account: str | None) -> int:
-    from x_intel_rules import get_accounts_by_level
+    from deepalpha.x_intel_rules import get_accounts_by_level
 
     normalized = normalize_account(account)
     if not normalized:
@@ -111,7 +111,7 @@ def classify_source_type(account: str | None) -> str:
     if key in JOURNALIST_HINTS:
         return "记者"
 
-    from x_intel_rules import get_accounts_by_group
+    from deepalpha.x_intel_rules import get_accounts_by_group
 
     oil_accounts = {normalize_account(item).lower() for item in get_accounts_by_group("oil")}
     if normalized.lower() in oil_accounts:
@@ -189,7 +189,7 @@ def load_events(path: str | Path) -> list[dict[str, Any]]:
 
 
 def sample_events() -> list[dict[str, Any]]:
-    from event_cluster import cluster_events, sample_cleaned_tweets
+    from deepalpha.event_cluster import cluster_events, sample_cleaned_tweets
 
     return cluster_events(sample_cleaned_tweets())
 

@@ -31,12 +31,12 @@ if choice == "1":
     print("  方案一：只使用新版决策器")
     print("=" * 60)
 
-    from intel_router_v2 import decide, decide_and_print
+    from deepalpha.intel_router_v2 import decide, decide_and_print
 
     print("\n💡 这是最简单的方式，100x 更快！")
     print("\n代码示例:")
     print("""
-    from intel_router_v2 import decide
+    from deepalpha.intel_router_v2 import decide
     decision = decide("油价会涨吗？")
     print(f"推荐账号: {decision.top_accounts}")
     """)
@@ -58,8 +58,8 @@ elif choice == "2":
     print("  方案二：决策器 + 清洗器")
     print("=" * 60)
 
-    from intel_router_v2 import decide
-    from cleaner_v2 import clean_tweets
+    from deepalpha.intel_router_v2 import decide
+    from deepalpha.cleaner_v2 import clean_tweets
 
     print("\n💡 这个方案包含:")
     print("   - 极速决策器（100x 更快）")
@@ -142,8 +142,8 @@ elif choice == "3":
 
     # 测试系统初始化
     try:
-        from main_v2 import XIntelSystem
-        from account_pool import AccountPoolManager
+        from deepalpha.main_v2 import XIntelSystem
+        from deepalpha.account_pool import AccountPoolManager
 
         print("\n✅ 系统模块导入成功")
 

@@ -54,7 +54,7 @@ def main():
     parser.add_argument(
         "--cookie-file",
         type=str,
-        default="x_cookie.json",
+        default="cookies/browser/x_cookie.json",
         help="Cookie file path.",
     )
 

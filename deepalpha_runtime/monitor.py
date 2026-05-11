@@ -67,7 +67,7 @@ def main() -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="DeepAlpha oil intelligence monitor")
     parser.add_argument("--once", action="store_true", help="只执行一轮，便于手动验证或外部调度")
-    parser.add_argument("--cookie-file", default="x_cookie.json", help="Cookie 文件路径")
+    parser.add_argument("--cookie-file", default="cookies/browser/x_cookie.json", help="Cookie 文件路径")
     parser.add_argument("-b", "--browser", default="chrome", choices=["chrome", "firefox", "safari"])
     parser.add_argument("--headless", action="store_true", help="使用无头浏览器")
     parser.add_argument("--delay", type=int, default=3, help="crawler_runner 内部任务间隔秒数")
@@ -80,7 +80,7 @@ def build_parser() -> argparse.ArgumentParser:
 def run_once(args: argparse.Namespace) -> int:
     _ensure_project_on_path()
 
-    from crawler_runner import print_tasks, run_all_tasks, save_results
+    from deepalpha.crawler_runner import print_tasks, run_all_tasks, save_results
 
     started_at = datetime.now()
     _log("=" * 72)
@@ -141,8 +141,8 @@ def build_oil_decision(query: str) -> dict:
     intel_router_v2 负责资产/阶段和基础账号选择；
     x_intel_rules 负责补充石油账号池和关键词搜索任务。
     """
-    from intel_router_v2 import decide
-    from x_intel_rules import get_accounts_by_group, get_accounts_by_level, get_keyword_rules_by_domain
+    from deepalpha.intel_router_v2 import decide
+    from deepalpha.x_intel_rules import get_accounts_by_group, get_accounts_by_level, get_keyword_rules_by_domain
 
     decision_obj = decide(query)
     decision = decision_obj.to_dict()

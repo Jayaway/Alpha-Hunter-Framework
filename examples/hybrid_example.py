@@ -16,7 +16,7 @@ print("=" * 60)
 
 print("\n1️⃣  使用新版极速决策器...")
 try:
-    from intel_router_v2 import decide, decide_and_print
+    from deepalpha.intel_router_v2 import decide, decide_and_print
 
     query = "油价会涨吗？"
     print(f"  查询: {query}")
@@ -64,7 +64,7 @@ except Exception as e:
 
 print("\n3️⃣  测试新版精简清洗器...")
 try:
-    from cleaner_v2 import clean_tweets, quick_filter
+    from deepalpha.cleaner_v2 import clean_tweets, quick_filter
 
     # 测试数据
     test_data = [

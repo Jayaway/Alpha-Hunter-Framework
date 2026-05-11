@@ -53,7 +53,7 @@ except ImportError:
     SELENIUM_AVAILABLE = False
     print("⚠️ selenium 未安装")
 
-from x_intel_rules import S_LEVEL, A_LEVEL
+from deepalpha.x_intel_rules import S_LEVEL, A_LEVEL
 
 
 # ============================================================
@@ -360,7 +360,7 @@ class AsyncHTTPEngine:
 
     def _build_cookies(self) -> dict:
         """从 cookie 文件加载 cookies"""
-        cookie_file = "x_cookie.json"
+        cookie_file = "cookies/browser/x_cookie.json"
         if not os.path.exists(cookie_file):
             return {}
 

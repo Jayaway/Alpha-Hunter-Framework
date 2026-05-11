@@ -206,12 +206,12 @@ pip install -r requirements.txt
 
 1. 使用测试用 X 账号登录浏览器。
 2. 通过 Cookie-Editor 等工具导出 JSON Cookie。
-3. 保存为项目根目录的 `x_cookie.json`。
-4. 可参考 `x_cookie 示例.json` 的格式。
+3. 保存为项目根目录的 `cookies/browser/x_cookie.json`。
+4. 可参考 `cookies/browser/x_cookie 示例.json` 的格式。
 
 注意：
 
-- `x_cookie.json` 是登录凭证，不要提交或公开。
+- `cookies/browser/x_cookie.json` 是登录凭证，不要提交或公开。
 - `cookies/*.json` 也可能包含账号凭证，应按敏感文件处理。
 - Cookie 过期后需要重新导出。
 

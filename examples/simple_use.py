@@ -19,7 +19,7 @@ print("=" * 60)
 print("\n1️⃣  只用新版决策器 (最快):")
 print("--------------------------")
 
-from intel_router_v2 import decide
+from deepalpha.intel_router_v2 import decide
 
 query = "油价会涨吗？"
 print(f"\n问题: {query}")
@@ -38,7 +38,7 @@ print("\n" + "=" * 60)
 print("\n2️⃣  决策器 + 清洗器 (推荐):")
 print("--------------------------")
 
-from cleaner_v2 import clean_tweets
+from deepalpha.cleaner_v2 import clean_tweets
 
 # 模拟一些推文
 tweets = [
@@ -71,10 +71,10 @@ print("""
 只需替换这一行:
 
 # 旧版
-# from intel_router import decide
+# from deepalpha.intel_router import decide
 
 # 新版 (100x 更快)
-from intel_router_v2 import decide
+from deepalpha.intel_router_v2 import decide
 
 其他代码完全不变！
 """)

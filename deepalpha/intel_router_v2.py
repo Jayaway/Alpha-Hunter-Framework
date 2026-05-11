@@ -9,7 +9,7 @@ X 实时情报系统 - 极速决策器 v2（优化版）
   4. 1秒内给出抓取任务
 
 使用方式：
-  from intel_router_v2 import decide, decide_with_cache
+  from deepalpha.intel_router_v2 import decide, decide_with_cache
 
   # 快速规则匹配（<1ms）
   result = decide("油价会涨吗？")
@@ -28,12 +28,18 @@ from typing import Optional, List, Dict, Any
 from functools import lru_cache
 from dataclasses import dataclass, field
 
-from x_intel_rules import S_LEVEL, A_LEVEL
+from deepalpha.x_intel_rules import S_LEVEL, A_LEVEL
 
 
 # ============================================================
 # 1. 预编译正则（提升匹配速度）
 # ============================================================
+
+CRYPTO_TICKERS = {
+    "btc", "bitcoin", "eth", "ethereum", "sui", "sol", "solana", "xrp",
+    "bnb", "doge", "ada", "ton", "apt", "arb", "op", "avax", "link",
+    "near", "sei", "tia", "inj", "pepe", "wif", "ondo",
+}
 
 ASSET_PATTERNS_V2 = {
     "oil": {
@@ -49,8 +55,8 @@ ASSET_PATTERNS_V2 = {
         "en": re.compile(r'\bforex\b|\bfx\b|\bdollar\b|\beuro\b|\byen\b|\bdxy\b', re.I),
     },
     "crypto": {
-        "zh": re.compile(r'比特币|BTC|以太坊|ETH|加密|币|区块链'),
-        "en": re.compile(r'\bbitcoin\b|\bbtc\b|\bethereum\b|\bcrypto\b|\bblockchain\b', re.I),
+        "zh": re.compile(r'比特币|以太坊|加密|币|区块链'),
+        "en": re.compile(r'(?<![A-Za-z0-9_])(?:bitcoin|btc|ethereum|eth|crypto|blockchain|sui|sol|solana|xrp|bnb|doge|ada|ton|apt|arb|avax|link|near|sei|tia|inj|pepe|wif|ondo)(?![A-Za-z0-9_])', re.I),
     },
     "equity": {
         "zh": re.compile(r'股市|美股|A股|港股|标普|纳斯达克|股指'),
@@ -87,6 +93,16 @@ REGIME_PATTERNS_V2 = {
         "zh": re.compile(r'战争|冲突|导弹|袭击|入侵|停火|军事|以色列|伊朗|乌克兰|俄罗斯|核|胡塞|真主党|哈马斯|红海|中东'),
         "en": re.compile(r'war|missile|attack|invasion|ceasefire|military|israel|iran|ukraine|russia|nuclear|houthis|hezbollah|hamas', re.I),
     },
+    "risk_sentiment": {
+        "label": "风险偏好驱动",
+        "zh": re.compile(r'风险偏好|避险|流动性|拉升|暴跌|突破|回调|清算|资金流入|资金流出'),
+        "en": re.compile(r'risk on|risk off|liquidity|rally|selloff|breakout|pullback|liquidation|inflow|outflow', re.I),
+    },
+    "dollar_risk": {
+        "label": "美元驱动",
+        "zh": re.compile(r'美元|DXY|美债|实际利率'),
+        "en": re.compile(r'dollar|dxy|treasury|real yield', re.I),
+    },
 }
 
 URGENCY_PATTERNS = {
@@ -113,9 +129,9 @@ ACCOUNT_REGIME_ACCOUNTS_V2 = {
         "default": ["@federalreserve", "@DeItaone", "@Reuters", "@charliebilello", "@realDonaldTrump"],
     },
     "crypto": {
-        "policy_risk": ["@DeItaone", "@Reuters", "@CathieDWood", "@ZeroHedge", "@federalreserve"],
-        "risk_sentiment": ["@DeItaone", "@CathieDWood", "@Reuters", "@ZeroHedge", "@howardlindzon"],
-        "default": ["@DeItaone", "@ZeroHedge", "@federalreserve", "@Reuters", "@CathieDWood"],
+        "policy_risk": ["@CoinDesk", "@TheBlock__", "@WuBlockchain", "@lookonchain", "@santimentfeed"],
+        "risk_sentiment": ["@CoinDesk", "@TheBlock__", "@WuBlockchain", "@lookonchain", "@santimentfeed"],
+        "default": ["@CoinDesk", "@TheBlock__", "@WuBlockchain", "@lookonchain", "@santimentfeed"],
     },
     "equity": {
         "policy_risk": ["@federalreserve", "@DeItaone", "@realDonaldTrump", "@Reuters", "@charliebilello"],
@@ -248,7 +264,7 @@ class IntelRouter:
         urgency = self._detect_urgency_fast(query)
         selection = self._select_accounts(asset, regime, query)
         accounts = selection["selected_accounts"]
-        crawl_tasks = self._build_crawl_tasks(accounts)
+        crawl_tasks = self._build_crawl_tasks(accounts, asset, query)
 
         why = f"当前{self._asset_name(asset)}市场处于【{regime_label}】阶段"
 
@@ -304,6 +320,8 @@ class IntelRouter:
     def _detect_asset_fast(self, query: str) -> str:
         """快速资产识别"""
         scores = {}
+        if self._extract_crypto_terms(query):
+            scores["crypto"] = 3
         for asset, patterns in ASSET_PATTERNS_V2.items():
             score = 0
             if patterns["zh"].search(query):
@@ -311,7 +329,7 @@ class IntelRouter:
             if patterns["en"].search(query):
                 score += 1
             if score > 0:
-                scores[asset] = score
+                scores[asset] = max(scores.get(asset, 0), score)
 
         if scores:
             return max(scores, key=scores.get)
@@ -384,23 +402,16 @@ class IntelRouter:
             }
 
     def _select_oil_accounts_dynamic(self, regime: str, query: str) -> dict:
-        from account_status import load_account_status, save_account_status
-        from oil_intent_classifier import classify_oil_intent
-        from x_intel_rules import get_accounts_by_group, get_accounts_by_level
+        from deepalpha.account_status import load_account_status, save_account_status
+        from deepalpha.oil_intent_classifier import classify_oil_intent
+        from deepalpha.x_intel_rules import get_accounts_by_group, get_accounts_by_level
 
         status = load_account_status()
         oil_intent = classify_oil_intent(query).get("oil_intent", "general_risk")
 
-        core_pool = self._dedupe_accounts(
-            get_accounts_by_level("S")
-            + ACCOUNT_REGIME_ACCOUNTS_V2.get("oil", {}).get("default", [])
-        )
+        core_pool = self._oil_core_pool(oil_intent, regime)
         scenario_pool = self._oil_scenario_pool(oil_intent, regime)
-        exploration_pool = self._dedupe_accounts(
-            get_accounts_by_level("B")
-            + get_accounts_by_level("C")
-            + get_accounts_by_group("oil")
-        )
+        exploration_pool = self._oil_exploration_pool(oil_intent, regime)
 
         candidate_accounts = self._dedupe_accounts(core_pool + scenario_pool + exploration_pool)
         excluded_accounts = []
@@ -441,14 +452,14 @@ class IntelRouter:
         }
 
     def _oil_scenario_pool(self, oil_intent: str, regime: str) -> List[str]:
-        from x_intel_rules import get_accounts_by_group, get_accounts_by_level
+        from deepalpha.x_intel_rules import get_accounts_by_group, get_accounts_by_level
 
         pools = {
             "shipping_risk": get_accounts_by_group("oil") + get_accounts_by_group("geopolitics"),
             "geopolitics": get_accounts_by_group("geopolitics") + get_accounts_by_group("journalist"),
             "opec_policy": get_accounts_by_group("leaders") + get_accounts_by_group("oil"),
             "inventory_macro": get_accounts_by_group("oil") + get_accounts_by_group("macro"),
-            "price_direction": get_accounts_by_group("oil") + get_accounts_by_level("A"),
+            "price_direction": get_accounts_by_group("oil"),
             "general_risk": get_accounts_by_level("S") + get_accounts_by_group("oil"),
         }
         pool = pools.get(oil_intent, pools["general_risk"])
@@ -459,6 +470,41 @@ class IntelRouter:
         elif regime == "policy_risk":
             pool = get_accounts_by_group("leaders") + pool
         return self._dedupe_accounts(pool)
+
+    def _oil_core_pool(self, oil_intent: str, regime: str) -> List[str]:
+        from deepalpha.x_intel_rules import get_accounts_by_group, get_accounts_by_level
+
+        oil_core = self._dedupe_accounts(
+            ACCOUNT_REGIME_ACCOUNTS_V2.get("oil", {}).get("default", [])
+            + get_accounts_by_group("oil")[:12]
+        )
+        if oil_intent in {"geopolitics", "shipping_risk"} or regime == "war_risk":
+            return self._dedupe_accounts(
+                oil_core
+                + ["@Reuters", "@Bloomberg", "@WSJ"]
+                + get_accounts_by_group("geopolitics")[:8]
+            )
+        if oil_intent == "opec_policy":
+            return self._dedupe_accounts(oil_core + get_accounts_by_group("leaders")[:8])
+        if oil_intent == "inventory_macro":
+            return self._dedupe_accounts(oil_core + get_accounts_by_group("macro")[:8])
+        return oil_core
+
+    def _oil_exploration_pool(self, oil_intent: str, regime: str) -> List[str]:
+        from deepalpha.x_intel_rules import get_accounts_by_group
+
+        if oil_intent in {"geopolitics", "shipping_risk"} or regime == "war_risk":
+            return self._dedupe_accounts(
+                get_accounts_by_group("oil")
+                + get_accounts_by_group("geopolitics")
+                + get_accounts_by_group("journalist")
+            )
+        if oil_intent == "inventory_macro" or regime == "demand_risk":
+            return self._dedupe_accounts(
+                get_accounts_by_group("oil")
+                + get_accounts_by_group("macro")
+            )
+        return self._dedupe_accounts(get_accounts_by_group("oil"))
 
     def _filter_runtime_available(self, accounts: List[str], status: dict, excluded: list) -> List[str]:
         available = []
@@ -508,19 +554,69 @@ class IntelRouter:
             text = f"@{text}"
         return text
 
-    def _build_crawl_tasks(self, accounts: List[str]) -> List[str]:
+    def _build_crawl_tasks(self, accounts: List[str], asset: str, query: str) -> List[str]:
         """构建抓取任务"""
         tasks = []
+        asset_terms = self._asset_search_terms(asset, query)
 
         if len(accounts) >= 2:
             acc_part = " OR ".join([f"from:{a}" for a in accounts[:2]])
+            if asset_terms:
+                acc_part = f"({acc_part}) ({asset_terms})"
             tasks.append(acc_part)
 
         if len(accounts) >= 4:
             acc_part2 = " OR ".join([f"from:{a}" for a in accounts[2:4]])
+            if asset_terms:
+                acc_part2 = f"({acc_part2}) ({asset_terms})"
             tasks.append(acc_part2)
 
+        topic_query = self._topic_search_query(asset, query)
+        if topic_query:
+            tasks.append(topic_query)
+
         return tasks[:2]
+
+    def _extract_crypto_terms(self, query: str) -> List[str]:
+        terms = []
+        for token in re.findall(r"[A-Za-z][A-Za-z0-9_]{1,9}", query):
+            if token.lower() in CRYPTO_TICKERS:
+                terms.append(token.upper() if token.lower() != "bitcoin" else "bitcoin")
+        if "比特币" in query:
+            terms.extend(["BTC", "bitcoin"])
+        if "以太坊" in query:
+            terms.extend(["ETH", "ethereum"])
+        return self._dedupe_terms(terms)
+
+    def _asset_search_terms(self, asset: str, query: str) -> str:
+        if asset == "crypto":
+            terms = self._extract_crypto_terms(query) or ["BTC", "ETH", "crypto"]
+            return " OR ".join(terms + ["crypto"])
+        if asset == "oil":
+            return "oil OR crude OR Brent OR WTI OR OPEC"
+        if asset == "gold":
+            return "gold OR XAU"
+        return ""
+
+    def _topic_search_query(self, asset: str, query: str) -> str:
+        if asset == "crypto":
+            terms = self._extract_crypto_terms(query) or ["BTC", "ETH"]
+            asset_part = " OR ".join(terms + ["crypto"])
+            return f"({asset_part}) (price OR rally OR drop OR breakout OR inflow OR whale OR liquidation)"
+        if asset == "oil":
+            return "(oil OR crude OR Brent OR WTI) (price OR rally OR drop OR supply OR OPEC OR inventory)"
+        return ""
+
+    def _dedupe_terms(self, terms: List[str]) -> List[str]:
+        result = []
+        seen = set()
+        for term in terms:
+            key = term.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            result.append(term)
+        return result
 
     def _asset_name(self, asset: str) -> str:
         """资产名称映射"""

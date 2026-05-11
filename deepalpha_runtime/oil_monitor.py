@@ -85,7 +85,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-interval", type=int, default=40, help="maximum interval in minutes")
     parser.add_argument("--max-rounds", type=int, default=0, help="0 means run continuously")
     parser.add_argument("--dry-run", action="store_true", help="print selected accounts only")
-    parser.add_argument("--cookie-file", default="x_cookie.json")
+    parser.add_argument("--cookie-file", default="cookies/browser/x_cookie.json")
     parser.add_argument("-b", "--browser", default="chrome", choices=["chrome", "firefox", "safari"])
     parser.add_argument("--headless", action="store_true")
     parser.add_argument("--delay", type=int, default=3, help="crawler_runner task delay in seconds")
@@ -117,7 +117,7 @@ def run_round(args: argparse.Namespace) -> int:
         _log("=" * 72)
         return next_wait
 
-    from crawler_runner import run_all_tasks, save_results
+    from deepalpha.crawler_runner import run_all_tasks, save_results
 
     decision = build_monitor_decision(
         selected_accounts=selected_accounts,
@@ -172,9 +172,9 @@ def run_round(args: argparse.Namespace) -> int:
 
 def select_accounts(accounts_per_round: int, update_status: bool = True) -> dict[str, Any]:
     import account_status
-    from account_status import load_account_status, save_account_status
-    from intel_router_v2 import decide
-    from x_intel_rules import get_accounts_by_group, get_accounts_by_level
+    from deepalpha.account_status import load_account_status, save_account_status
+    from deepalpha.intel_router_v2 import decide
+    from deepalpha.x_intel_rules import get_accounts_by_group, get_accounts_by_level
 
     status = load_account_status()
 

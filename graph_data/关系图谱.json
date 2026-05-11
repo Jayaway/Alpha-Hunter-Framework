@@ -1,22 +1,31 @@
 {
   "nodes": [
     {
-      "id": "Iran",
-      "label": "伊朗",
-      "detail": "Iran",
-      "type": "location",
-      "type_label": "地点",
-      "mention_count": 103,
-      "engagement": 58276
-    },
-    {
       "id": "Reuters",
       "label": "路透社",
       "detail": "@Reuters",
       "type": "account",
       "type_label": "账号/角色",
-      "mention_count": 103,
-      "engagement": 3837
+      "mention_count": 134,
+      "engagement": 4791
+    },
+    {
+      "id": "Iran",
+      "label": "伊朗",
+      "detail": "Iran",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 132,
+      "engagement": 86050
+    },
+    {
+      "id": "US",
+      "label": "美国",
+      "detail": "US",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 79,
+      "engagement": 27679
     },
     {
       "id": "KSAmofaEN",
@@ -28,13 +37,13 @@
       "engagement": 8904
     },
     {
-      "id": "US",
-      "label": "美国",
-      "detail": "US",
-      "type": "location",
-      "type_label": "地点",
-      "mention_count": 61,
-      "engagement": 17141
+      "id": "oil",
+      "label": "原油",
+      "detail": "oil",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 60,
+      "engagement": 79968
     },
     {
       "id": "IDF",
@@ -46,13 +55,22 @@
       "engagement": 152065
     },
     {
-      "id": "oil",
-      "label": "原油",
-      "detail": "oil",
+      "id": "war",
+      "label": "战争",
+      "detail": "war",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 51,
+      "engagement": 23304
+    },
+    {
+      "id": "crypto",
+      "label": "加密货币",
+      "detail": "crypto",
       "type": "asset",
       "type_label": "资产",
-      "mention_count": 52,
-      "engagement": 77223
+      "mention_count": 48,
+      "engagement": 14906
     },
     {
       "id": "JavierBlas",
@@ -64,13 +82,31 @@
       "engagement": 81684
     },
     {
-      "id": "war",
-      "label": "战争",
-      "detail": "war",
-      "type": "event",
-      "type_label": "事件",
-      "mention_count": 41,
-      "engagement": 13502
+      "id": "Hormuz",
+      "label": "霍尔木兹",
+      "detail": "Hormuz",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 37,
+      "engagement": 38274
+    },
+    {
+      "id": "CoinDesk",
+      "label": "情报账号",
+      "detail": "@CoinDesk",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 35,
+      "engagement": 13245
+    },
+    {
+      "id": "WuBlockchain",
+      "label": "情报账号",
+      "detail": "@WuBlockchain",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 35,
+      "engagement": 2129
     },
     {
       "id": "BrianFeroldi",
@@ -91,6 +127,15 @@
       "engagement": 2041
     },
     {
+      "id": "DeItaone",
+      "label": "快讯账号",
+      "detail": "@DeItaone",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 30,
+      "engagement": 30856
+    },
+    {
       "id": "LizAnnSonders",
       "label": "情报账号",
       "detail": "@LizAnnSonders",
@@ -100,13 +145,40 @@
       "engagement": 4701
     },
     {
-      "id": "Hormuz",
-      "label": "霍尔木兹",
-      "detail": "Hormuz",
+      "id": "lookonchain",
+      "label": "情报账号",
+      "detail": "@lookonchain",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 26,
+      "engagement": 9137
+    },
+    {
+      "id": "bitcoin",
+      "label": "比特币",
+      "detail": "bitcoin",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 25,
+      "engagement": 2393
+    },
+    {
+      "id": "federalreserve",
+      "label": "美联储",
+      "detail": "@federalreserve",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 21,
+      "engagement": 1477
+    },
+    {
+      "id": "China",
+      "label": "中国",
+      "detail": "China",
       "type": "location",
       "type_label": "地点",
-      "mention_count": 26,
-      "engagement": 31421
+      "mention_count": 20,
+      "engagement": 4799
     },
     {
       "id": "FaisalbinFarhan",
@@ -163,6 +235,33 @@
       "engagement": 11704
     },
     {
+      "id": "Gulf",
+      "label": "海湾",
+      "detail": "Gulf",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 15,
+      "engagement": 7878
+    },
+    {
+      "id": "charliebilello",
+      "label": "情报账号",
+      "detail": "@charliebilello",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 15,
+      "engagement": 5889
+    },
+    {
+      "id": "consensus2026",
+      "label": "情报账号",
+      "detail": "@consensus2026",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 15,
+      "engagement": 3434
+    },
+    {
       "id": "SangerNYT",
       "label": "情报账号",
       "detail": "@SangerNYT",
@@ -170,6 +269,33 @@
       "type_label": "账号/角色",
       "mention_count": 15,
       "engagement": 1389
+    },
+    {
+      "id": "blockade",
+      "label": "封锁",
+      "detail": "blockade",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 14,
+      "engagement": 19637
+    },
+    {
+      "id": "ceasefire",
+      "label": "停火",
+      "detail": "ceasefire",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 14,
+      "engagement": 10765
+    },
+    {
+      "id": "Russia",
+      "label": "俄罗斯",
+      "detail": "Russia",
+      "type": "location",
+      "type_label": "地点",
+      "mention_count": 14,
+      "engagement": 5390
     },
     {
       "id": "realDonaldTrump",
@@ -181,15 +307,6 @@
       "engagement": 5884000
     },
     {
-      "id": "blockade",
-      "label": "封锁",
-      "detail": "blockade",
-      "type": "event",
-      "type_label": "事件",
-      "mention_count": 13,
-      "engagement": 18884
-    },
-    {
       "id": "AlexCrawfordSky",
       "label": "情报账号",
       "detail": "@AlexCrawfordSky",
@@ -199,40 +316,31 @@
       "engagement": 15857
     },
     {
-      "id": "ceasefire",
-      "label": "停火",
-      "detail": "ceasefire",
-      "type": "event",
-      "type_label": "事件",
+      "id": "moonpay",
+      "label": "情报账号",
+      "detail": "@moonpay",
+      "type": "account",
+      "type_label": "账号/角色",
       "mention_count": 13,
-      "engagement": 9704
+      "engagement": 2755
     },
     {
-      "id": "Gulf",
-      "label": "海湾",
-      "detail": "Gulf",
+      "id": "United States",
+      "label": "美国",
+      "detail": "United States",
       "type": "location",
       "type_label": "地点",
-      "mention_count": 13,
-      "engagement": 5665
+      "mention_count": 11,
+      "engagement": 994520
     },
     {
-      "id": "Russia",
-      "label": "俄罗斯",
-      "detail": "Russia",
+      "id": "Tehran",
+      "label": "德黑兰",
+      "detail": "Tehran",
       "type": "location",
       "type_label": "地点",
-      "mention_count": 13,
-      "engagement": 4329
-    },
-    {
-      "id": "China",
-      "label": "中国",
-      "detail": "China",
-      "type": "location",
-      "type_label": "地点",
-      "mention_count": 13,
-      "engagement": 2244
+      "mention_count": 11,
+      "engagement": 17930
     },
     {
       "id": "OPEC",
@@ -244,6 +352,33 @@
       "engagement": 5714
     },
     {
+      "id": "SantimentData",
+      "label": "情报账号",
+      "detail": "@SantimentData",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 11,
+      "engagement": 1229
+    },
+    {
+      "id": "BTC",
+      "label": "比特币",
+      "detail": "BTC",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 11,
+      "engagement": 929
+    },
+    {
+      "id": "White House",
+      "label": "白宫",
+      "detail": "White House",
+      "type": "organization",
+      "type_label": "机构",
+      "mention_count": 10,
+      "engagement": 5257
+    },
+    {
       "id": "attack",
       "label": "袭击",
       "detail": "attack",
@@ -251,6 +386,15 @@
       "type_label": "事件",
       "mention_count": 9,
       "engagement": 9992
+    },
+    {
+      "id": "gold",
+      "label": "黄金",
+      "detail": "gold",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 9,
+      "engagement": 556
     },
     {
       "id": "aeberman12",
@@ -262,22 +406,22 @@
       "engagement": 106
     },
     {
-      "id": "United States",
-      "label": "美国",
-      "detail": "United States",
-      "type": "location",
-      "type_label": "地点",
+      "id": "crude",
+      "label": "原油",
+      "detail": "crude",
+      "type": "asset",
+      "type_label": "资产",
       "mention_count": 8,
-      "engagement": 992699
+      "engagement": 49709
     },
     {
-      "id": "Tehran",
-      "label": "德黑兰",
-      "detail": "Tehran",
-      "type": "location",
-      "type_label": "地点",
+      "id": "Anchorage",
+      "label": "情报账号",
+      "detail": "@Anchorage",
+      "type": "account",
+      "type_label": "账号/角色",
       "mention_count": 8,
-      "engagement": 15761
+      "engagement": 3863
     },
     {
       "id": "POTUS",
@@ -289,22 +433,22 @@
       "engagement": 98
     },
     {
-      "id": "crude",
-      "label": "原油",
-      "detail": "crude",
-      "type": "asset",
-      "type_label": "资产",
+      "id": "Washington",
+      "label": "华盛顿",
+      "detail": "Washington",
+      "type": "location",
+      "type_label": "地点",
       "mention_count": 7,
-      "engagement": 49675
+      "engagement": 2382
     },
     {
-      "id": "White House",
-      "label": "白宫",
-      "detail": "White House",
-      "type": "organization",
-      "type_label": "机构",
+      "id": "Middle East",
+      "label": "中东",
+      "detail": "Middle East",
+      "type": "location",
+      "type_label": "地点",
       "mention_count": 7,
-      "engagement": 2967
+      "engagement": 2328
     },
     {
       "id": "KingSalman",
@@ -316,13 +460,22 @@
       "engagement": 389
     },
     {
-      "id": "Middle East",
-      "label": "中东",
-      "detail": "Middle East",
-      "type": "location",
-      "type_label": "地点",
+      "id": "stock",
+      "label": "股票",
+      "detail": "stock",
+      "type": "asset",
+      "type_label": "资产",
       "mention_count": 6,
-      "engagement": 2294
+      "engagement": 1004588
+    },
+    {
+      "id": "sentdefender",
+      "label": "情报账号",
+      "detail": "@sentdefender",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 6,
+      "engagement": 4551
     },
     {
       "id": "Statement",
@@ -332,6 +485,24 @@
       "type_label": "话题",
       "mention_count": 6,
       "engagement": 2243
+    },
+    {
+      "id": "Binance",
+      "label": "Binance",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 6,
+      "engagement": 1761
+    },
+    {
+      "id": "Bloomberg",
+      "label": "彭博社",
+      "detail": "Bloomberg",
+      "type": "organization",
+      "type_label": "机构",
+      "mention_count": 6,
+      "engagement": 620
     },
     {
       "id": "SecRubio",
@@ -352,6 +523,15 @@
       "engagement": 94
     },
     {
+      "id": "PeterMallouk",
+      "label": "情报账号",
+      "detail": "@PeterMallouk",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 5,
+      "engagement": 5622
+    },
+    {
       "id": "RALee85",
       "label": "情报账号",
       "detail": "@RALee85",
@@ -361,13 +541,49 @@
       "engagement": 3922
     },
     {
-      "id": "Washington",
-      "label": "华盛顿",
-      "detail": "Washington",
+      "id": "Axios",
+      "label": "情报账号",
+      "detail": "@Axios",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 5,
+      "engagement": 2924
+    },
+    {
+      "id": "Beijing",
+      "label": "北京",
+      "detail": "Beijing",
       "type": "location",
       "type_label": "地点",
       "mention_count": 5,
-      "engagement": 306
+      "engagement": 974
+    },
+    {
+      "id": "Federal Reserve",
+      "label": "美联储",
+      "detail": "Federal Reserve",
+      "type": "organization",
+      "type_label": "机构",
+      "mention_count": 5,
+      "engagement": 529
+    },
+    {
+      "id": "HAOHONG_CFA",
+      "label": "情报账号",
+      "detail": "@HAOHONG_CFA",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 5,
+      "engagement": 409
+    },
+    {
+      "id": "dollar",
+      "label": "美元",
+      "detail": "dollar",
+      "type": "asset",
+      "type_label": "资产",
+      "mention_count": 5,
+      "engagement": 243
     },
     {
       "id": "NYTimes",
@@ -379,6 +595,15 @@
       "engagement": 213
     },
     {
+      "id": "conflict",
+      "label": "冲突",
+      "detail": "conflict",
+      "type": "event",
+      "type_label": "事件",
+      "mention_count": 5,
+      "engagement": 198
+    },
+    {
       "id": "SecWar",
       "label": "情报账号",
       "detail": "@SecWar",
@@ -386,24 +611,6 @@
       "type_label": "账号/角色",
       "mention_count": 5,
       "engagement": 76
-    },
-    {
-      "id": "gold",
-      "label": "黄金",
-      "detail": "gold",
-      "type": "asset",
-      "type_label": "资产",
-      "mention_count": 5,
-      "engagement": 56
-    },
-    {
-      "id": "stock",
-      "label": "股票",
-      "detail": "stock",
-      "type": "asset",
-      "type_label": "资产",
-      "mention_count": 4,
-      "engagement": 1004457
     },
     {
       "id": "missile",
@@ -415,22 +622,49 @@
       "engagement": 13883
     },
     {
-      "id": "Beijing",
-      "label": "北京",
-      "detail": "Beijing",
-      "type": "location",
-      "type_label": "地点",
-      "mention_count": 4,
-      "engagement": 247
-    },
-    {
-      "id": "conflict",
-      "label": "冲突",
-      "detail": "conflict",
+      "id": "strike",
+      "label": "打击",
+      "detail": "strike",
       "type": "event",
       "type_label": "事件",
       "mention_count": 4,
-      "engagement": 173
+      "engagement": 3518
+    },
+    {
+      "id": "JKempEnergy",
+      "label": "情报账号",
+      "detail": "@JKempEnergy",
+      "type": "account",
+      "type_label": "账号/角色",
+      "mention_count": 4,
+      "engagement": 1237
+    },
+    {
+      "id": "Solana",
+      "label": "Solana",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 4,
+      "engagement": 951
+    },
+    {
+      "id": "FedData",
+      "label": "FedData",
+      "detail": "话题",
+      "type": "hashtag",
+      "type_label": "话题",
+      "mention_count": 4,
+      "engagement": 215
+    },
+    {
+      "id": "CNBC",
+      "label": "CNBC",
+      "detail": "机构",
+      "type": "organization",
+      "type_label": "机构",
+      "mention_count": 4,
+      "engagement": 148
     },
     {
       "id": "W_Elkhereiji",
@@ -442,15 +676,6 @@
       "engagement": 140
     },
     {
-      "id": "dollar",
-      "label": "美元",
-      "detail": "dollar",
-      "type": "asset",
-      "type_label": "资产",
-      "mention_count": 4,
-      "engagement": 73
-    },
-    {
       "id": "CENTCOM",
       "label": "情报账号",
       "detail": "@CENTCOM",
@@ -460,13 +685,22 @@
       "engagement": 9280
     },
     {
-      "id": "strike",
-      "label": "打击",
-      "detail": "strike",
-      "type": "event",
-      "type_label": "事件",
+      "id": "Persian Gulf",
+      "label": "波斯湾",
+      "detail": "Persian Gulf",
+      "type": "location",
+      "type_label": "地点",
       "mention_count": 3,
-      "engagement": 3505
+      "engagement": 2949
+    },
+    {
+      "id": "WSJ",
+      "label": "华尔街日报",
+      "detail": "WSJ",
+      "type": "organization",
+      "type_label": "机构",
+      "mention_count": 3,
+      "engagement": 2511
     },
     {
       "id": "UN",
@@ -485,260 +719,38 @@
       "type_label": "资产",
       "mention_count": 3,
       "engagement": 1147
-    },
-    {
-      "id": "Moscow",
-      "label": "莫斯科",
-      "detail": "Moscow",
-      "type": "location",
-      "type_label": "地点",
-      "mention_count": 3,
-      "engagement": 1023
-    },
-    {
-      "id": "Axios",
-      "label": "情报账号",
-      "detail": "@Axios",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 3,
-      "engagement": 932
-    },
-    {
-      "id": "Mike_Eckel",
-      "label": "情报账号",
-      "detail": "@Mike_Eckel",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 3,
-      "engagement": 548
-    },
-    {
-      "id": "laurnorman",
-      "label": "情报账号",
-      "detail": "@laurnorman",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 3,
-      "engagement": 526
-    },
-    {
-      "id": "invasion",
-      "label": "入侵",
-      "detail": "invasion",
-      "type": "event",
-      "type_label": "事件",
-      "mention_count": 3,
-      "engagement": 443
-    },
-    {
-      "id": "Ankara",
-      "label": "Ankara",
-      "detail": "话题",
-      "type": "hashtag",
-      "type_label": "话题",
-      "mention_count": 3,
-      "engagement": 432
-    },
-    {
-      "id": "ElizLanders",
-      "label": "情报账号",
-      "detail": "@ElizLanders",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 3,
-      "engagement": 334
-    },
-    {
-      "id": "Jeddah",
-      "label": "Jeddah",
-      "detail": "话题",
-      "type": "hashtag",
-      "type_label": "话题",
-      "mention_count": 3,
-      "engagement": 310
-    },
-    {
-      "id": "AdelAlJubeir",
-      "label": "情报账号",
-      "detail": "@AdelAlJubeir",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 3,
-      "engagement": 246
-    },
-    {
-      "id": "Pentagon",
-      "label": "五角大楼",
-      "detail": "Pentagon",
-      "type": "organization",
-      "type_label": "机构",
-      "mention_count": 3,
-      "engagement": 193
-    },
-    {
-      "id": "Pontifex",
-      "label": "情报账号",
-      "detail": "@Pontifex",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 3,
-      "engagement": 47
-    },
-    {
-      "id": "energy",
-      "label": "energy",
-      "detail": "话题",
-      "type": "hashtag",
-      "type_label": "话题",
-      "mention_count": 3,
-      "engagement": 47
-    },
-    {
-      "id": "OOTT",
-      "label": "OOTT",
-      "detail": "话题",
-      "type": "hashtag",
-      "type_label": "话题",
-      "mention_count": 3,
-      "engagement": 47
-    },
-    {
-      "id": "oilandgas",
-      "label": "oilandgas",
-      "detail": "话题",
-      "type": "hashtag",
-      "type_label": "话题",
-      "mention_count": 3,
-      "engagement": 47
-    },
-    {
-      "id": "CrudeOil",
-      "label": "CrudeOil",
-      "detail": "话题",
-      "type": "hashtag",
-      "type_label": "话题",
-      "mention_count": 3,
-      "engagement": 47
-    },
-    {
-      "id": "fintwit",
-      "label": "fintwit",
-      "detail": "话题",
-      "type": "hashtag",
-      "type_label": "话题",
-      "mention_count": 3,
-      "engagement": 47
-    },
-    {
-      "id": "Commodities",
-      "label": "Commodities",
-      "detail": "话题",
-      "type": "hashtag",
-      "type_label": "话题",
-      "mention_count": 3,
-      "engagement": 47
-    },
-    {
-      "id": "commoditiesmarket",
-      "label": "commoditiesmarket",
-      "detail": "话题",
-      "type": "hashtag",
-      "type_label": "话题",
-      "mention_count": 3,
-      "engagement": 47
-    },
-    {
-      "id": "IranWar‌",
-      "label": "IranWar‌",
-      "detail": "话题",
-      "type": "hashtag",
-      "type_label": "话题",
-      "mention_count": 3,
-      "engagement": 0
-    },
-    {
-      "id": "SkyNews",
-      "label": "情报账号",
-      "detail": "@SkyNews",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 2,
-      "engagement": 8319
-    },
-    {
-      "id": "CFTC",
-      "label": "情报账号",
-      "detail": "@CFTC",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 2,
-      "engagement": 7892
-    },
-    {
-      "id": "NickKristof",
-      "label": "情报账号",
-      "detail": "@NickKristof",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 2,
-      "engagement": 7681
-    },
-    {
-      "id": "SangitaMyska",
-      "label": "情报账号",
-      "detail": "@SangitaMyska",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 2,
-      "engagement": 5861
-    },
-    {
-      "id": "CopernicusEU",
-      "label": "情报账号",
-      "detail": "@CopernicusEU",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 2,
-      "engagement": 3000
-    },
-    {
-      "id": "Persian Gulf",
-      "label": "波斯湾",
-      "detail": "Persian Gulf",
-      "type": "location",
-      "type_label": "地点",
-      "mention_count": 2,
-      "engagement": 1974
-    },
-    {
-      "id": "LTC_Shoshani",
-      "label": "情报账号",
-      "detail": "@LTC_Shoshani",
-      "type": "account",
-      "type_label": "账号/角色",
-      "mention_count": 2,
-      "engagement": 1725
     }
   ],
   "edges": [
     {
+      "source": "CoinDesk",
+      "target": "crypto",
+      "type": "discusses",
+      "weight": 29
+    },
+    {
       "source": "Reuters",
       "target": "Iran",
       "type": "mentions",
-      "weight": 21
+      "weight": 25
+    },
+    {
+      "source": "Reuters",
+      "target": "US",
+      "type": "mentions",
+      "weight": 24
+    },
+    {
+      "source": "DeItaone",
+      "target": "Iran",
+      "type": "mentions",
+      "weight": 22
     },
     {
       "source": "KSAmofaEN",
       "target": "FaisalbinFarhan",
       "type": "mentions",
       "weight": 20
-    },
-    {
-      "source": "Reuters",
-      "target": "US",
-      "type": "mentions",
-      "weight": 19
     },
     {
       "source": "JavierBlas",
@@ -750,7 +762,13 @@
       "source": "Reuters",
       "target": "war",
       "type": "reports",
-      "weight": 17
+      "weight": 18
+    },
+    {
+      "source": "CoinDesk",
+      "target": "consensus2026",
+      "type": "mentions",
+      "weight": 15
     },
     {
       "source": "JavierBlas",
@@ -765,6 +783,12 @@
       "weight": 14
     },
     {
+      "source": "CoinDesk",
+      "target": "moonpay",
+      "type": "mentions",
+      "weight": 13
+    },
+    {
       "source": "KSAmofaEN",
       "target": "Saudi Arabia",
       "type": "mentions",
@@ -772,13 +796,37 @@
     },
     {
       "source": "Reuters",
+      "target": "oil",
+      "type": "discusses",
+      "weight": 12
+    },
+    {
+      "source": "WuBlockchain",
+      "target": "crypto",
+      "type": "discusses",
+      "weight": 12
+    },
+    {
+      "source": "Reuters",
       "target": "China",
+      "type": "mentions",
+      "weight": 11
+    },
+    {
+      "source": "WuBlockchain",
+      "target": "bitcoin",
+      "type": "discusses",
+      "weight": 11
+    },
+    {
+      "source": "Reuters",
+      "target": "Hormuz",
       "type": "mentions",
       "weight": 9
     },
     {
-      "source": "Reuters",
-      "target": "oil",
+      "source": "WuBlockchain",
+      "target": "BTC",
       "type": "discusses",
       "weight": 9
     },
@@ -795,6 +843,18 @@
       "weight": 8
     },
     {
+      "source": "DeItaone",
+      "target": "war",
+      "type": "reports",
+      "weight": 8
+    },
+    {
+      "source": "CoinDesk",
+      "target": "Anchorage",
+      "type": "mentions",
+      "weight": 8
+    },
+    {
       "source": "JavierBlas",
       "target": "Hormuz",
       "type": "mentions",
@@ -807,12 +867,6 @@
       "weight": 7
     },
     {
-      "source": "Reuters",
-      "target": "Hormuz",
-      "type": "mentions",
-      "weight": 7
-    },
-    {
       "source": "KSAmofaEN",
       "target": "Gulf",
       "type": "mentions",
@@ -821,6 +875,12 @@
     {
       "source": "IDF",
       "target": "Israel",
+      "type": "mentions",
+      "weight": 7
+    },
+    {
+      "source": "DeItaone",
+      "target": "US",
       "type": "mentions",
       "weight": 7
     },
@@ -840,6 +900,18 @@
       "source": "nickschifrin",
       "target": "US",
       "type": "mentions",
+      "weight": 6
+    },
+    {
+      "source": "DeItaone",
+      "target": "Hormuz",
+      "type": "mentions",
+      "weight": 6
+    },
+    {
+      "source": "CoinDesk",
+      "target": "bitcoin",
+      "type": "discusses",
       "weight": 6
     },
     {
@@ -867,6 +939,18 @@
       "weight": 5
     },
     {
+      "source": "federalreserve",
+      "target": "Federal Reserve",
+      "type": "mentions",
+      "weight": 5
+    },
+    {
+      "source": "charliebilello",
+      "target": "US",
+      "type": "mentions",
+      "weight": 5
+    },
+    {
       "source": "JavierBlas",
       "target": "Tehran",
       "type": "mentions",
@@ -885,22 +969,22 @@
       "weight": 4
     },
     {
-      "source": "KSAmofaEN",
-      "target": "AdelAlJubeir",
+      "source": "DeItaone",
+      "target": "China",
       "type": "mentions",
-      "weight": 3
+      "weight": 4
     },
     {
-      "source": "nickschifrin",
-      "target": "Pontifex",
-      "type": "mentions",
-      "weight": 3
+      "source": "SantimentData",
+      "target": "crypto",
+      "type": "discusses",
+      "weight": 4
     },
     {
-      "source": "aeberman12",
-      "target": "US",
-      "type": "mentions",
-      "weight": 3
+      "source": "SantimentData",
+      "target": "bitcoin",
+      "type": "discusses",
+      "weight": 4
     },
     {
       "source": "aeberman12",
@@ -921,27 +1005,39 @@
       "weight": 3
     },
     {
+      "source": "sentdefender",
+      "target": "Iran",
+      "type": "mentions",
+      "weight": 3
+    },
+    {
+      "source": "WuBlockchain",
+      "target": "CNBC",
+      "type": "mentions",
+      "weight": 3
+    },
+    {
+      "source": "WuBlockchain",
+      "target": "Bloomberg",
+      "type": "mentions",
+      "weight": 3
+    },
+    {
+      "source": "lookonchain",
+      "target": "bitcoin",
+      "type": "discusses",
+      "weight": 3
+    },
+    {
       "source": "realDonaldTrump",
       "target": "United States",
       "type": "mentions",
       "weight": 2
     },
     {
-      "source": "NickKristof",
+      "source": "nickschifrin",
       "target": "war",
       "type": "reports",
-      "weight": 2
-    },
-    {
-      "source": "ElizLanders",
-      "target": "Iran",
-      "type": "mentions",
-      "weight": 2
-    },
-    {
-      "source": "LTC_Shoshani",
-      "target": "IDF",
-      "type": "mentions",
       "weight": 2
     },
     {
@@ -963,12 +1059,6 @@
       "weight": 2
     },
     {
-      "source": "Mike_Eckel",
-      "target": "Russia",
-      "type": "mentions",
-      "weight": 2
-    },
-    {
       "source": "Chevron",
       "target": "oil",
       "type": "discusses",
@@ -978,18 +1068,6 @@
       "source": "AlexCrawfordSky",
       "target": "ceasefire",
       "type": "reports",
-      "weight": 2
-    },
-    {
-      "source": "AlexCrawfordSky",
-      "target": "US",
-      "type": "mentions",
-      "weight": 2
-    },
-    {
-      "source": "AndrewPancholi",
-      "target": "Iran",
-      "type": "mentions",
       "weight": 2
     },
     {
@@ -1005,28 +1083,94 @@
       "weight": 2
     },
     {
-      "source": "aeberman12",
-      "target": "energy",
-      "type": "posts_about",
-      "weight": 3
+      "source": "federalreserve",
+      "target": "United States",
+      "type": "mentions",
+      "weight": 2
     },
     {
-      "source": "aeberman12",
-      "target": "OOTT",
-      "type": "posts_about",
-      "weight": 3
+      "source": "DeItaone",
+      "target": "oil",
+      "type": "discusses",
+      "weight": 2
     },
     {
-      "source": "aeberman12",
-      "target": "oilandgas",
-      "type": "posts_about",
-      "weight": 3
+      "source": "JKempEnergy",
+      "target": "oil",
+      "type": "discusses",
+      "weight": 2
     },
     {
-      "source": "oil",
-      "target": "war",
+      "source": "JKempEnergy",
+      "target": "Hormuz",
+      "type": "mentions",
+      "weight": 2
+    },
+    {
+      "source": "CoinDesk",
+      "target": "gold",
+      "type": "discusses",
+      "weight": 2
+    },
+    {
+      "source": "WuBlockchain",
+      "target": "stock",
+      "type": "discusses",
+      "weight": 2
+    },
+    {
+      "source": "KSAmofaEN",
+      "target": "Riyadh",
+      "type": "posts_about",
+      "weight": 17
+    },
+    {
+      "source": "lookonchain",
+      "target": "Binance",
+      "type": "posts_about",
+      "weight": 6
+    },
+    {
+      "source": "federalreserve",
+      "target": "FedData",
+      "type": "posts_about",
+      "weight": 4
+    },
+    {
+      "source": "lookonchain",
+      "target": "Solana",
+      "type": "posts_about",
+      "weight": 4
+    },
+    {
+      "source": "consensus2026",
+      "target": "crypto",
       "type": "co_occurs",
-      "weight": 7
+      "weight": 11
+    },
+    {
+      "source": "consensus2026",
+      "target": "moonpay",
+      "type": "co_occurs",
+      "weight": 9
+    },
+    {
+      "source": "moonpay",
+      "target": "crypto",
+      "type": "co_occurs",
+      "weight": 9
+    },
+    {
+      "source": "bitcoin",
+      "target": "BTC",
+      "type": "co_occurs",
+      "weight": 9
+    },
+    {
+      "source": "Anchorage",
+      "target": "crypto",
+      "type": "co_occurs",
+      "weight": 8
     },
     {
       "source": "Hormuz",
@@ -1041,176 +1185,50 @@
       "weight": 6
     },
     {
-      "source": "oil",
-      "target": "crude",
+      "source": "Hormuz",
+      "target": "war",
+      "type": "co_occurs",
+      "weight": 6
+    },
+    {
+      "source": "Anchorage",
+      "target": "consensus2026",
       "type": "co_occurs",
       "weight": 5
     },
     {
-      "source": "Hormuz",
-      "target": "war",
+      "source": "consensus2026",
+      "target": "bitcoin",
       "type": "co_occurs",
       "weight": 4
     },
     {
-      "source": "Russia",
+      "source": "China",
       "target": "war",
       "type": "co_occurs",
       "weight": 3
     },
     {
-      "source": "AdelAlJubeir",
-      "target": "Riyadh",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "FaisalbinFarhan",
-      "target": "Jeddah",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "FaisalbinFarhan",
-      "target": "Ankara",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "energy",
-      "target": "OOTT",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "energy",
-      "target": "oilandgas",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "energy",
-      "target": "WTI",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "energy",
-      "target": "CrudeOil",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "energy",
-      "target": "fintwit",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "OOTT",
-      "target": "oilandgas",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "OOTT",
-      "target": "WTI",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "OOTT",
-      "target": "CrudeOil",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "OOTT",
-      "target": "fintwit",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "oilandgas",
-      "target": "WTI",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "oilandgas",
-      "target": "CrudeOil",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "oilandgas",
-      "target": "fintwit",
+      "source": "Persian Gulf",
+      "target": "Gulf",
       "type": "co_occurs",
       "weight": 3
     },
     {
       "source": "WTI",
-      "target": "CrudeOil",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "WTI",
-      "target": "fintwit",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "CrudeOil",
-      "target": "fintwit",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "CrudeOil",
       "target": "OPEC",
       "type": "co_occurs",
       "weight": 3
     },
     {
-      "source": "fintwit",
-      "target": "OPEC",
+      "source": "Russia",
+      "target": "ceasefire",
       "type": "co_occurs",
       "weight": 3
-    },
-    {
-      "source": "OPEC",
-      "target": "Commodities",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "OPEC",
-      "target": "commoditiesmarket",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "Commodities",
-      "target": "commoditiesmarket",
-      "type": "co_occurs",
-      "weight": 3
-    },
-    {
-      "source": "Tehran",
-      "target": "Hormuz",
-      "type": "co_occurs",
-      "weight": 2
     },
     {
       "source": "UN",
       "target": "Russia",
-      "type": "co_occurs",
-      "weight": 2
-    },
-    {
-      "source": "Russia",
-      "target": "Moscow",
       "type": "co_occurs",
       "weight": 2
     },
@@ -1223,18 +1241,6 @@
     {
       "source": "W_Elkhereiji",
       "target": "Saudi Arabia",
-      "type": "co_occurs",
-      "weight": 2
-    },
-    {
-      "source": "Gulf",
-      "target": "Persian Gulf",
-      "type": "co_occurs",
-      "weight": 2
-    },
-    {
-      "source": "Gulf",
-      "target": "Hormuz",
       "type": "co_occurs",
       "weight": 2
     },
@@ -1251,18 +1257,36 @@
       "weight": 2
     },
     {
-      "source": "Russia",
+      "source": "Israel",
       "target": "ceasefire",
       "type": "co_occurs",
       "weight": 2
     },
     {
-      "source": "Israel",
-      "target": "ceasefire",
+      "source": "Middle East",
+      "target": "crude",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "FedData",
+      "target": "United States",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "consensus2026",
+      "target": "gold",
+      "type": "co_occurs",
+      "weight": 2
+    },
+    {
+      "source": "moonpay",
+      "target": "gold",
       "type": "co_occurs",
       "weight": 2
     }
   ],
-  "query": "油价会涨吗？",
-  "generated": "2026-05-11T09:26:32.285395"
+  "query": "BTC会涨吗？",
+  "generated": "2026-05-11T11:14:36.477928"
 }

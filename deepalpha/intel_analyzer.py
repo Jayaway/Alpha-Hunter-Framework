@@ -7,15 +7,20 @@
 """
 
 from collections import Counter
+import re
 from typing import List, Tuple
 
-from graph_engine import DEFAULT_INPUT_DIR, load_tweets_from_csv_dir, parse_count
+from deepalpha.graph_engine import DEFAULT_INPUT_DIR, load_tweets_from_csv_dir, parse_count
 
 
 ASSET_TERMS = {
     "oil": ["oil", "crude", "wti", "brent", "opec", "hormuz", "tanker", "red sea", "原油", "油价", "欧佩克"],
     "gold": ["gold", "xau", "safe haven", "rate cut", "dxy", "黄金", "避险", "降息"],
-    "crypto": ["bitcoin", "btc", "crypto", "etf", "whale", "比特币", "加密", "链上"],
+    "crypto": [
+        "bitcoin", "btc", "ethereum", "eth", "crypto", "etf", "whale",
+        "sui", "sol", "xrp", "bnb", "doge", "ada", "ton", "apt", "arb",
+        "比特币", "以太坊", "加密", "链上",
+    ],
     "fx": ["dollar", "dxy", "fed", "rate", "currency", "美元", "汇率", "美联储"],
     "equity": ["stock", "equity", "nasdaq", "s&p", "earnings", "股市", "股票", "纳指", "标普"],
     "macro": ["fed", "inflation", "cpi", "jobs", "tariff", "recession", "美联储", "通胀", "关税", "衰退"],
@@ -42,7 +47,7 @@ def analyze_history(query: str, decision: dict, input_dir: str = DEFAULT_INPUT_D
             "summary_lines": ["历史库中没有找到足够相关的情报。可以使用 --crawl 执行一次实时抓取。"],
         }
 
-    from signal_judge import judge_all_signals
+    from deepalpha.signal_judge import judge_all_signals
 
     judgment = judge_all_signals(relevant, asset=decision.get("asset"))
     top_tweets = sorted(relevant, key=_tweet_weight, reverse=True)[:8]
@@ -60,13 +65,16 @@ def analyze_history(query: str, decision: dict, input_dir: str = DEFAULT_INPUT_D
 
 def filter_relevant_tweets(tweets: List[dict], query: str, decision: dict, limit: int = 80) -> List[dict]:
     terms = build_terms(query, decision)
+    asset_terms = build_asset_terms(query, decision)
     scored: List[Tuple[int, dict]] = []
 
     for tweet in tweets:
         content = str(tweet.get("content", "")).lower()
         tags = " ".join(tweet.get("tags", []) or []).lower()
         haystack = f"{content} {tags}"
-        score = sum(1 for term in terms if term and term.lower() in haystack)
+        if asset_terms and not any(term_matches(haystack, term) for term in asset_terms):
+            continue
+        score = sum(1 for term in terms if term and term_matches(haystack, term))
         if score <= 0:
             continue
         score += min(_tweet_weight(tweet) // 1000, 5)
@@ -80,6 +88,7 @@ def build_terms(query: str, decision: dict) -> List[str]:
     terms = []
     asset = decision.get("asset")
     terms.extend(ASSET_TERMS.get(asset, []))
+    terms.extend(extract_query_tickers(query))
     terms.extend(decision.get("top_event_phrases", []) or [])
 
     query_lower = query.lower()
@@ -92,6 +101,34 @@ def build_terms(query: str, decision: dict) -> List[str]:
             terms.append(raw)
 
     return list(dict.fromkeys(terms))
+
+
+def build_asset_terms(query: str, decision: dict) -> List[str]:
+    asset = decision.get("asset")
+    tickers = extract_query_tickers(query)
+    if asset == "crypto" and tickers:
+        return list(dict.fromkeys(tickers))
+    terms = list(ASSET_TERMS.get(asset, []))
+    if asset == "crypto":
+        terms.extend(tickers)
+    return list(dict.fromkeys(term for term in terms if term))
+
+
+def extract_query_tickers(query: str) -> List[str]:
+    return [
+        token
+        for token in re.findall(r"[A-Za-z][A-Za-z0-9_]{1,9}", query)
+        if len(token) <= 10
+    ]
+
+
+def term_matches(haystack: str, term: str) -> bool:
+    text = str(term or "").strip().lower()
+    if not text:
+        return False
+    if re.fullmatch(r"[a-z0-9_]{2,5}", text):
+        return re.search(rf"(?<![a-z0-9_]){re.escape(text)}(?![a-z0-9_])", haystack) is not None
+    return text in haystack
 
 
 def build_summary_lines(query: str, decision: dict, tweets: List[dict], judgment: dict, top_tweets: List[dict]) -> List[str]:

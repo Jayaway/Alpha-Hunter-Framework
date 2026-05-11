@@ -270,7 +270,7 @@
 {
   "top_accounts": ["@JavierBlas", "@Reuters"],
   "crawl_tasks": ["\"Iran Hormuz\" oil"],
-  "cookie_file": "x_cookie.json",
+  "cookie_file": "cookies/browser/x_cookie.json",
   "browser": "chrome",
   "headless": false
 }

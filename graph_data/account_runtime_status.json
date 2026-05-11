@@ -3,7 +3,7 @@
     "last_status": "active",
     "fail_count": 0,
     "last_error": "",
-    "last_checked_at": "2026-05-08T10:35:42",
+    "last_checked_at": "2026-05-11T10:40:15",
     "last_tweet_count": 20
   },
   "@SangerNYT": {
@@ -73,7 +73,7 @@
     "last_status": "active",
     "fail_count": 0,
     "last_error": "",
-    "last_checked_at": "2026-05-08T10:59:06",
+    "last_checked_at": "2026-05-11T10:40:34",
     "last_tweet_count": 20
   },
   "@AlexCrawfordSky": {
@@ -87,8 +87,8 @@
     "last_status": "active",
     "fail_count": 0,
     "last_error": "",
-    "last_checked_at": "2026-05-08T10:59:58",
-    "last_tweet_count": 20
+    "last_checked_at": "2026-05-11T10:44:46",
+    "last_tweet_count": 6
   },
   "@BrianFeroldi": {
     "last_status": "active",
@@ -96,5 +96,82 @@
     "last_error": "",
     "last_checked_at": "2026-05-08T11:00:24",
     "last_tweet_count": 20
+  },
+  "@federalreserve": {
+    "last_status": "active",
+    "fail_count": 0,
+    "last_error": "",
+    "last_checked_at": "2026-05-11T10:39:43",
+    "last_tweet_count": 20
+  },
+  "@DeItaone": {
+    "last_status": "active",
+    "fail_count": 0,
+    "last_error": "",
+    "last_checked_at": "2026-05-11T10:43:57",
+    "last_tweet_count": 13
+  },
+  "@charliebilello": {
+    "last_status": "active",
+    "fail_count": 0,
+    "last_error": "",
+    "last_checked_at": "2026-05-11T10:41:02",
+    "last_tweet_count": 20
+  },
+  "@JKempEnergy": {
+    "last_status": "active",
+    "fail_count": 0,
+    "last_error": "",
+    "last_checked_at": "2026-05-11T10:44:19",
+    "last_tweet_count": 6
+  },
+  "@sentdefender": {
+    "last_status": "active",
+    "fail_count": 0,
+    "last_error": "",
+    "last_checked_at": "2026-05-11T10:45:10",
+    "last_tweet_count": 5
+  },
+  "@haohong_cfa": {
+    "last_status": "active",
+    "fail_count": 0,
+    "last_error": "",
+    "last_checked_at": "2026-05-11T10:45:31",
+    "last_tweet_count": 5
+  },
+  "@CoinDesk": {
+    "last_status": "active",
+    "fail_count": 0,
+    "last_error": "",
+    "last_checked_at": "2026-05-11T11:11:37",
+    "last_tweet_count": 9
+  },
+  "@TheBlock__": {
+    "last_status": "not_found_or_empty",
+    "fail_count": 1,
+    "last_error": "This account doesn’t exist / No more tweets to scrape",
+    "last_checked_at": "2026-05-11T11:11:48",
+    "last_tweet_count": 0
+  },
+  "@WuBlockchain": {
+    "last_status": "active",
+    "fail_count": 0,
+    "last_error": "",
+    "last_checked_at": "2026-05-11T11:12:08",
+    "last_tweet_count": 20
+  },
+  "@lookonchain": {
+    "last_status": "active",
+    "fail_count": 0,
+    "last_error": "",
+    "last_checked_at": "2026-05-11T11:12:40",
+    "last_tweet_count": 20
+  },
+  "@santimentfeed": {
+    "last_status": "active",
+    "fail_count": 0,
+    "last_error": "",
+    "last_checked_at": "2026-05-11T11:13:10",
+    "last_tweet_count": 11
   }
 }

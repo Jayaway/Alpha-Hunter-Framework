@@ -95,6 +95,9 @@ DIRECTION_SIGNALS = {
         "triggers": [
             "ETF approval", "ETF inflow", "rate cut", "institutional buying",
             "adoption", "regulation clarity", "halving", "whale accumulation",
+            "rally", "surge", "breakout", "new high", "all-time high", "ath",
+            "spot buying", "inflow", "accumulation", "short squeeze",
+            "price jumps", "price rises", "uptrend",
         ],
         "asset": "crypto",
     },
@@ -103,6 +106,8 @@ DIRECTION_SIGNALS = {
         "triggers": [
             "SEC rejection", "regulation crackdown", "ban", "ETF outflow",
             "hack", "exchange collapse", "whale selling", "rate hike",
+            "selloff", "drop", "breakdown", "liquidation", "long liquidation",
+            "outflow", "distribution", "price falls", "price drops", "downtrend",
         ],
         "asset": "crypto",
     },

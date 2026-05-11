@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DeepAlpha — Slides</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        color-scheme: dark;
+        --bg: #09090b;
+        --panel: #111114;
+        --line: #27272a;
+        --line-soft: #1e1f26;
+        --text: #fafafa;
+        --soft: #e4e4e7;
+        --muted: #a1a1aa;
+        --dim: #52525b;
+        --green: #22c55e;
+        --green-soft: rgba(34, 197, 94, 0.1);
+        --cyan-soft: rgba(6, 182, 212, 0.09);
+        --red-soft: rgba(239, 68, 68, 0.08);
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--soft);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      }
+
+      .slide {
+        position: relative;
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        padding: clamp(3rem, 6vw, 5rem) clamp(3rem, 8vw, 7.5rem);
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .slide.active {
+        display: flex;
+      }
+
+      .slide::before,
+      .slide::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        pointer-events: none;
+      }
+
+      .slide::before {
+        width: 48rem;
+        height: 48rem;
+        top: -20rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: radial-gradient(circle, rgba(34, 197, 94, 0.1), transparent 62%);
+        filter: blur(5rem);
+      }
+
+      .slide::after {
+        width: 30rem;
+        height: 30rem;
+        right: -10rem;
+        bottom: -12rem;
+        background: radial-gradient(circle, var(--cyan-soft), transparent 60%);
+        filter: blur(4rem);
+      }
+
+      .slide > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      li {
+        max-width: 58rem;
+      }
+
+      h1 {
+        margin-bottom: 1.5rem;
+        color: var(--text);
+        font-family: Georgia, "Noto Serif SC", "Songti SC", serif;
+        font-size: clamp(3rem, 5vw, 4rem);
+        font-weight: 900;
+        line-height: 1.18;
+        letter-spacing: -0.03em;
+      }
+
+      h2 {
+        margin-bottom: 1.8rem;
+        color: var(--text);
+        font-size: clamp(2.25rem, 3.6vw, 3rem);
+        font-weight: 850;
+        line-height: 1.28;
+        letter-spacing: -0.02em;
+      }
+
+      h3 {
+        margin-bottom: 1.1rem;
+        color: var(--dim);
+        font-size: 1.35rem;
+        font-weight: 700;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        font-size: clamp(1.15rem, 1.9vw, 1.55rem);
+        line-height: 1.72;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      li {
+        position: relative;
+        padding: 0.45rem 0 0.45rem 1.55rem;
+      }
+
+      li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1.35rem;
+        width: 0.45rem;
+        height: 0.45rem;
+        border-radius: 999px;
+        background: var(--green);
+      }
+
+      .green {
+        color: #4ade80;
+      }
+
+      .white {
+        color: var(--text);
+      }
+
+      .dim {
+        color: var(--dim);
+      }
+
+      .center {
+        align-items: center;
+        text-align: center;
+      }
+
+      .center h1,
+      .center h2,
+      .center p {
+        max-width: 58rem;
+      }
+
+      .logo {
+        color: var(--text);
+        font-size: clamp(4rem, 7vw, 5.7rem);
+        font-weight: 950;
+        line-height: 1;
+        letter-spacing: -0.04em;
+      }
+
+      .logo .accent {
+        position: relative;
+        color: var(--green);
+      }
+
+      .logo .accent::after {
+        content: "";
+        position: absolute;
+        right: 0.08rem;
+        bottom: 0.16rem;
+        left: 0.08rem;
+        height: 0.42rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--green), #4ade80);
+        opacity: 0.3;
+      }
+
+      .cursor {
+        display: inline-block;
+        width: 0.28rem;
+        height: 0.78em;
+        margin-left: 0.35rem;
+        border-radius: 999px;
+        background: var(--green);
+        vertical-align: -0.08em;
+        animation: blink 1s infinite;
+      }
+
+      .tagline {
+        margin-top: 1.35rem;
+        color: var(--dim);
+        font-size: 1.35rem;
+        font-weight: 600;
+      }
+
+      .quote {
+        max-width: 64rem;
+        margin: 1rem 0;
+        padding-left: 1.8rem;
+        border-left: 4px solid var(--green);
+        color: var(--soft);
+        font-size: clamp(1.5rem, 2.7vw, 2.2rem);
+        font-weight: 650;
+        line-height: 1.55;
+      }
+
+      .noise {
+        display: grid;
+        gap: 0.75rem;
+        max-width: 42rem;
+        margin-top: 0.5rem;
+      }
+
+      .noise span {
+        display: inline-flex;
+        width: fit-content;
+        padding: 0.75rem 1.1rem;
+        border: 1px solid rgba(239, 68, 68, 0.16);
+        border-radius: 0.75rem;
+        background: var(--red-soft);
+        color: #f87171;
+        font-size: 1.25rem;
+        font-weight: 750;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.2rem;
+        max-width: 64rem;
+      }
+
+      .card {
+        min-height: 10rem;
+        padding: 1.2rem;
+        border: 1px solid var(--line-soft);
+        border-radius: 0.8rem;
+        background: rgba(255, 255, 255, 0.025);
+      }
+
+      .card strong {
+        display: block;
+        margin-bottom: 0.55rem;
+        color: var(--text);
+        font-size: 1.1rem;
+      }
+
+      .card p {
+        font-size: 1rem;
+        line-height: 1.62;
+      }
+
+      .pipeline {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.7rem;
+        max-width: 66rem;
+        margin-top: 0.5rem;
+      }
+
+      .pipe {
+        min-height: 8rem;
+        padding: 1rem;
+        border: 1px solid rgba(34, 197, 94, 0.22);
+        border-radius: 0.75rem;
+        background: var(--green-soft);
+      }
+
+      .pipe b {
+        display: grid;
+        place-items: center;
+        width: 2rem;
+        height: 2rem;
+        margin-bottom: 0.75rem;
+        border-radius: 0.5rem;
+        background: var(--green);
+        color: #061207;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      .pipe span {
+        color: var(--soft);
+        font-size: 0.98rem;
+        font-weight: 750;
+        line-height: 1.45;
+      }
+
+      .metric-row,
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        max-width: 60rem;
+        margin-top: 1.2rem;
+      }
+
+      .metric,
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.7rem;
+        padding: 0 1rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #0a0a0a;
+        color: #71717a;
+        font-size: 0.95rem;
+        font-weight: 650;
+      }
+
+      .metric {
+        border-color: rgba(34, 197, 94, 0.2);
+        color: #4ade80;
+      }
+
+      .code {
+        width: min(58rem, 100%);
+        margin-top: 1.3rem;
+        padding: 1.2rem 1.35rem;
+        border: 1px solid var(--line-soft);
+        border-radius: 0.75rem;
+        background: #0a0a0a;
+        color: #a1a1aa;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 1.05rem;
+        line-height: 1.8;
+      }
+
+      .page-indicator {
+        position: fixed;
+        right: 2.5rem;
+        bottom: 2rem;
+        z-index: 10;
+        color: #3f3f46;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.9rem;
+      }
+
+      .hint {
+        position: fixed;
+        left: 2.5rem;
+        bottom: 2rem;
+        z-index: 10;
+        color: #3f3f46;
+        font-size: 0.82rem;
+      }
+
+      .home-link {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 10;
+        padding: 0.62rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+        color: #71717a;
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .home-link:hover {
+        color: var(--text);
+        border-color: rgba(34, 197, 94, 0.35);
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .slide {
+          padding: 4.5rem 1.4rem 4rem;
+        }
+
+        .grid-2,
+        .pipeline {
+          grid-template-columns: 1fr;
+        }
+
+        .pipeline {
+          gap: 0.55rem;
+        }
+
+        .pipe {
+          min-height: auto;
+        }
+
+        .quote {
+          padding-left: 1rem;
+        }
+
+        .home-link {
+          top: 1rem;
+          right: 1rem;
+        }
+
+        .hint {
+          left: 1rem;
+          bottom: 1rem;
+        }
+
+        .page-indicator {
+          right: 1rem;
+          bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="home-link" href="./index.html">← DeepAlpha</a>
+
+    <section class="slide center active">
+      <div class="logo">Deep<span class="accent">Alpha</span><span class="cursor"></span></div>
+      <p class="tagline">从 X 信息流发现事件、叙事拐点和市场冲击源。</p>
+    </section>
+
+    <section class="slide">
+      <h3>现在的问题</h3>
+      <h2>用户问的是市场方向，系统抓到的却常常是噪音</h2>
+      <div class="noise">
+        <span>“BTC 会涨吗？”却抓到宏观新闻</span>
+        <span>“SUI 会涨吗？”却复用同一批账号</span>
+        <span>“油价会涨吗？”结论总是无明确方向</span>
+        <span>单条推文被当成方向信号</span>
+      </div>
+      <p style="margin-top: 1.7rem">DeepAlpha 要解决的不是“多抓一点”，而是让抓取、清洗、证据和结论都跟问题本身对齐。</p>
+    </section>
+
+    <section class="slide">
+      <h3>核心洞察</h3>
+      <h2>市场情报不是内容流，而是<span class="green">事件流</span></h2>
+      <div class="quote">一条推文不直接产生判断。只有当独立来源、事件簇、冲击源和市场变量互相验证时，它才进入最终报告。</div>
+      <div class="tag-row">
+        <span class="tag">不是情绪摘要</span>
+        <span class="tag">不是账号列表</span>
+        <span class="tag">不是关键词搜索</span>
+        <span class="metric">事件级分析</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h3>产品入口</h3>
+      <h2>用户只需要问一句自然语言问题</h2>
+      <p>比如：<span class="white">“石油今天价格会涨吗？”</span></p>
+      <div class="grid-2" style="margin-top: 1.6rem">
+        <div class="card">
+          <strong>系统理解问题</strong>
+          <p>识别资产、时间窗口、市场阶段、核心变量和候选冲击源。</p>
+        </div>
+        <div class="card">
+          <strong>系统规划信号</strong>
+          <p>为 oil / BTC / SUI 等问题选择不同来源、不同关键词、不同证据结构。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h3>DeepAlpha Pipeline</h3>
+      <h2>从问题到报告，分成五步</h2>
+      <div class="pipeline">
+        <div class="pipe"><b>1</b><span>理解问题<br />规划信号</span></div>
+        <div class="pipe"><b>2</b><span>动态选择<br />抓取来源</span></div>
+        <div class="pipe"><b>3</b><span>六层清洗<br />剔除噪音</span></div>
+        <div class="pipe"><b>4</b><span>事件聚类<br />证据交叉</span></div>
+        <div class="pipe"><b>5</b><span>中文报告<br />方向判断</span></div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h3>六层清洗</h3>
+      <h2>先降低噪音，再谈判断</h2>
+      <ul>
+        <li>去重：同源转发和重复文本不能重复计票</li>
+        <li>低价值过滤：泛泛评论、标题党、无资产相关性内容降权</li>
+        <li>二手转述标记：区分原始信源和扩散信源</li>
+        <li>情绪噪音标记：避免把喊单当成证据</li>
+        <li>可行动 / 值得关注 / 低价值 / 丢弃四类裁决</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>动态来源</h3>
+      <h2>不同问题，应该抓不同的人</h2>
+      <div class="grid-2">
+        <div class="card">
+          <strong>Oil</strong>
+          <p>Reuters Energy、JKempEnergy、OPEC、航运、地缘风险、Brent-WTI、期货曲线。</p>
+        </div>
+        <div class="card">
+          <strong>BTC / SUI</strong>
+          <p>链上资金、ETF flow、Lookonchain、WuBlockchain、项目生态、交易所流向。</p>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem">这一步直接对应你指出的问题：不能所有问题都抓同一批人。</p>
+    </section>
+
+    <section class="slide">
+      <h3>关系图谱</h3>
+      <h2>把账号、事件和资产连接起来</h2>
+      <div class="quote">DeepAlpha 会把历史推文生成独立图谱：节点是账号、事件、资产和主题；关系是提及、扩散、引用和共同出现。</div>
+      <div class="metric-row">
+        <span class="metric">graph_data/关系图谱.json</span>
+        <span class="metric">source reputation</span>
+        <span class="metric">event cluster</span>
+        <span class="metric">evidence chain</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <h3>报告标准</h3>
+      <h2>最终输出必须能被人检查</h2>
+      <ul>
+        <li>有中文解释：不要只给标签和分数</li>
+        <li>有关键证据：说明哪些事件支持这个判断</li>
+        <li>有风险提示：说明信号冲突、数据不足和短线波动</li>
+        <li>有免责声明：分析不是投资建议</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h3>v0.1 稳定版</h3>
+      <h2>我们先把主流程跑稳</h2>
+      <div class="code">
+        python3 run_v2.py "油价会涨吗？"<br />
+        python3 run_v2.py "油价会涨吗？" --output reports/test.json<br />
+        python3 report_formatter.py reports/test.json<br />
+        python3 run_v2.py "油价会涨吗？" --crawl --new-cleaner
+      </div>
+      <div class="tag-row">
+        <span class="tag">账号不存在不崩</span>
+        <span class="tag">抓取 0 条不崩</span>
+        <span class="tag">API 失败可回退</span>
+        <span class="tag">debug 显示详细错误</span>
+      </div>
+    </section>
+
+    <section class="slide center">
+      <h3>Try it</h3>
+      <div class="logo">Deep<span class="accent">Alpha</span></div>
+      <p style="margin-top: 1.4rem">先让系统说清楚：它看到了什么，没看到什么，为什么这么判断。</p>
+      <div class="tag-row" style="justify-content: center; margin-top: 2rem">
+        <span class="metric">X 情报流</span>
+        <span class="metric">六层清洗</span>
+        <span class="metric">关系图谱</span>
+        <span class="metric">中文证据报告</span>
+      </div>
+    </section>
+
+    <div class="hint">← / → 翻页，F 全屏，右键后退</div>
+    <div class="page-indicator"><span id="currentPage">1</span> / <span id="totalPages">11</span></div>
+
+    <script>
+      const slides = [...document.querySelectorAll(".slide")];
+      const currentPage = document.querySelector("#currentPage");
+      const totalPages = document.querySelector("#totalPages");
+      let current = 0;
+
+      totalPages.textContent = String(slides.length);
+
+      function gotoSlide(index) {
+        if (index < 0 || index >= slides.length) return;
+        slides[current].classList.remove("active");
+        current = index;
+        slides[current].classList.add("active");
+        currentPage.textContent = String(current + 1);
+      }
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === " " || event.key === "ArrowDown") {
+          event.preventDefault();
+          gotoSlide(current + 1);
+        }
+
+        if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+          event.preventDefault();
+          gotoSlide(current - 1);
+        }
+
+        if (event.key === "f" || event.key === "F") {
+          if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+          } else {
+            document.exitFullscreen();
+          }
+        }
+      });
+
+      document.addEventListener("click", (event) => {
+        if (event.target.closest("a")) return;
+        gotoSlide(current + 1);
+      });
+
+      document.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        gotoSlide(current - 1);
+      });
+    </script>
+  </body>
+</html>

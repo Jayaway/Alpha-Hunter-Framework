@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DeepAlpha Oracle</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <section class="home-screen" id="homeScreen">
+        <nav class="home-nav" aria-label="DeepAlpha 功能入口">
+          <a class="nav-pill" href="../docs/PROJECT_STRUCTURE.md">
+            <span class="nav-icon">D</span>
+            <span>Docs</span>
+          </a>
+          <a class="nav-pill" href="./slides.html">
+            <span class="nav-icon">S</span>
+            <span>Slides</span>
+          </a>
+          <a class="nav-pill" href="https://github.com/">
+            <span class="nav-icon">G</span>
+            <span>GitHub</span>
+          </a>
+        </nav>
+
+        <main class="home-hero">
+          <div class="hero-center">
+            <h1 class="brand-title">
+              <span>Deep</span>
+              <span class="brand-accent">Alpha</span>
+              <span class="brand-caret" aria-hidden="true"></span>
+            </h1>
+            <p class="home-subtitle">从 X 信息流发现事件、叙事拐点和市场冲击源。</p>
+
+            <form class="home-search" id="homeForm">
+              <label class="sr-only" for="homeQuery">输入市场问题</label>
+              <input id="homeQuery" name="query" placeholder="你想知道什么？" autocomplete="off" />
+              <button type="submit">
+                <span>分析</span>
+                <span class="button-arrow">→</span>
+              </button>
+            </form>
+
+            <section class="powered" aria-label="DeepAlpha 能力模块">
+              <div class="powered-label">POWERED BY</div>
+              <div class="power-chip-grid">
+                <span class="power-chip"><i style="--chip-color: #6f45ff">X</i>X 情报流</span>
+                <span class="power-chip"><i style="--chip-color: #2f78ff">IR</i>问题路由</span>
+                <span class="power-chip"><i style="--chip-color: #95c84c">EC</i>事件聚类</span>
+                <span class="power-chip"><i style="--chip-color: #f47445">EV</i>证据链</span>
+                <span class="power-chip"><i style="--chip-color: #19418d">SR</i>来源信誉</span>
+                <span class="power-chip"><i style="--chip-color: #66b85e">CL</i>六层清洗</span>
+                <span class="power-chip"><i style="--chip-color: #2d88b9">SG</i>信号判断</span>
+                <span class="power-chip"><i style="--chip-color: #f6ae34">MM</i>冲击源监控</span>
+                <span class="power-chip"><i style="--chip-color: #ad3546">KG</i>关系图谱</span>
+                <span class="power-chip"><i style="--chip-color: #4db1de">RP</i>中文报告</span>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+
+      <section class="analysis-screen hidden" id="analysisScreen">
+        <header class="topbar">
+          <button class="ghost-button" id="newQuestion" type="button" aria-label="新问题">
+            <span class="arrow">←</span>
+            <span>新问题</span>
+          </button>
+          <form class="query-form" id="queryForm">
+            <label class="sr-only" for="queryInput">输入市场问题</label>
+            <input id="queryInput" name="query" value="石油价格会涨吗" autocomplete="off" />
+            <button class="run-button" type="submit">生成</button>
+          </form>
+          <div class="status-pill">
+            <span class="pulse"></span>
+            <span id="modeText">生成界面</span>
+          </div>
+        </header>
+
+        <main class="workspace">
+          <aside class="timeline-panel" aria-label="执行进度">
+            <div class="timeline-line"></div>
+
+            <section class="step completed">
+              <div class="step-dot">✓</div>
+              <div class="step-content">
+                <h2>理解问题 &amp; 规划信号</h2>
+                <p>完成</p>
+                <div class="planning-card">
+                  <span class="meta">核心变量</span>
+                  <strong id="coreVariable">原油价格未来走势（WTI/Brent）</strong>
+                  <span class="meta">时间窗口</span>
+                  <strong id="timeWindow">用户未指定，默认覆盖短期(3-6个月)和中期(1-2年)</strong>
+                  <span class="meta">数据源</span>
+                  <strong id="sourceLine">X/Twitter, event cluster, evidence chain, sentiment signals</strong>
+                </div>
+              </div>
+            </section>
+
+            <section class="step completed">
+              <div class="step-dot">✓</div>
+              <div class="step-content">
+                <h2>拉取实时情报</h2>
+                <p><span id="sourceCount">19</span>个 · <span id="failedCount">0</span>x</p>
+                <div class="chip-grid" id="chipGrid"></div>
+                <div class="summary-meter">
+                  <span><i class="ok"></i><b id="successCount">19</b> success</span>
+                  <span><i class="bad"></i><b id="failureCount">0</b> failed</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="step active">
+              <div class="step-dot">3</div>
+              <div class="step-content">
+                <h2>生成分析报告</h2>
+                <p>生成中...</p>
+                <div class="progress-bar" aria-hidden="true">
+                  <span></span>
+                </div>
+              </div>
+            </section>
+          </aside>
+
+          <section class="report-panel" aria-label="分析报告">
+            <div class="report-glow"></div>
+            <article class="report">
+              <div class="report-kicker">DeepAlpha · X 情报事件级分析</div>
+              <h1 id="reportTitle">石油价格会涨吗：多信号交叉验证分析</h1>
+
+              <section class="report-section">
+                <div class="section-title">
+                  <span></span>
+                  <h2>数据摘要</h2>
+                </div>
+                <p class="lead" id="leadText">
+                  系统将用户问题拆解为资产、情景、事件簇与证据链。单条推文不直接产生结论，只有多源事件和冲击源提醒会进入最终判断。
+                </p>
+              </section>
+
+              <section class="report-section">
+                <h3>第一层：直接市场信号</h3>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>信号</th>
+                        <th>数据</th>
+                        <th>市场在说什么</th>
+                      </tr>
+                    </thead>
+                    <tbody id="signalRows"></tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section class="report-section">
+                <h3>第二层：X 事件簇与证据链</h3>
+                <div class="event-grid" id="eventGrid"></div>
+              </section>
+
+              <section class="report-section">
+                <h3>第三层：方向判断</h3>
+                <div class="verdict-card">
+                  <div>
+                    <span class="meta">事件级方向</span>
+                    <strong id="directionText">偏利多，但需要二次确认</strong>
+                  </div>
+                  <div>
+                    <span class="meta">证据质量</span>
+                    <strong id="evidenceText">strong_multi_source / medium confidence</strong>
+                  </div>
+                  <div>
+                    <span class="meta">风险提示</span>
+                    <strong id="riskText">冲击源信息可能造成短线波动，方向需等待更多独立来源确认</strong>
+                  </div>
+                </div>
+              </section>
+            </article>
+          </section>
+        </main>
+      </section>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

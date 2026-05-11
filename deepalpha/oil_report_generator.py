@@ -280,9 +280,9 @@ def build_overall_judgment(signals: list[EventSignal]) -> str:
 
 
 def build_chains_from_local_store(asset: str, hours: int | float) -> list[dict[str, Any]]:
-    from evidence_chain import build_evidence_chains
-    from event_cluster import cluster_events
-    from local_intel_store import read_intel
+    from deepalpha.evidence_chain import build_evidence_chains
+    from deepalpha.event_cluster import cluster_events
+    from deepalpha.local_intel_store import read_intel
 
     records = read_intel(asset=asset, hours=hours)
     events = cluster_events(records)

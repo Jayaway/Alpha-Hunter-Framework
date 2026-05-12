@@ -160,7 +160,7 @@
             <span></span>
             <h2>Quality Gates</h2>
           </div>
-          <p class="docs-lead">v0.1 稳定版的目标不是做炫，而是确保异常路径不崩、报告路径可用、关键证据能被检查。</p>
+          <p class="docs-lead">当前稳定目标不是做炫，而是确保异常路径不崩、报告路径可用、关键证据能被检查。</p>
 
           <div class="quality-grid">
             <article>
@@ -183,21 +183,10 @@
         </section>
 
         <section class="docs-section operator-section" id="operatorLayer">
-          <div class="section-title">
-            <span></span>
-            <h2>Operator Layer</h2>
-          </div>
-          <p class="docs-lead">这是 DeepAlpha 的商业化控制面。默认隐藏，只有进入 operator 模式后才会显示完整画布。</p>
-
-          <div class="operator-lock" id="operatorLock" aria-label="Operator Layer locked">
-            <div>
-              <span class="lock-kicker">LOCKED</span>
-              <h3>商业层暂未展开</h3>
-              <p>在当前页面输入访问口令即可解锁。提示：项目名里藏着答案。</p>
-            </div>
-            <div class="lock-code" aria-hidden="true">
-              <i></i><i></i><i></i><i></i><i></i>
-            </div>
+          <div class="operator-lock" id="operatorLock">
+            <button class="operator-bird" id="operatorBird" type="button" aria-label="">
+              <img src="./assets/twitter-transparent.png" alt="" aria-hidden="true" />
+            </button>
           </div>
 
           <div class="business-canvas" aria-label="DeepAlpha 商业模式画布">
@@ -279,9 +268,8 @@
       </main>
     </div>
     <script>
-      let unlockBuffer = "";
-      const unlockWord = "alpha";
       const lock = document.querySelector("#operatorLock");
+      const bird = document.querySelector("#operatorBird");
 
       function unlockOperatorLayer() {
         document.body.classList.add("operator-unlocked");
@@ -290,12 +278,7 @@
         }
       }
 
-      document.addEventListener("keydown", (event) => {
-        if (event.metaKey || event.ctrlKey || event.altKey) return;
-        if (event.key.length !== 1) return;
-        unlockBuffer = (unlockBuffer + event.key.toLowerCase()).slice(-unlockWord.length);
-        if (unlockBuffer === unlockWord) unlockOperatorLayer();
-      });
+      bird?.addEventListener("click", unlockOperatorLayer);
     </script>
   </body>
 </html>

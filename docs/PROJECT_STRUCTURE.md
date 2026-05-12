@@ -7,8 +7,8 @@ scraper/                X/Twitter Selenium 抓取器
 tests/                  测试脚本
 examples/               示例脚本和快速上手材料
 docs/                   架构、数据流、审计和说明文档
-web/                    DeepAlpha 静态网页版原型
-scripts/                小型维护脚本
+web/                    DeepAlpha 网页界面、Slides、Docs、Graph 容器
+deepalpha_web/          本地网页服务与 JSON API
 notebooks/              Notebook
 cookies/                账号与浏览器 Cookie 配置
 cookies/browser/        浏览器导出的 X Cookie
@@ -34,7 +34,6 @@ main_v2.py
 report_formatter.py
 graph_viewer.py
 test_v2.py
-scripts/export_web_graph.py
 ```
 
 旧命令仍可使用，例如：

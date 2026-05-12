@@ -122,13 +122,19 @@ run_v2.py
 从历史 CSV 生成独立图谱 JSON：
 
 ```bash
-python graph_engine.py
+python -m deepalpha.graph_engine
 ```
 
 启动本地图谱查看器：
 
 ```bash
-python graph_viewer.py
+python graph_viewer.py --port 8080
+```
+
+启动本地网页版：
+
+```bash
+python -m deepalpha_web.server
 ```
 
 在查询后打开图谱：
@@ -148,7 +154,7 @@ python run_v2.py "油价会涨吗？" --view-graph
 当前已有一个低频刷新脚本：
 
 ```bash
-python scheduled_crawler.py --once --jitter-minutes 25 --headless
+python -m deepalpha.scheduled_crawler --once --jitter-minutes 25 --headless
 ```
 
 它目前更适合作为“定时刷新历史库”的调度壳，而不是完整监听模块。后续新增“定时情报监听模块”时，建议接在 `intel_router_v2.py` / `x_intel_rules.py` 之后，复用 `crawler_runner.py` 执行抓取，并在 `crawler_runner.save_results()` 后接清洗和信号判断。
@@ -232,8 +238,8 @@ pip install -r requirements.txt
 | `intel_analyzer.py` | 历史情报分析。 |
 | `graph_engine.py` | 独立图谱 JSON 生成。 |
 | `graph_viewer.py` | 本地图谱查看器。 |
-| `web/` | DeepAlpha 静态网页、Slides、Docs 和关系图谱界面。 |
-| `scripts/export_web_graph.py` | 将运行生成的 `graph_data/关系图谱.json` 导出为 `web/graph-data.js`。 |
+| `web/` | DeepAlpha 网页、Slides、Docs 和嵌入式关系图谱入口。 |
+| `deepalpha_web/` | 本地网页服务与 JSON API。 |
 | `scheduled_crawler.py` | 低频刷新历史库脚本，未来监听模块参考。 |
 | `main_v2.py` | 实验入口，暂不作为主链路。 |
 | `hybrid_crawler.py` | 实验抓取引擎，暂不作为主链路。 |

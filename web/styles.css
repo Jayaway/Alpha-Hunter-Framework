@@ -179,11 +179,11 @@ input {
 .brand-accent::after {
   content: "";
   position: absolute;
-  right: 0.22rem;
-  bottom: 0.16rem;
+  right: 0.08rem;
+  bottom: -0.18rem;
   left: 0.08rem;
-  height: 0.32rem;
-  border-radius: 0.25rem;
+  height: 0.44rem;
+  border-radius: 999px;
   background: linear-gradient(90deg, var(--blue), #60a5fa);
   opacity: 0.34;
 }
@@ -1051,58 +1051,37 @@ td:nth-child(2) {
 
 .operator-lock {
   display: flex;
-  justify-content: space-between;
-  gap: 1.4rem;
-  align-items: center;
-  min-height: 14rem;
-  margin-top: 1.4rem;
-  padding: 1.4rem;
-  border: 1px solid rgba(29, 161, 242, 0.18);
-  border-radius: 0.9rem;
-  background:
-    radial-gradient(circle at 18% 0%, rgba(29, 161, 242, 0.11), transparent 18rem),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.026), rgba(255, 255, 255, 0.012)),
-    #0a0a0a;
+  justify-content: flex-end;
+  min-height: 4rem;
+  margin-top: 0.5rem;
 }
 
-.lock-kicker {
+.operator-bird {
   display: block;
-  margin-bottom: 0.6rem;
-  color: #9fd8ff;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: 0.18em;
+  width: 3.4rem;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.34;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
 }
 
-.operator-lock h3 {
-  margin: 0 0 0.65rem;
-  color: var(--text);
-  font-size: 1.35rem;
-}
-
-.operator-lock p {
-  max-width: 34rem;
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.65;
-}
-
-.lock-code {
-  display: flex;
-  gap: 0.45rem;
-  flex-shrink: 0;
-}
-
-.lock-code i {
+.operator-bird img {
   display: block;
-  width: 1.8rem;
-  height: 2.4rem;
-  border: 1px solid rgba(29, 161, 242, 0.32);
-  border-radius: 0.4rem;
-  background: rgba(29, 161, 242, 0.08);
-  box-shadow: 0 0 1.6rem rgba(29, 161, 242, 0.06);
+  width: 100%;
+  height: auto;
+  filter: saturate(1.1);
+}
+
+.operator-bird:hover,
+.operator-bird:focus-visible {
+  opacity: 0.72;
+  outline: none;
+  transform: translateY(-0.08rem);
 }
 
 .business-canvas {

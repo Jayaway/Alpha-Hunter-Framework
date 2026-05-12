@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepAlpha 关系图谱</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 51% 12%, rgba(29, 161, 242, 0.16), transparent 24rem),
+        radial-gradient(circle at 92% 94%, rgba(96, 165, 250, 0.1), transparent 18rem),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.012), transparent 19rem),
+        #070809;
+      color: #f2f2f2;
+      font-family:
+        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+
+    .tool-rail,
+    .graph-status,
+    .hint {
+      position: fixed;
+      z-index: 4;
+      color: rgba(255, 255, 255, 0.45);
+      user-select: none;
+    }
+
+    .tool-rail {
+      right: 1.1rem;
+      top: 5.7rem;
+      display: grid;
+      gap: 1.2rem;
+      font-size: 1.7rem;
+    }
+
+    .tool-button {
+      width: 2rem;
+      height: 2rem;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      line-height: 1;
+    }
+
+    .tool-button:hover {
+      color: rgba(96, 165, 250, 0.92);
+    }
+
+    #graphCanvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      cursor: default;
+    }
+
+    #graphCanvas.is-dragging {
+      cursor: grabbing;
+    }
+
+    .graph-status {
+      right: 1.1rem;
+      bottom: 1rem;
+      color: rgba(255, 255, 255, 0.28);
+      font-size: 0.74rem;
+    }
+
+    .hint {
+      left: 1.1rem;
+      bottom: 1rem;
+      color: rgba(255, 255, 255, 0.25);
+      font-size: 0.74rem;
+    }
+
+    .tooltip {
+      position: fixed;
+      z-index: 5;
+      display: none;
+      max-width: 18rem;
+      padding: 0.52rem 0.65rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0.55rem;
+      background: rgba(28, 28, 28, 0.86);
+      box-shadow: 0 1rem 2.8rem rgba(0, 0, 0, 0.22);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.78rem;
+      line-height: 1.5;
+      pointer-events: none;
+      backdrop-filter: blur(14px);
+    }
+
+    .tooltip b {
+      display: block;
+      margin-bottom: 0.12rem;
+      color: #fff;
+      font-size: 0.85rem;
+    }
+
+    .tooltip span {
+      color: rgba(255, 255, 255, 0.52);
+    }
+
+    @media (max-width: 720px) {
+      .tool-rail,
+      .hint {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="tool-rail" aria-hidden="true">
+    <button class="tool-button" type="button" id="resetButton" title="重置视图">⚙</button>
+    <button class="tool-button" type="button" id="spinButton" title="自动旋转">⟳</button>
+  </div>
+  <canvas id="graphCanvas"></canvas>
+  <div class="tooltip" id="tooltip"></div>
+  <div class="hint">拖拽旋转球体 · 滚轮缩放 · 点击聚焦</div>
+  <div class="graph-status" id="statusText">加载中</div>
+
+  <script>
+    const canvas = document.querySelector("#graphCanvas");
+    const ctx = canvas.getContext("2d");
+    const tooltip = document.querySelector("#tooltip");
+    const statusText = document.querySelector("#statusText");
+    const resetButton = document.querySelector("#resetButton");
+    const spinButton = document.querySelector("#spinButton");
+
+    const state = {
+      width: 0,
+      height: 0,
+      radius: 320,
+      zoom: 1,
+      rotationX: -0.18,
+      rotationY: 0.45,
+      velocityX: 0,
+      velocityY: 0.0022,
+      autoSpin: true,
+      dragging: false,
+      dragMoved: false,
+      lastX: 0,
+      lastY: 0,
+      selected: null,
+      hovered: null,
+      nodes: [],
+      edges: [],
+      nodeByKey: new Map(),
+    };
+
+    const colors = {
+      account: "#4e93c5",
+      organization: "#5b9bd2",
+      location: "#5596c6",
+      asset: "#63a3d4",
+      event: "#de706c",
+      hashtag: "#4e93c5",
+      keyword: "#79acd1",
+      person: "#4e93c5",
+      other: "#4e93c5",
+    };
+
+    function resize() {
+      const ratio = window.devicePixelRatio || 1;
+      state.width = window.innerWidth;
+      state.height = window.innerHeight;
+      canvas.width = Math.round(state.width * ratio);
+      canvas.height = Math.round(state.height * ratio);
+      canvas.style.width = state.width + "px";
+      canvas.style.height = state.height + "px";
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      state.radius = Math.max(260, Math.min(state.width, state.height) * 0.52);
+    }
+
+    function resetView() {
+      state.zoom = 1;
+      state.rotationX = -0.18;
+      state.rotationY = 0.45;
+      state.velocityX = 0;
+      state.velocityY = state.autoSpin ? 0.0022 : 0;
+      state.selected = null;
+      state.hovered = null;
+    }
+
+    function displayName(node) {
+      const label = String(node.label || node.id || "").trim();
+      const detail = String(node.detail || "").trim();
+      const generic = new Set(["情报账号", "快讯账号", "账号", "未知来源"]);
+      if (generic.has(label) && detail) return detail.replace(/^@/, "");
+      return label || detail || String(node.id || "unknown");
+    }
+
+    function normalizeName(value) {
+      return String(value || "")
+        .replace(/^@/, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function stableHash(value) {
+      let hash = 2166136261;
+      for (let i = 0; i < value.length; i++) {
+        hash ^= value.charCodeAt(i);
+        hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+      }
+      return Math.abs(hash >>> 0);
+    }
+
+    function fibonacciPoint(index, count) {
+      const offset = 2 / count;
+      const increment = Math.PI * (3 - Math.sqrt(5));
+      const y = index * offset - 1 + offset / 2;
+      const r = Math.sqrt(1 - y * y);
+      const phi = index * increment;
+      return {
+        sx: Math.cos(phi) * r,
+        sy: y,
+        sz: Math.sin(phi) * r,
+      };
+    }
+
+    function mergeGraph(data) {
+      const sourceNodes = Array.isArray(data.nodes) ? data.nodes : [];
+      const sourceEdges = Array.isArray(data.edges) ? data.edges : [];
+      const originalToKey = new Map();
+      const merged = new Map();
+
+      for (const node of sourceNodes) {
+        const name = normalizeName(displayName(node));
+        if (!name) continue;
+        const key = name.toLowerCase();
+        originalToKey.set(String(node.id), key);
+        if (!merged.has(key)) {
+          merged.set(key, {
+            key,
+            label: name,
+            type: node.type || "other",
+            typeLabel: node.type_label || node.type || "节点",
+            detail: node.detail || "",
+            count: 0,
+          });
+        }
+        const item = merged.get(key);
+        item.count += Number(node.mention_count || 1);
+        if (!item.detail && node.detail) item.detail = node.detail;
+        if (item.type === "other" && node.type) item.type = node.type;
+      }
+
+      const importantTypes = new Set(["asset", "account", "location", "event", "organization"]);
+      const topNodes = [...merged.values()]
+        .filter((node) => node.count >= 2 || importantTypes.has(node.type))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 96);
+
+      const allowed = new Set(topNodes.map((node) => node.key));
+      const edgeMap = new Map();
+
+      for (const edge of sourceEdges) {
+        const source = originalToKey.get(String(edge.source));
+        const target = originalToKey.get(String(edge.target));
+        if (!source || !target || source === target || !allowed.has(source) || !allowed.has(target)) continue;
+        const key = source < target ? `${source}::${target}` : `${target}::${source}`;
+        const current = edgeMap.get(key) || { source, target, weight: 0 };
+        current.weight += Number(edge.weight || 1);
+        edgeMap.set(key, current);
+      }
+
+      const topEdges = [...edgeMap.values()]
+        .filter((edge) => edge.weight >= 2)
+        .sort((a, b) => b.weight - a.weight)
+        .slice(0, 72);
+
+      const degree = new Map();
+      for (const edge of topEdges) {
+        degree.set(edge.source, (degree.get(edge.source) || 0) + edge.weight);
+        degree.set(edge.target, (degree.get(edge.target) || 0) + edge.weight);
+      }
+
+      state.nodes = topNodes.map((node, index) => {
+        const seed = stableHash(node.key);
+        const point = fibonacciPoint(index, topNodes.length);
+        const importance = Math.sqrt(node.count + (degree.get(node.key) || 0));
+        const jitter = ((seed % 1000) / 1000 - 0.5) * 0.025;
+        const length = Math.hypot(point.sx + jitter, point.sy - jitter, point.sz) || 1;
+        return {
+          ...node,
+          degree: degree.get(node.key) || 0,
+          importance,
+          radius: Math.max(4.8, Math.min(9.2, 4.1 + importance * 0.42)),
+          labelAlpha: Math.max(0.14, Math.min(0.6, 0.09 + importance * 0.03)),
+          sx: (point.sx + jitter) / length,
+          sy: (point.sy - jitter) / length,
+          sz: point.sz / length,
+          screenX: 0,
+          screenY: 0,
+          screenZ: 0,
+          depth: 0,
+        };
+      });
+
+      state.edges = topEdges;
+      state.nodeByKey = new Map(state.nodes.map((node) => [node.key, node]));
+      statusText.textContent = `${state.nodes.length} 节点 · ${state.edges.length} 关系`;
+    }
+
+    function projectNode(node) {
+      const cx = Math.cos(state.rotationX);
+      const sx = Math.sin(state.rotationX);
+      const cy = Math.cos(state.rotationY);
+      const sy = Math.sin(state.rotationY);
+
+      let x = node.sx * cy + node.sz * sy;
+      let z = -node.sx * sy + node.sz * cy;
+      let y = node.sy * cx - z * sx;
+      z = node.sy * sx + z * cx;
+
+      const perspective = 1.72 / (2.35 - z);
+      const sphere = state.radius * state.zoom;
+      node.screenX = state.width / 2 + x * sphere * perspective;
+      node.screenY = state.height / 2 + y * sphere * perspective;
+      node.screenZ = z;
+      node.depth = perspective;
+      return node;
+    }
+
+    function updateProjection() {
+      for (const node of state.nodes) projectNode(node);
+    }
+
+    function drawBackground() {
+      ctx.fillStyle = "#070809";
+      ctx.fillRect(0, 0, state.width, state.height);
+
+      const upperGlow = ctx.createRadialGradient(
+        state.width * 0.51,
+        state.height * 0.12,
+        0,
+        state.width * 0.51,
+        state.height * 0.12,
+        Math.min(state.width, state.height) * 0.55,
+      );
+      upperGlow.addColorStop(0, "rgba(29,161,242,0.16)");
+      upperGlow.addColorStop(1, "rgba(29,161,242,0)");
+      ctx.fillStyle = upperGlow;
+      ctx.fillRect(0, 0, state.width, state.height);
+
+      const lowerGlow = ctx.createRadialGradient(
+        state.width * 0.92,
+        state.height * 0.94,
+        0,
+        state.width * 0.92,
+        state.height * 0.94,
+        Math.min(state.width, state.height) * 0.42,
+      );
+      lowerGlow.addColorStop(0, "rgba(96,165,250,0.1)");
+      lowerGlow.addColorStop(1, "rgba(96,165,250,0)");
+      ctx.fillStyle = lowerGlow;
+      ctx.fillRect(0, 0, state.width, state.height);
+    }
+
+    function drawEdges() {
+      const sorted = [...state.edges].sort((a, b) => {
+        const az = ((state.nodeByKey.get(a.source)?.screenZ || 0) + (state.nodeByKey.get(a.target)?.screenZ || 0)) / 2;
+        const bz = ((state.nodeByKey.get(b.source)?.screenZ || 0) + (state.nodeByKey.get(b.target)?.screenZ || 0)) / 2;
+        return az - bz;
+      });
+
+      for (const edge of sorted) {
+        const source = state.nodeByKey.get(edge.source);
+        const target = state.nodeByKey.get(edge.target);
+        if (!source || !target) continue;
+        const avgZ = (source.screenZ + target.screenZ) / 2;
+        const active = state.selected && (edge.source === state.selected.key || edge.target === state.selected.key);
+        const alpha = active ? 0.46 : Math.max(0.04, Math.min(0.2, (avgZ + 1.2) * 0.09));
+
+        ctx.beginPath();
+        ctx.moveTo(source.screenX, source.screenY);
+        ctx.lineTo(target.screenX, target.screenY);
+        ctx.strokeStyle = active ? `rgba(140,185,220,${alpha})` : `rgba(160,170,178,${alpha})`;
+        ctx.lineWidth = active ? 1.1 : Math.max(0.42, Math.min(1.1, 0.35 + edge.weight * 0.025));
+        ctx.stroke();
+      }
+    }
+
+    function isConnected(node) {
+      if (!state.selected || node.key === state.selected.key) return true;
+      return state.edges.some((edge) =>
+        (edge.source === state.selected.key && edge.target === node.key) ||
+        (edge.target === state.selected.key && edge.source === node.key)
+      );
+    }
+
+    function drawNodes() {
+      const nodes = [...state.nodes].sort((a, b) => a.screenZ - b.screenZ);
+      for (const node of nodes) {
+        const front = (node.screenZ + 1) / 2;
+        const connected = isConnected(node);
+        const active = state.selected && node.key === state.selected.key;
+        const hover = state.hovered && node.key === state.hovered.key;
+        const color = colors[node.type] || colors.other;
+        const size = (node.radius * (0.78 + node.depth * 0.38)) * (active ? 1.34 : hover ? 1.18 : 1);
+        const alpha = connected ? Math.max(0.24, Math.min(0.95, 0.26 + front * 0.68)) : 0.09;
+
+        ctx.beginPath();
+        ctx.arc(node.screenX, node.screenY, size, 0, Math.PI * 2);
+        ctx.fillStyle = colorWithAlpha(color, alpha);
+        ctx.fill();
+
+        if (active || hover) {
+          ctx.beginPath();
+          ctx.arc(node.screenX, node.screenY, size + 5, 0, Math.PI * 2);
+          ctx.strokeStyle = active ? "rgba(255,255,255,0.42)" : "rgba(96,165,250,0.45)";
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+        }
+      }
+    }
+
+    function drawLabels() {
+      const important = [...state.nodes]
+        .filter((node) => node.screenZ > -0.36)
+        .sort((a, b) => b.importance - a.importance)
+        .slice(0, 70);
+
+      ctx.save();
+      ctx.font = "12px Inter, system-ui, -apple-system, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      for (const node of important) {
+        const active = state.selected && node.key === state.selected.key;
+        const connected = isConnected(node);
+        const alpha = active ? 0.85 : connected ? node.labelAlpha * (0.75 + node.screenZ * 0.35) : 0.05;
+        ctx.globalAlpha = Math.max(0.035, Math.min(0.75, alpha));
+        ctx.fillStyle = node.type === "event" ? "#de706c" : "rgba(205,205,205,0.92)";
+        ctx.fillText(node.label, node.screenX, node.screenY + 18);
+      }
+
+      ctx.restore();
+    }
+
+    function colorWithAlpha(hex, alpha) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r},${g},${b},${alpha})`;
+    }
+
+    function draw() {
+      if (!state.dragging && state.autoSpin) {
+        state.rotationY += state.velocityY;
+        state.rotationX += state.velocityX;
+        state.velocityX *= 0.985;
+        state.velocityY = state.velocityY * 0.985 + 0.0022 * 0.015;
+      }
+      updateProjection();
+      drawBackground();
+      drawEdges();
+      drawNodes();
+      drawLabels();
+      requestAnimationFrame(draw);
+    }
+
+    function pickNode(clientX, clientY) {
+      let best = null;
+      let bestDistance = Infinity;
+      const nodes = [...state.nodes].sort((a, b) => b.screenZ - a.screenZ);
+      for (const node of nodes) {
+        const dx = node.screenX - clientX;
+        const dy = node.screenY - clientY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const radius = Math.max(12, node.radius * (0.9 + node.depth * 0.5) + 5);
+        if (distance < radius && distance < bestDistance) {
+          best = node;
+          bestDistance = distance;
+        }
+      }
+      return best;
+    }
+
+    function showTooltip(node, event) {
+      if (!node) {
+        tooltip.style.display = "none";
+        return;
+      }
+      tooltip.innerHTML = `<b>${node.label}</b><span>${node.typeLabel} · 提及 ${node.count} 次</span>`;
+      tooltip.style.left = Math.min(event.clientX + 14, state.width - 260) + "px";
+      tooltip.style.top = Math.min(event.clientY + 14, state.height - 90) + "px";
+      tooltip.style.display = "block";
+    }
+
+    function bindEvents() {
+      window.addEventListener("resize", resize);
+
+      canvas.addEventListener("mousedown", (event) => {
+        state.dragging = true;
+        state.dragMoved = false;
+        state.lastX = event.clientX;
+        state.lastY = event.clientY;
+        canvas.classList.add("is-dragging");
+      });
+
+      window.addEventListener("mouseup", () => {
+        if (!state.dragging) return;
+        state.dragging = false;
+        state.autoSpin = true;
+        if (Math.abs(state.velocityY) < 0.0018) state.velocityY = 0.0022;
+        canvas.classList.remove("is-dragging");
+      });
+
+      canvas.addEventListener("mousemove", (event) => {
+        if (state.dragging) {
+          const dx = event.clientX - state.lastX;
+          const dy = event.clientY - state.lastY;
+          state.rotationY += dx * 0.006;
+          state.rotationX += dy * 0.006;
+          state.rotationX = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, state.rotationX));
+          state.velocityY = dx * 0.00008;
+          state.velocityX = dy * 0.00008;
+          state.lastX = event.clientX;
+          state.lastY = event.clientY;
+          state.dragMoved = state.dragMoved || Math.abs(dx) + Math.abs(dy) > 3;
+          tooltip.style.display = "none";
+          return;
+        }
+        state.hovered = pickNode(event.clientX, event.clientY);
+        showTooltip(state.hovered, event);
+      });
+
+      canvas.addEventListener("click", (event) => {
+        if (state.dragMoved) return;
+        const node = pickNode(event.clientX, event.clientY);
+        state.selected = state.selected === node ? null : node;
+      });
+
+      canvas.addEventListener("wheel", (event) => {
+        event.preventDefault();
+        state.zoom = Math.max(0.72, Math.min(1.8, state.zoom * (event.deltaY > 0 ? 0.92 : 1.08)));
+      }, { passive: false });
+
+      resetButton.addEventListener("click", resetView);
+      spinButton.addEventListener("click", () => {
+        state.autoSpin = !state.autoSpin;
+        state.velocityY = state.autoSpin ? 0.0022 : 0;
+        spinButton.style.color = state.autoSpin ? "rgba(96,165,250,0.92)" : "";
+      });
+    }
+
+    async function loadGraph() {
+      try {
+        const response = await fetch("/api/graph", { cache: "no-store" });
+        if (!response.ok) throw new Error("graph api failed");
+        const data = await response.json();
+        mergeGraph(data);
+      } catch (error) {
+        statusText.textContent = "图谱加载失败";
+      }
+    }
+
+    resize();
+    bindEvents();
+    loadGraph();
+    draw();
+  </script>
+</body>
+</html>
